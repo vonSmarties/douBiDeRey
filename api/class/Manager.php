@@ -10,7 +10,7 @@ abstract class Manager {
    *
    * adresse et nom de la base de données
    */
-  private $dbInfo = 'mysql:host=localhost;dbname=expense_manager;charset=utf8';
+  private $dbInfo = 'mysql:host=localhost;dbname=doubiderey;charset=utf8';
 
   /**
    * Proriété private string : dbUser
