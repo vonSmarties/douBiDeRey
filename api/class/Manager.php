@@ -104,6 +104,30 @@ abstract class Manager {
   }
 
   /**
+   * fonction public : readWhereValue
+   *
+   * lecture des données d'une ou plusieurs Entities à partir d'une valeur d'un des champs d'une des table de la base de donnée.
+   *
+   * @param any valeur du champ de la table choisi.
+   * @param string nom du champ de la table choisi.
+   *
+   * @return any données d'une ou plusieurs Entities retournées par la requète SQL
+   */
+  public function readLast(){
+
+    $sql='SELECT * FROM '.$this->table.' ORDER BY id DESC LIMIT 1';
+
+    $req=$this->db->prepare($sql);
+    $req->execute();
+    $values=$req->fetchAll(PDO::FETCH_ASSOC);
+    if (sizeof($values)==1) {
+      return $values[0];
+    } else {
+      return $values;
+    }
+  }
+
+  /**
    * fonction public : readAll
    *
    * retourne toutes les données d'une table

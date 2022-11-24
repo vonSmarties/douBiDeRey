@@ -1,5 +1,5 @@
 <?php
-require('Entity.php');
+include 'Entity.php';
 /**
  *
  */

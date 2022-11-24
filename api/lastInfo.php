@@ -2,10 +2,10 @@
 
 require('functions.php');
 
-$htmlManager = new InfoManager();
+$infoManager = new InfoManager();
 
-$html = $htmlManager->read(1)->getHtml();
+$info = $infoManager->readLast();
 
  /** whatever is being serialized **/; 
 header('Content-Type: application/json'); 
-echo json_encode(['html' => $html]);
+echo json_encode($info->getJson());
