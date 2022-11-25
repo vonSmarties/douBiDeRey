@@ -6,6 +6,7 @@ include 'Entity.php';
 class Info extends Entity {
 
   private $html;
+  protected $keys = ["id","html"];
 
   public function getHtml() {
     return $this->html;

@@ -51,8 +51,7 @@ abstract class Entity
   {
     foreach ($values as $key => $value) {
       $methodName = 'set' . ucfirst($key);
-      if (method_exists($this, $methodName)) {
-        $this->keys[] = $key;
+      if (isset($value) && method_exists($this, $methodName)) {
         $this->$methodName($value);
       }
     }
@@ -71,11 +70,28 @@ abstract class Entity
   {
     foreach ($this->keys as $key) {
       $methodName = 'get' . ucfirst($key);
-      if (method_exists($this, $methodName)) {
+      if (isset($this->$key) && method_exists($this, $methodName)) {
         $json[$key] = $this->$methodName();
       }
     }
     return $json;
+  }
+
+  /**
+   * fonction fill
+   *
+   * cherche une méthode set d'un modèle
+   *
+   * @param any nom de la données.
+   */
+  public function fill($data)
+  {
+    foreach ($this->keys as $key) {
+      $methodName = 'set' . ucfirst($key);
+      if (isset($data->$key) && method_exists($this, $methodName)) {
+        $this->$methodName($data->$key);
+      }
+    }
   }
 
   /**
