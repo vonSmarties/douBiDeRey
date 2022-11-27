@@ -3,11 +3,11 @@
 require('functions.php');
 
 $data = json_decode(file_get_contents('php://input'));
-$infoManager = new InfoManager();
-$info = $infoManager->read($data->id);
-$info->setHtml($data->html);
+$galleryManager = new GalleryManager();
+$gallery = $galleryManager->read($data->id);
+$gallery->fill($data);
 try {
-    $infoManager->update($info);
+    $galleryManager->update($gallery);
     header('Content-Type: application/json');
     echo json_encode(["update" => "true"]);
 } catch (Exception $ex) {
@@ -17,5 +17,3 @@ try {
         "exception" => $ex
     ]);
 }
-
-/** whatever is being serialized **/;

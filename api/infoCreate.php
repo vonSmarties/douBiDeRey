@@ -12,5 +12,8 @@ try {
     echo json_encode(["create" => "true"]);
 } catch (Exception $ex) {
     header('Content-Type: application/json');
-    echo json_encode(["create" => "false"]);
+    echo json_encode([
+        "create" => "false",
+        "exception" => $ex
+    ]);
 }

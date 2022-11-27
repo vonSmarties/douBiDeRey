@@ -11,7 +11,9 @@ try {
     header('Content-Type: application/json');
     echo json_encode(["update" => "true"]);
 } catch (Exception $ex) {
-    echo $ex;
+    header('Content-Type: application/json');
+    echo json_encode([
+        "update" => "false",
+        "exception" => $ex
+    ]);
 }
-
-/** whatever is being serialized **/;

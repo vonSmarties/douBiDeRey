@@ -191,6 +191,26 @@ abstract class Manager
   }
 
   /**
+   * fonction public : delete
+   *
+   * supprime les données d'une ou plusieurs Entities en fonction d'un champ 
+   *
+   * @param any valeur du champ de la table choisi.
+   * @param string nom du champ de la table choisi.
+   *   *
+   * @return void
+   */
+  public function deleteWhereValue($value, string $champ)
+  {
+
+    $sql = 'DELETE FROM ' . $this->table . ' WHERE ' . $this->condition($champ);
+
+    $req = $this->db->prepare($sql);
+    $this->bindValue($req, $value, $champ);
+    $req->execute();
+  }
+
+  /**
    * fonction private : strWithoutIdChamps
    *
    * met en forme les noms des champs et les variable PDO pour la requète SQL de création d'une Entity

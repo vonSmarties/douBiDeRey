@@ -8,8 +8,11 @@ $member = $memberManager->read($id);
 try {
     $memberManager->delete($member);
     header('Content-Type: application/json');
-    echo json_encode(["create" => "true"]);
+    echo json_encode(["delete" => "true"]);
 } catch (Exception $ex) {
     header('Content-Type: application/json');
-    echo json_encode(["create" => "false"]);
+    echo json_encode([
+        "delete" => "false",
+        "exception" => $ex
+    ]);
 }
