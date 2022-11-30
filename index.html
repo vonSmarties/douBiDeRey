@@ -7,10 +7,46 @@
 </head>
 
 <body>
+    <form enctype="multipart/form-data" action="upload.php" method="post">
+        <input name="file[]" type="file" id="fileToUpload" multiple />
+        <!-- <button class="add_more">Add More Files -->
+    </form>
+    <button id="upload">click</button>
+
     <div id="unicorn"></div>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="http://localhost/doubiderey/accueil.js"></script>
+    <script>
+        const ajax = () => {
+            const files = document.querySelector("#fileToUpload").files;
+            fetch(
+                "http://localhost/doubiderey/api/galleryCreate.php",
+                { method: 'POST', body: JSON.stringify({ title: "unicorn" }) }
+            ).then(rtrn =>
+                rtrn.json().then(gallery =>
+                    upload(files, 0, gallery.id)
+                )
+            );
+        }
+        const upload = (files, i, idGallery) => {
+            const formData = new FormData();
+            formData.append("idGallery", idGallery);
+            formData.append("file", files[i]);
+            if (i == files.length - 1) {
+                fetch(
+                    "http://localhost/doubiderey/api/imageCreate.php",
+                    { method: 'POST', body: formData }
+                );
+            } else {
+                fetch(
+                    "http://localhost/doubiderey/api/imageCreate.php",
+                    { method: 'POST', body: formData }
+                ).then(() => upload(files, i + 1, idGallery));
+            }
+        }
+        document.querySelector("#upload").addEventListener('click', ajax);
+    </script>
 </body>
 
 </html>

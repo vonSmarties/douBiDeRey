@@ -9,6 +9,10 @@ class ImageManager extends Manager
   protected $table = 'image';
   protected $champs = [
     [
+      'nom' => 'id',
+      'PDO' => PDO::PARAM_INT
+    ],
+    [
       'nom' => 'file',
       'PDO' => PDO::PARAM_STR
     ],
