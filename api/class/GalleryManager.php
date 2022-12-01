@@ -23,6 +23,8 @@ class GalleryManager extends Manager
     $values = parent::readWhereValue($id, 'id');
     if ($values) {
       return new Gallery($values);
+    } else {
+      return new Gallery();
     }
   }
 
@@ -31,6 +33,8 @@ class GalleryManager extends Manager
     $values = parent::readLast();
     if ($values) {
       return new Gallery($values);
+    } else {
+      return new Gallery();
     }
   }
 

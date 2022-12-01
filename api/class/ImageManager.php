@@ -22,15 +22,27 @@ class ImageManager extends Manager
     ]
   ];
 
-  public function read(int $idGallery)
+  public function readAllGallery(int $idGallery)
   {
-    $values = parent::readWhereValue($idGallery, 'gallery');
+    $values = $this->readWhereValue($idGallery, 'gallery');
     foreach ($values as $value) {
       $tableau[] = new Image($value);
     }
+    return $tableau;
   }
 
-  public function deleteImage(Image $image){
-    $this->deleteWhereValue($image->file,"file");
+  public function read(string $file)
+  {
+    $value = $this->readWhereValue($file, 'file');
+    if ($value) {
+      return new Image($value);
+    } else {
+      return new Gallery();
+    }
+  }
+
+  public function deleteImage(Image $image)
+  {
+    $this->deleteWhereValue($image->file, "file");
   }
 }

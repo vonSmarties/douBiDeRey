@@ -6,8 +6,8 @@ include 'Entity.php';
 class Member extends Entity
 {
 
-  private $name, $firstName, $address, $city, $phone, $mobile, $picture;
-  protected $keys = ["id","name", "firstName", "address", "city", "phone", "mobile", "picture"];
+  private $name, $firstName, $role, $address, $city, $phone, $mobile, $picture;
+  protected $keys = ["id", "name", "firstName", "role", "address", "city", "phone", "mobile", "picture"];
 
   public function getName()
   {
@@ -27,6 +27,16 @@ class Member extends Entity
   public function setFirstName(string $firstName)
   {
     $this->firstName = $firstName;
+  }
+
+  public function getRole()
+  {
+    return $this->role;
+  }
+
+  public function setRole(string $role)
+  {
+    $this->role = $role;
   }
 
   public function getAddress()

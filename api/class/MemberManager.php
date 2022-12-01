@@ -47,6 +47,8 @@ class MemberManager extends Manager
     $values = parent::readWhereValue($id, 'id');
     if ($values) {
       return new Member($values);
+    } else {
+      return new Member();
     }
   }
 

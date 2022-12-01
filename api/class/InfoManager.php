@@ -23,6 +23,8 @@ class InfoManager extends Manager
     $values = parent::readWhereValue($id, 'id');
     if ($values) {
       return new Info($values);
+    } else {
+      return new Info();
     }
   }
 
@@ -31,6 +33,8 @@ class InfoManager extends Manager
     $values = parent::readLast();
     if ($values) {
       return new Info($values);
+    } else {
+      return new Info();
     }
   }
 
