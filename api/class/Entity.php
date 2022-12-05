@@ -70,7 +70,7 @@ abstract class Entity
   {
     foreach ($this->keys as $key) {
       $methodName = 'get' . ucfirst($key);
-      if (isset($this->$key) && method_exists($this, $methodName)) {
+      if (method_exists($this, $methodName)) {
         $json[$key] = $this->$methodName();
       }
     }
