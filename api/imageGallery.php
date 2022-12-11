@@ -2,10 +2,11 @@
 
 require('functions.php');
 
-$post = json_decode(file_get_contents('php://input'));
+$gallery = json_decode(file_get_contents('php://input'));
 
 $imageManager = new ImageManager();
-$images = $imageManager->readAllGallery($post->gallery->id);
+$images = $imageManager->readAllGallery($gallery->id);
+$data = [];
 foreach ($images as $image) {
     $data[] = $image->getJson();
 }

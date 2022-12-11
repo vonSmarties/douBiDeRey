@@ -21,8 +21,8 @@ class GalleryManager extends Manager
   public function read(int $id)
   {
     $values = parent::readWhereValue($id, 'id');
-    if ($values) {
-      return new Gallery($values);
+    if (sizeof($values) == 1) {
+      return new Gallery($values[0]);
     } else {
       return new Gallery();
     }
@@ -30,9 +30,9 @@ class GalleryManager extends Manager
 
   public function readLast()
   {
-    $values = parent::readLast();
-    if ($values) {
-      return new Gallery($values);
+    $values = parent::readWithOrder('id', 'Desc', 1);
+    if (sizeof($values) == 1) {
+      return new Gallery($values[0]);
     } else {
       return new Gallery();
     }

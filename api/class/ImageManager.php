@@ -25,19 +25,26 @@ class ImageManager extends Manager
   public function readAllGallery(int $idGallery)
   {
     $values = $this->readWhereValue($idGallery, 'gallery');
+    $tableau = [];
     foreach ($values as $value) {
       $tableau[] = new Image($value);
     }
     return $tableau;
   }
 
+  public function readOneInGallery(int $idGallery)
+  {
+    $values = $this->readWhereValue($idGallery, 'gallery');
+    return new Image($values[0]);
+  }
+
   public function read(string $file)
   {
-    $value = $this->readWhereValue($file, 'file');
-    if ($value) {
-      return new Image($value);
+    $values = $this->readWhereValue($file, 'file');
+    if (sizeof($values) == 1) {
+      return new Image($values[0]);
     } else {
-      return new Gallery();
+      return new Image();
     }
   }
 

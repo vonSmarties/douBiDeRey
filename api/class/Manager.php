@@ -99,35 +99,38 @@ abstract class Manager
     $this->bindValue($req, $value, $champ);
     $req->execute();
     $values = $req->fetchAll(PDO::FETCH_ASSOC);
-    if (sizeof($values) == 1) {
-      return $values[0];
-    } else {
+    if ($values) {
       return $values;
+    } else {
+      return [];
     }
   }
 
   /**
-   * fonction public : readWhereValue
+   * fonction public : readWithOrder
    *
-   * lecture des données d'une ou plusieurs Entities à partir d'une valeur d'un des champs d'une des table de la base de donnée.
+   * lecture des données d'une ou plusieurs Entities et ordonnées à partir d'une valeur d'un des champs d'une des table de la base de donnée.
    *
-   * @param any valeur du champ de la table choisi.
    * @param string nom du champ de la table choisi.
+   * @param int nb de résultats retournés.
+   * @param string direction de l'ordre.
    *
-   * @return any données d'une ou plusieurs Entities retournées par la requète SQL
+   * @return array<any> données d'une ou plusieurs Entities retournées par la requète SQL
    */
-  public function readLast()
+  public function readWithOrder(string $champ, string $direction = "ASC", ?int $limit)
   {
 
-    $sql = 'SELECT * FROM ' . $this->table . ' ORDER BY id DESC LIMIT 1';
-
+    $sql = 'SELECT * FROM ' . $this->table . ' ORDER BY ' . $champ . ' ' . $direction;
+    if($direction){
+      $sql .= ' LIMIT ' . $limit;
+    }
     $req = $this->db->prepare($sql);
     $req->execute();
     $values = $req->fetchAll(PDO::FETCH_ASSOC);
-    if (sizeof($values) == 1) {
-      return $values[0];
-    } else {
+    if ($values) {
       return $values;
+    } else {
+      return [];
     }
   }
 
@@ -147,7 +150,12 @@ abstract class Manager
 
     $req = $this->db->prepare($sql);
     $req->execute();
-    return $req->fetchALL(PDO::FETCH_ASSOC);
+    $values = $req->fetchALL(PDO::FETCH_ASSOC);
+    if ($values) {
+      return $values;
+    } else {
+      return [];
+    }
   }
 
   /**

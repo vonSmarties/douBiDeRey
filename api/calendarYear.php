@@ -5,7 +5,8 @@ require('functions.php');
 $data = json_decode(file_get_contents('php://input'));
 $calendarManager = new CalendarManager();
 
-$calendar = $calendarManager->readYear($data->id);
+$calendar = $calendarManager->readYear($data->year);
+$data = [];
 foreach ($calendar as $item) {
     $data[] = $item->getJson();
 }

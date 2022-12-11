@@ -45,8 +45,8 @@ class MemberManager extends Manager
   public function read(int $id)
   {
     $values = parent::readWhereValue($id, 'id');
-    if ($values) {
-      return new Member($values);
+    if (sizeof($values) == 1) {
+      return new Member($values[0]);
     } else {
       return new Member();
     }
@@ -55,6 +55,7 @@ class MemberManager extends Manager
   public function readAll()
   {
     $values = parent::readAll();
+    $tableau = [];
     foreach ($values as $value) {
       $tableau[] = new Member($value);
     }

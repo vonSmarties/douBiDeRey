@@ -21,8 +21,8 @@ class InfoManager extends Manager
   public function read(int $id)
   {
     $values = parent::readWhereValue($id, 'id');
-    if ($values) {
-      return new Info($values);
+    if (sizeof($values) == 1) {
+      return new Info($values[0]);
     } else {
       return new Info();
     }
@@ -30,9 +30,9 @@ class InfoManager extends Manager
 
   public function readLast()
   {
-    $values = parent::readLast();
-    if ($values) {
-      return new Info($values);
+    $values = parent::readWithOrder('id', 'Desc',  1);
+    if (sizeof($values) == 1) {
+      return new Info($values[0]);
     } else {
       return new Info();
     }
@@ -40,7 +40,8 @@ class InfoManager extends Manager
 
   public function readAll()
   {
-    $values = parent::readAll();
+    $values = parent::readWithOrder('id', 'Desc',  1000);
+    $tableau = [];
     foreach ($values as $value) {
       $tableau[] = new Info($value);
     }

@@ -5,6 +5,7 @@ require('functions.php');
 $memberManager = new MemberManager();
 
 $members = $memberManager->readAll();
+$data = [];
 foreach ($members as $member) {
     $data[] = $member->getJson();
 }

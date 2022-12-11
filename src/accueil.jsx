@@ -31,15 +31,13 @@ class LastGallery extends React.Component {
     componentDidMount = () => {
         const apiSvc = new ApiService();
         apiSvc.load("galleryLast").then(gallery =>
-            apiSvc.post("imageGallery", { gallery }).then(images =>
-                this.setState({ gallery, images })
-            )
-        );
+            this.setState({ gallery })
+        )
     }
 
     render = () => {
         return this.state
-            ? <Gallery gallery={this.state.gallery} images={this.state.images}/>
+            ? <Gallery gallery={this.state.gallery} images={this.state.images} />
             : <div>chargement</div>
     };
 }

@@ -5,6 +5,7 @@ require('functions.php');
 $infoManager = new InfoManager();
 
 $infos = $infoManager->readAll();
+$data = [];
 foreach ($infos as $info) {
     $data[] = $info->getJson();
 }

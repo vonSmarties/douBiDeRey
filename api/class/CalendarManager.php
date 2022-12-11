@@ -40,9 +40,9 @@ class CalendarManager extends Manager
 
   public function read(string $id)
   {
-    $value = $this->readWhereValue($id, 'id');
-    if ($value) {
-      return new Calendar($value);
+    $values = $this->readWhereValue($id, 'id');
+    if (sizeof($values) == 1) {
+      return new Calendar($values[0]);
     } else {
       return new Calendar();
     }
@@ -50,11 +50,18 @@ class CalendarManager extends Manager
 
   public function readYear(int $year)
   {
-    $values = $this->readWhereValue($year, 'year');
+
+    $sql = "SELECT * FROM calendar WHERE date BETWEEN '" . ($year - 1) . "-12-31' AND '" . ($year + 1) . "-01-01' ORDER BY date ASC";
+
+    $req = $this->db->prepare($sql);
+    $req->execute();
+    $values = $req->fetchAll(PDO::FETCH_ASSOC);
+    $tableau = [];
     foreach ($values as $value) {
-      $tableau[] =  new Calendar($value);
+      $tableau[] = new Calendar($value);
     }
     return $tableau;
+  
   }
 
   public function deleteYear(int $year)
