@@ -4,8 +4,10 @@ require('functions.php');
 
 $data = json_decode(file_get_contents('php://input'));
 $galleryManager = new GalleryManager();
-$gallery = $galleryManager->read($id);
+$imageManager = new ImageManager();
+$gallery = $galleryManager->read($data->id);
 try {
+    $imageManager->deleteImagesGallery($gallery);
     $galleryManager->delete($gallery);
     header('Content-Type: application/json');
     echo json_encode(["delete" => "true"]);

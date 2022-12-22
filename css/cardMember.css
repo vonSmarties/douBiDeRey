@@ -1,0 +1,45 @@
+.cardMember {
+    --widthPict: 40%;
+    display: flex;
+    padding: 10px;
+    width: 380px;
+    height: 180px;
+    border-radius: 5px;
+    background-color: var(--colorConstrast);
+    box-shadow: 0 0 23px var(--boxShadowColor);
+    margin: 10px;
+}
+
+.pictContainer {
+    height: 100%;
+    border-radius: 5px;
+    width: var(--widthPict);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.pictMember {
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.memberContainer{
+    --marginleft:10px;
+    margin-left: var(--marginleft);
+    width: calc(100% - var(--widthPict) - var(--marginleft));
+}
+
+.lineMember {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 5px ;
+}
+
+.roleMember {
+    font-weight: 600;
+}
+
+.lineMemberItem {
+    margin-right: 5px;
+}

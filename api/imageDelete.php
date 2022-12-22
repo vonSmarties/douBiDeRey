@@ -4,7 +4,7 @@ require('functions.php');
 
 $data = json_decode(file_get_contents('php://input'));
 $imageManager = new ImageManager();
-$image = $imageManager->read($data->$file);
+$image = $imageManager->read($data->file);
 try {
     $imageManager->deleteImage($image);
     header('Content-Type: application/json');

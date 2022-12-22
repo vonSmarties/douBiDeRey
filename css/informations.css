@@ -1,0 +1,17 @@
+.informations {
+    margin-top: var(--heightHeader);
+}
+
+.reactContainer {
+    margin-top: 42px;
+    width: calc(100% - var(--widthMenu));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width:1023px) {
+    .reactContainer {
+        width: 100%;
+    }
+}

@@ -1,0 +1,166 @@
+body {
+    --widthMenu: 200px;
+    --heightHeader: 51px;
+    --boxShadowColor: darkgray;
+    --colorBackground: orange;
+    --colorConstrast: aliceblue;
+    --colorText: black;
+    --colorTextConstrast: white;
+    --widthClutch: 1023px;
+    font-family: Verdana;
+    margin: 0px;
+}
+
+header {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--heightHeader);
+    top: 0;
+    width: 100%;
+    color: var(--colorText);
+    background-color: var(--colorBackground);
+}
+
+.main {
+    height: calc(100vh - var(--heightHeader));
+    overflow: auto;
+}
+
+.backgroundLogo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('http://localhost/doubiderey/asset/marcheurs-Dou-bi-de-Rey.jpg');
+    background-size: cover;
+    background-position: top;
+}
+
+h1 {
+    padding: 10px;
+    font-size: 29px;
+    font-weight: 600;
+    margin: 0px;
+}
+
+.titleHeader {
+    font-size: 23px;
+    font-weight: 600;
+    padding: 10px;
+}
+
+.generalMenu {
+    position: fixed;
+    top: var(--heightHeader);
+    right: 17px;
+    width: var(--widthMenu);
+    --paddingMenu: 10px;
+}
+
+.generalMenu>a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.itemMenu {
+    padding: var(--paddingMenu);
+    text-decoration: none;
+    color: inherit;
+    text-align: right;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--colorText);
+}
+
+.itemMenu:hover {
+    background-color: aliceblue;
+    color: var(--colorDark);
+}
+
+.itemMenu::after {
+    content: ">";
+    margin: 0px 5px;
+    transition: margin 0.25s ease;
+}
+
+
+.itemMenu:hover::after {
+    margin-left: 10px;
+    margin-right: 0px;
+}
+
+
+
+.menu-button-container {
+    display: none;
+    height: 100%;
+    width: 30px;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+.menu-button,
+.menu-button::before,
+.menu-button::after {
+    display: block;
+    background-color: var(--colorText);
+    position: absolute;
+    height: 4px;
+    width: 30px;
+    /* transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1); */
+    border-radius: 2px;
+}
+
+.menu-button::before {
+    content: '';
+    margin-top: -8px;
+}
+
+.menu-button::after {
+    content: '';
+    margin-top: 8px;
+}
+
+#menu-toggle:checked+.menu-button-container .menu-button::before {
+    margin-top: 0px;
+    transform: rotate(405deg);
+}
+
+#menu-toggle:checked+.menu-button-container .menu-button {
+    background: rgba(255, 255, 255, 0);
+}
+
+#menu-toggle:checked+.menu-button-container .menu-button::after {
+    margin-top: 0px;
+    transform: rotate(-405deg);
+}
+
+
+
+@media (max-width:1023px) {
+    .menu-button-container {
+        display: flex;
+    }
+
+    .generalMenu {
+        display: none;
+        background-color: var(--colorBackground);
+        right: 0;
+        z-index: 1;
+    }
+
+    #menu-toggle:checked~.generalMenu {
+        display: block;
+    }
+}

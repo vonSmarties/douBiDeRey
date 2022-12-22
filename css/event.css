@@ -1,0 +1,81 @@
+.event {
+    display: flex;
+    border-radius: 1000px;
+    padding: 2px;
+    padding-left: 10px;
+    max-width: fit-content;
+}
+
+.eventLine {
+    display: flex;
+}
+
+.eventDate {
+    min-width: 200px;
+}
+
+.eventHour {
+    min-width: 100px;
+}
+
+.eventDistance {
+    min-width: 150px;
+}
+
+.eventPlace {
+    min-width: 200px;
+}
+
+.eventClub {
+    display: flex;
+    min-width: 200px;
+}
+
+.mainEventLine {
+    display: flex;
+}
+
+.itemEvent {
+    display: flex;
+}
+
+.labelMobiel {
+    display: none;
+}
+
+@media (max-width:1023px) {
+    .event {
+        --marginLeft: 42px;
+        display: block;
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    .labelMobiel {
+        display: block;
+        margin-right: 10px;
+    }
+
+    .eventLine {
+        margin-left: var(--marginLeft);
+    }
+
+    .eventClub {
+        margin-left: var(--marginLeft);
+    }
+
+    .itemEvent {
+        width: calc(50% - var(--marginLeft)/2);
+    }
+}
+
+@media (max-width:666px) {
+    .eventLine  {
+        width: calc(100%- var(--marginLeft));
+        display: block;
+    }
+
+    .itemEvent {
+        width:100%;
+    }
+}

@@ -9,5 +9,9 @@ class ApiService {
     post = (route, body) => {
         return fetch(this.http + route + this.ext, { method: "POST", body: JSON.stringify(body) }).then(rtrn => rtrn.json());
     }
+
+    postRawBody = (route, body) => {
+        return fetch(this.http + route + this.ext, { method: "POST", body:body }).then(rtrn => rtrn.json());
+    }
 }
 export default ApiService; 

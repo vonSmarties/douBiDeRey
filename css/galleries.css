@@ -1,0 +1,21 @@
+.galleries {
+    margin-top: var(--heightHeader);
+}
+
+.reactContainer {
+    width: calc(100% - var(--widthMenu));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.galleryErsatz {
+    width: 320px;
+    margin: 0 23px;
+}
+
+@media (max-width:1023px) {
+    .reactContainer {
+        width: 100%;
+    }
+}

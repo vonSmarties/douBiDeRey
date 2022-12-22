@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Calendrier</title>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="asset/dbdr2blackdd.jpg" />
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/calendar.css">
+    <link rel="stylesheet" href="css/event.css">
+</head>
+
+<body>
+    <header>
+        <div class="titleHeader">Calendrier</div>
+        <input id="menu-toggle" type="checkbox" />
+        <label class='menu-button-container' for="menu-toggle">
+            <div class='menu-button'></div>
+        </label>
+        <div class="generalMenu">
+            <a href="galleries.html">
+                <div class="itemMenu">Galerie</div>
+            </a>
+            <a href="informations.html">
+                <div class="itemMenu">Informations</div>
+            </a>
+            <a href="calendar.html">
+                <div class="itemMenu">Calendrier</div>
+            </a>
+            <a href="board.html">
+                <div class="itemMenu">Le club</div>
+            </a>
+        </div>
+    </header>
+    <div class="backgroundLogo"></div>
+    <section class="calendar main">
+            <div class="reactContainer" id="calendar"></div>
+    </section>
+    <script type="module" src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script type="module" src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script type="module" src="http://localhost/doubiderey/js/calendar.js"></script>
+</body>
+
+</html>

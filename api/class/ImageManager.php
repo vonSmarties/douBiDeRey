@@ -50,6 +50,11 @@ class ImageManager extends Manager
 
   public function deleteImage(Image $image)
   {
-    $this->deleteWhereValue($image->file, "file");
+    $this->deleteWhereValue($image->getFile(), "file");
+  }
+
+  public function deleteImagesGallery(Gallery $gallery)
+  {
+    $this->deleteWhereValue($gallery->getId(), "gallery");
   }
 }

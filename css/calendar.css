@@ -1,0 +1,37 @@
+.calendar {
+    margin-top: var(--heightHeader);
+}
+
+.reactContainer {
+    width: calc(100% - var(--widthMenu));
+}
+
+.calendarContainer {
+    --padding: 10px;
+    width: calc(100% - 2*var(--padding));
+    padding: var(--padding);
+}
+
+.calendarHeader {
+    display: flex;
+    margin-left: 10px;
+}
+
+.eventOrange {
+    background-color: var(--colorBackground);
+}
+
+.eventLight {
+    background-color: var(--colorConstrast);
+}
+
+
+@media (max-width:1023px) {
+    .reactContainer {
+        width: 100%;
+    }
+
+    .calendarHeader {
+        display: none;
+    }
+}

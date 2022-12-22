@@ -1,0 +1,43 @@
+.accueil {
+    margin-top: var(--heightHeader);
+}
+
+.quickView {
+    width: calc(100% - var(--widthMenu));
+}
+
+.quickView>a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.seeAll {
+    margin-top: 23px;
+    padding: var(--paddingMenu);
+    text-align: center;
+}
+
+.seeAll::after {
+    content: ">";
+    margin: 0px 5px;
+    transition: margin 0.25s ease;
+}
+
+
+.seeAll:hover::after {
+    margin-left: 10px;
+    margin-right: 0px;
+}
+
+.reactContainer {
+    margin-top: 42px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width:1023px) {
+    .quickView {
+        width: 100%;
+    }
+}
