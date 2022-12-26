@@ -1,6 +1,6 @@
 <?php
-include 'Manager.php';
-include 'Image.php';
+include_once 'Manager.php';
+include_once 'Image.php';
 
 /**
  *

@@ -1,5 +1,5 @@
 <?php
-include 'class/MemberManager.php';
+include_once 'class/MemberManager.php';
 
 $memberManager = new MemberManager();
 

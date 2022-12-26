@@ -1,6 +1,6 @@
 <?php
-include 'Manager.php';
-include 'Member.php';
+include_once 'Manager.php';
+include_once 'Member.php';
 
 /**
  *

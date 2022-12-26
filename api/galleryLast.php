@@ -1,5 +1,5 @@
 <?php
-include 'class/GalleryManager.php';
+include_once 'class/GalleryManager.php';
 
 $galleryManager = new GalleryManager();
 

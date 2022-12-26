@@ -1,6 +1,6 @@
 <?php
-include 'class/GalleryManager.php';
-include 'class/Gallery.php';
+include_once 'class/GalleryManager.php';
+include_once 'class/Gallery.php';
 
 $data = json_decode(file_get_contents('php://input'));
 $galleryManager = new GalleryManager();

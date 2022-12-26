@@ -1,5 +1,5 @@
 <?php
-include 'class/CalendarManager.php';
+include_once 'class/CalendarManager.php';
 
 $data = json_decode(file_get_contents('php://input'));
 $calendarManager = new CalendarManager();

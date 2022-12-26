@@ -1,5 +1,5 @@
 <?php
-include 'class/ImageManager.php';
+include_once 'class/ImageManager.php';
 
 $gallery = json_decode(file_get_contents('php://input'));
 

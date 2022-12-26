@@ -1,5 +1,5 @@
 <?php
-include 'class/ImageManager.php';
+include_once 'class/ImageManager.php';
 
 $data = json_decode(file_get_contents('php://input'));
 $imageManager = new ImageManager();

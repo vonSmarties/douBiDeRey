@@ -1,6 +1,6 @@
 <?php
-include 'Manager.php';
-include 'Calendar.php';
+include_once 'Manager.php';
+include_once 'Calendar.php';
 
 /**
  *

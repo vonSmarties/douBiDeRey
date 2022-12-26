@@ -1,6 +1,6 @@
 <?php
-include 'class/InfoManager.php';
-include 'class/Info.php';
+include_once 'class/InfoManager.php';
+include_once 'class/Info.php';
 
 $data = json_decode(file_get_contents('php://input'));
 $infoManager = new InfoManager();

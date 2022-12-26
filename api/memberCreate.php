@@ -1,6 +1,6 @@
 <?php
-include 'class/MemberManagers.php';
-include 'class/Member.php';
+include_once 'class/MemberManagers.php';
+include_once 'class/Member.php';
 
 $data = json_decode(file_get_contents('php://input'));
 $memberManager = new MemberManager();

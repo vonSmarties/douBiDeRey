@@ -1,6 +1,6 @@
 <?php
-include 'class/ImageManager.php';
-include 'class/Image.php';
+include_once 'class/ImageManager.php';
+include_once 'class/Image.php';
 
 $imageManager = new ImageManager();
 $image = new Image();

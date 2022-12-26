@@ -1,5 +1,5 @@
 <?php
-include 'class/CalendarManager.php';
+include_once 'class/CalendarManager.php';
 
 $calendarManager = new CalendarManager();
 
