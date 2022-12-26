@@ -30,7 +30,7 @@ export default class Event extends React.Component {
 
     render = () => {
         const date = new Date(this.props.event.date);
-        return <div className={"event " + this.props.className}>
+        return <div className={"event " + this.props.className} onclick={this.props.onClick}>
             <div className="eventLine">
                 <div className="itemEvent eventDate">
                     <div className="labelMobiel">Date : </div>

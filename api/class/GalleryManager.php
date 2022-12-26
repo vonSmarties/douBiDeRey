@@ -1,4 +1,6 @@
 <?php
+include 'Manager.php';
+include 'Gallery.php';
 
 /**
  *
@@ -40,7 +42,7 @@ class GalleryManager extends Manager
 
   public function readAll()
   {
-    $values = parent::readAll();
+    $values = parent::readWithOrder('id', 'Desc');
     foreach ($values as $value) {
       $tableau[] = new Gallery($value);
     }

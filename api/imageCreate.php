@@ -1,6 +1,6 @@
 <?php
-
-require('functions.php');
+include 'class/ImageManager.php';
+include 'class/Image.php';
 
 $imageManager = new ImageManager();
 $image = new Image();

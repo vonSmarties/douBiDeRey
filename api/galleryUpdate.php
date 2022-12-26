@@ -1,6 +1,5 @@
 <?php
-
-require('functions.php');
+include 'class/GalleryManager.php';
 
 $data = json_decode(file_get_contents('php://input'));
 $galleryManager = new GalleryManager();

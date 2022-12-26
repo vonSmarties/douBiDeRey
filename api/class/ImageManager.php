@@ -1,4 +1,6 @@
 <?php
+include 'Manager.php';
+include 'Image.php';
 
 /**
  *

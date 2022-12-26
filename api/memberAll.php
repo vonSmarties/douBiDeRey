@@ -1,6 +1,5 @@
 <?php
-
-require('functions.php');
+include 'class/MemberManager.php';
 
 $memberManager = new MemberManager();
 

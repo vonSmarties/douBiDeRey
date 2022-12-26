@@ -6,3 +6,7 @@
     margin: 23px;
     max-width: calc(100% - 92px);
 }
+
+.ql-clipboard {
+    display: none;
+}

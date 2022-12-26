@@ -44,21 +44,25 @@ export default class GalleryEditor extends React.Component {
     }
 
     addImage = () => {
-        console.log(this.props.gallery);
         const files = this.fileRef.current.files;
         this.upload(files, 0);
     }
 
     upload = (files, i) => {
         const formData = new FormData();
-        console.log(this.props.gallery.id);
         formData.append("idGallery", this.props.gallery.id);
         formData.append("file", files[i]);
-        if (i == files.length - 1) {
-            this.apiSvc.postRawBody("imageCreate", formData);
-        } else {
-            this.apiSvc.postRawBody("imageCreate", formData).then(() => this.upload(files, i + 1));
-        }
+        this.apiSvc.postRawBody("imageCreate", formData).then(rtrn => {
+            this.pushImage({ gallery: this.props.gallery.id, file: rtrn.file });
+            if (i < files.length - 1)
+                this.upload(files, i + 1);
+        });
+    }
+
+    pushImage = (image) => {
+        const images = this.state.images;
+        images.unshift(image);
+        this.setState({ images });
     }
 
     render = () => {
@@ -77,11 +81,11 @@ export default class GalleryEditor extends React.Component {
                 <div
                     onClick={this.deleteGallery}
                 >supprimer</div>
-                <input name="file[]" type="file" ref={this.fileRef} multiple onInput={this.addImage}/>
+                <input name="file[]" type="file" ref={this.fileRef} multiple onInput={this.addImage} />
             </div>
             <div className="modalScroll">
-                {this.state.images && this.state.images.map((image) => <div>
-                    <img className="imageModal" key={image.file} src={image.file}></img>
+                {this.state.images && this.state.images.map((image) => <div key={image.file}>
+                    <img className="imageModal" src={image.file}></img>
                     <div
                         onClick={() => this.deleteImg(image)}
                     >x</div>

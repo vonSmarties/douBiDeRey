@@ -50,9 +50,6 @@ export default class Gallery extends React.Component {
                         {this.state.images && this.state.images.map((image) =>
                             <img className="imageModal" key={image.file} src={image.file}></img>
                         )}
-                        {this.state.images && this.state.images.map((image) => 
-                            <div></div>
-                        )}
                     </div>
                 </div>
                 <div className="greyScreen" onClick={() => this.setState({ isOpen: false })}></div>

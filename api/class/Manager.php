@@ -117,11 +117,11 @@ abstract class Manager
    *
    * @return array<any> données d'une ou plusieurs Entities retournées par la requète SQL
    */
-  public function readWithOrder(string $champ, string $direction = "ASC", ?int $limit)
+  public function readWithOrder(string $champ, string $direction = "ASC", int $limit = null)
   {
 
     $sql = 'SELECT * FROM ' . $this->table . ' ORDER BY ' . $champ . ' ' . $direction;
-    if($direction){
+    if($limit){
       $sql .= ' LIMIT ' . $limit;
     }
     $req = $this->db->prepare($sql);

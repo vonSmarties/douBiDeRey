@@ -1,6 +1,5 @@
 <?php
-
-require('functions.php');
+include 'class/GalleryManager.php';
 
 $galleryManager = new GalleryManager();
 

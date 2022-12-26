@@ -5,14 +5,14 @@ include 'Entity.php';
  */
 class Info extends Entity {
 
-  private $html;
-  protected $keys = ["id","html"];
+  private $delta;
+  protected $keys = ["id","delta"];
 
-  public function getHtml() {
-    return $this->html;
+  public function getDelta() {
+    return $this->delta;
   }
 
-  public function setHtml(string $html) {
-    $this->html=$html;
+  public function setDelta(string $delta) {
+    $this->delta=$delta;
   }
 }

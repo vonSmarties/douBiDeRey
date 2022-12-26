@@ -1,6 +1,6 @@
 <?php
 
-function __autoload($className){
+function spl_autoload_register($className){
   $classDir = 'class/'.$className.'.php';
   if(file_exists($classDir)){
     require_once ($classDir);

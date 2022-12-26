@@ -1,6 +1,5 @@
 <?php
-
-require('functions.php');
+include 'class/InfoManager.php';
 
 $infoManager = new InfoManager();
 

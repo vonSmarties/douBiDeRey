@@ -1,10 +1,9 @@
 <?php
-
-require('functions.php');
+include 'class/InfoManager.php';
 
 $data = json_decode(file_get_contents('php://input'));
 $infoManager = new InfoManager();
-$info = $infoManager->read($id);
+$info = $infoManager->read($data->id);
 try {
     $infoManager->delete($info);
     header('Content-Type: application/json');

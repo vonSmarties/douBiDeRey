@@ -1,4 +1,6 @@
 <?php
+include 'Manager.php';
+include 'Calendar.php';
 
 /**
  *
@@ -60,12 +62,27 @@ class CalendarManager extends Manager
     foreach ($values as $value) {
       $tableau[] = new Calendar($value);
     }
-    return $tableau;
-  
+    return $tableau;  
   }
 
   public function deleteYear(int $year)
   {
     $this->deleteWhereValue($year, 'year');
   }
+
+  public function readListYear()
+  {
+    $sql = "SELECT YEAR(date) FROM calendar GROUP BY YEAR(date) ORDER BY date desc";
+
+    $req = $this->db->prepare($sql);
+    $req->execute();
+    $values = $req->fetchAll(PDO::FETCH_ASSOC);
+    $tableau = [];
+    foreach ($values as $value) {
+      $tableau[] = intval($value);
+    }
+    return $tableau;  
+  }
+
+  
 }

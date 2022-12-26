@@ -1,4 +1,6 @@
 <?php
+include 'Manager.php';
+include 'Info.php';
 
 /**
  *
@@ -13,7 +15,7 @@ class InfoManager extends Manager
       'PDO' => PDO::PARAM_INT
     ],
     [
-      'nom' => 'html',
+      'nom' => 'delta',
       'PDO' => PDO::PARAM_STR
     ]
   ];

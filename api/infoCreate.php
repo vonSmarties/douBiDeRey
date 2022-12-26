@@ -1,15 +1,18 @@
 <?php
-
-require('functions.php');
+include 'class/InfoManager.php';
+include 'class/Info.php';
 
 $data = json_decode(file_get_contents('php://input'));
 $infoManager = new InfoManager();
 $info = new Info();
-$info->setHtml($data->html);
+$info->setDelta($data->delta);
 try {
     $infoManager->create($info);
     header('Content-Type: application/json');
-    echo json_encode(["create" => "true"]);
+    echo json_encode([
+        "create" => "true",
+        "id" => $info->getId()
+    ]);
 } catch (Exception $ex) {
     header('Content-Type: application/json');
     echo json_encode([

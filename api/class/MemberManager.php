@@ -1,4 +1,6 @@
 <?php
+include 'Manager.php';
+include 'Member.php';
 
 /**
  *

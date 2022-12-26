@@ -1,11 +1,10 @@
 <?php
-
-require('functions.php');
+include 'class/InfoManager.php';
 
 $data = json_decode(file_get_contents('php://input'));
 $infoManager = new InfoManager();
 $info = $infoManager->read($data->id);
-$info->setHtml($data->html);
+$info->setDelta($data->delta);
 try {
     $infoManager->update($info);
     header('Content-Type: application/json');

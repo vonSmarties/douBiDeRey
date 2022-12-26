@@ -1,10 +1,9 @@
 <?php
-
-require('functions.php');
+include 'class/MemberManager.php';
 
 $data = json_decode(file_get_contents('php://input'));
 $memberManager = new MemberManager();
-$member = $memberManager->read($id);
+$member = $memberManager->read($data->id);
 try {
     $memberManager->delete($member);
     header('Content-Type: application/json');

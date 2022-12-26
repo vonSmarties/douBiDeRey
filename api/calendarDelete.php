@@ -1,10 +1,9 @@
 <?php
-
-require('functions.php');
+include 'class/CalendarManager.php';
 
 $data = json_decode(file_get_contents('php://input'));
 $calendarManager = new CalendarManager();
-$calendar = $calendarManager->read($id);
+$calendar = $calendarManager->read($data->id);
 try {
     $calendarManager->delete($calendar);
     header('Content-Type: application/json');
