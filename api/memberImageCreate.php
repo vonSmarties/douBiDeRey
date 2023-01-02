@@ -2,19 +2,23 @@
 include_once 'class/MemberManager.php';
 include_once 'class/Member.php';
 
-$data = json_decode(file_get_contents('php://input'));
 $memberManager = new MemberManager();
 $member = new Member();
-$member->fill($data);
 session_start();
 
-if ($_SESSION["magicalUnicornToken"] == $data->magicalUnicornToken) {
+if ($_SESSION["magicalUnicornToken"] == $_POST['magicalUnicornToken']) {
     try {
-        if ($memberManager->create($member)) {
+        $target_path = "asset/board/";
+        $ext = explode('.', basename($_FILES['file']['name']));
+        $target_path = $target_path . md5(uniqid()) . "." . $ext[count($ext) - 1];
+
+        move_uploaded_file($_FILES['file']['tmp_name'], "../" . $target_path);
+        $member->setPicture($target_path);
+        if ($memberManager->update($member)) {
             header('Content-Type: application/json');
             echo json_encode([
                 "create" => "true",
-                "id" => $member->getId()
+                "file" => $member->getPicture()
             ]);
         }
     } catch (Exception $ex) {

@@ -20,6 +20,14 @@ class GalleryManager extends Manager
     ]
   ];
 
+  public function create(Entity $gallery)
+  {
+    $rtrn = parent::create($gallery);
+    if ($rtrn)
+      mkdir("../gallery/" . $gallery->getId());
+    return $rtrn;
+  }
+
   public function read(int $id)
   {
     $values = parent::readWhereValue($id, 'id');
@@ -47,5 +55,13 @@ class GalleryManager extends Manager
       $tableau[] = new Gallery($value);
     }
     return $tableau;
+  }
+
+  public function delete(Entity $gallery)
+  {
+    $rtrn = parent::delete($gallery);
+    if ($rtrn)
+      rmdir("../gallery/" . $gallery->getId());
+    return $rtrn;
   }
 }

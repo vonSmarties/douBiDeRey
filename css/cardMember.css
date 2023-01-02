@@ -10,18 +10,11 @@
     margin: 10px;
 }
 
-.pictContainer {
+.pictMember {
     height: 100%;
     border-radius: 5px;
     width: var(--widthPict);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-}
-
-.pictMember {
-    min-height: 100%;
-    min-width: 100%;
+    object-fit: cover;
 }
 
 .memberContainer{

@@ -52,11 +52,19 @@ class ImageManager extends Manager
 
   public function deleteImage(Image $image)
   {
-    $this->deleteWhereValue($image->getFile(), "file");
+    return unlink('../' . $image->getFile()) && $this->deleteWhereValue($image->getFile(), "file");
   }
 
   public function deleteImagesGallery(Gallery $gallery)
   {
-    $this->deleteWhereValue($gallery->getId(), "gallery");
+    $images = $this->readAllGallery($gallery->getId());
+
+    foreach ($images as $image) {
+      if (!$this->deleteImage($image)) {
+        return false;
+      }
+    }
+
+    return $this->deleteWhereValue($gallery->getId(), "gallery");
   }
 }

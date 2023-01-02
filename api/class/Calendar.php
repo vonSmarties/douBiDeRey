@@ -7,7 +7,7 @@ class Calendar extends Entity
 {
 
   private $year, $date, $hour, $length, $club, $place;
-  protected $keys = ["id", "year", "date", "hour", "length", "club", "place"];
+  protected $keys = ["id", "date", "length", "club", "place"];
 
   public function getYear()
   {
@@ -27,16 +27,6 @@ class Calendar extends Entity
   public function setDate(string $date)
   {
     $this->date = $date;
-  }
-
-  public function getHour()
-  {
-    return $this->hour;
-  }
-
-  public function setHour(string $hour)
-  {
-    $this->hour = $hour;
   }
 
   public function getLength()

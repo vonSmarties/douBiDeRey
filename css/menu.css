@@ -36,8 +36,9 @@ header {
     width: 100vw;
     height: 100vh;
     background-image: url('http://localhost/doubiderey/asset/marcheurs-Dou-bi-de-Rey.jpg');
-    background-size: cover;
+    background-size: contain;
     background-position: top;
+    background-repeat: no-repeat;
 }
 
 h1 {

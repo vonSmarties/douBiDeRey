@@ -1,27 +1,28 @@
 <?php
-include_once 'class/GalleryManager.php';
-include_once 'class/Gallery.php';
+include_once 'class/MemberManager.php';
 
 $data = json_decode(file_get_contents('php://input'));
-$galleryManager = new GalleryManager();
-$gallery = new Gallery();
-$gallery->fill($data);
+$memberManager = new MemberManager();
 session_start();
 
 if ($_SESSION["magicalUnicornToken"] == $data->magicalUnicornToken) {
     try {
-        if ($galleryManager->create($gallery)) {
+        $update = true;
+        foreach ($data as $datum) {
+            $member = $memberManager->read($datum->id);
+            $member->fill($datum);
+            if (!$memberManager->update($member)) {
+                $update = false;
+            }
+        }
+        if ($update) {
             header('Content-Type: application/json');
-            echo json_encode([
-                "create" => "true",
-                "id" => $gallery->getId()
-            ]);
+            echo json_encode(["update" => "true"]);
         }
     } catch (Exception $ex) {
         header('Content-Type: application/json');
         echo json_encode([
-            "create" => "false",
-            "exception" => $ex
+            "update" => "false"
         ]);
     }
 } else {

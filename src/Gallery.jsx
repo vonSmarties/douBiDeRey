@@ -47,7 +47,7 @@ export default class Gallery extends React.Component {
                         </div>
                     </div>
                     <div className="modalScroll">
-                        {this.state.images && this.state.images.map((image) =>
+                        {this.state.images && this.state.images.map((image) => 
                             <img className="imageModal" key={image.file} src={image.file}></img>
                         )}
                     </div>

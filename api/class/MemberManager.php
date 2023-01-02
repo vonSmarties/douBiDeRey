@@ -15,6 +15,14 @@ class MemberManager extends Manager
       'PDO' => PDO::PARAM_INT
     ],
     [
+      'nom' => 'rang',
+      'PDO' => PDO::PARAM_INT
+    ],
+    [
+      'nom' => 'role',
+      'PDO' => PDO::PARAM_STR
+    ],
+    [
       'nom' => 'name',
       'PDO' => PDO::PARAM_STR
     ],
@@ -56,11 +64,16 @@ class MemberManager extends Manager
 
   public function readAll()
   {
-    $values = parent::readAll();
+    $values = parent::readWithOrder('rang');
     $tableau = [];
     foreach ($values as $value) {
       $tableau[] = new Member($value);
     }
     return $tableau;
+  }
+
+  public function deleteMember(Member $member)
+  {
+    return unlink('../' . $member->getPicture()) && parent::delete($member);
   }
 }

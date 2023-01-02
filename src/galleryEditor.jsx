@@ -29,17 +29,30 @@ export default class GalleryEditor extends React.Component {
         if (event.key == "Enter") {
             const gallery = this.props.gallery;
             gallery.title = this.state.title;
-            this.apiSvc.post("galleryUpdate", gallery);
+            this.apiSvc.post("galleryUpdate", gallery).then(rtrn => {
+                if (rtrn.update) {
+                    this.props.updateList(gallery);
+                }
+            });
         }
     }
 
     deleteImg = (image) => {
-        this.apiSvc.post("imageDelete", image);
+        this.apiSvc.post("imageDelete", image).then(rtrn => {
+            if (rtrn.delete) {
+                const images = this.state.images;
+                images.splice(images.indexOf(image), 1);
+                this.setState({ images });
+            }
+        });
     }
 
     deleteGallery = () => {
-        if (window.confirm("suppression galerie")) {
-            this.apiSvc.post("galleryDelete", this.props.gallery);
+        if (window.confirm("Confirmez vous la suppression de la galerie ?")) {
+            this.apiSvc.post("galleryDelete", this.props.gallery).then(rtrn => {
+                if (rtrn.delete) 
+                    this.props.delFromList(this.props.gallery);
+            });
         }
     }
 
@@ -52,7 +65,7 @@ export default class GalleryEditor extends React.Component {
         const formData = new FormData();
         formData.append("idGallery", this.props.gallery.id);
         formData.append("file", files[i]);
-        this.apiSvc.postRawBody("imageCreate", formData).then(rtrn => {
+        this.apiSvc.postFormData("imageCreate", formData).then(rtrn => {
             this.pushImage({ gallery: this.props.gallery.id, file: rtrn.file });
             if (i < files.length - 1)
                 this.upload(files, i + 1);
@@ -61,7 +74,7 @@ export default class GalleryEditor extends React.Component {
 
     pushImage = (image) => {
         const images = this.state.images;
-        images.unshift(image);
+        images.push(image);
         this.setState({ images });
     }
 

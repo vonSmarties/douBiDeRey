@@ -4,10 +4,13 @@ import "../service/reactDom";
 export default class Member extends React.Component {
 
     render = () => {
-        return <div className="cardMember">
-            <div className="pictContainer">
-                <img className="pictMember" src={this.props.member.picture} alt="moustache" />
-            </div>
+        return <div
+        className="cardMember"
+        onClick={this.props.onClick}
+        draggable={this.props.draggable}
+        onDragStartCapture={this.props.onDragStart}
+        >
+            <img className="pictMember" src={this.props.member.picture} alt="moustache" />
             <div className="memberContainer">
                 <div className="roleMember lineMember">{this.props.member.role}</div>
                 <div className="lineMember">

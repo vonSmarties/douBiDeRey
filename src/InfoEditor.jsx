@@ -17,19 +17,19 @@ export default class InfoEditor extends React.Component {
 
     componentDidMount = () => {
         this.quill = new Quill(this.quillContainer.current, {
-            modules : {
+            modules: {
                 toolbar: [
                     [{ 'font': [] }],
-                    [{ 'size': ['small', false, 'large', 'huge'] }], 
+                    [{ 'size': ['small', false, 'large', 'huge'] }],
                     ['bold', 'italic', 'underline', 'strike'],
-                    [{ 'script': 'sub'}, { 'script': 'super' }],  
+                    [{ 'script': 'sub' }, { 'script': 'super' }],
                     [{ 'align': [] }],
                     [{ 'color': [] }, { 'background': [] }],
-                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                    [{ 'indent': '-1'}, { 'indent': '+1' }],
-                  
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                    [{ 'indent': '-1' }, { 'indent': '+1' }],
+
                     ['clean']                                         // remove formatting button
-                  ]
+                ]
             },
             theme: 'snow'
         });
@@ -41,19 +41,28 @@ export default class InfoEditor extends React.Component {
         const body = { delta: JSON.stringify(this.quill.getContents()) };
         if (this.props.info.id) {
             body.id = this.props.info.id;
-            this.apiSvc.post("infoUpdate", body)
+            this.apiSvc.post("infoUpdate", body).then(rtrn => {
+                if (rtrn.update) {
+                    this.props.updateList(body);
+                }
+            });
         } else {
             this.apiSvc.post("infoCreate", body).then(rtrn => {
-                body.id = rtrn.id;
-                console.log(body)
-                this.props.updateList(body);
+                if (rtrn.create) {
+                    body.id = rtrn.id;
+                    this.props.addInList(body);
+                }
             });
         }
     }
 
     delete = () => {
-        if (!this.props.id)
-            this.apiSvc.post("infoDelete", this.props.info);
+        if (window.confirm("Confirmez vous la suppression de cette information ?")) 
+        this.apiSvc.post("infoDelete", this.props.info).then(rtrn => {
+            if (rtrn.delete) {
+                this.props.delFromList(this.props.info);
+            }
+        });
     }
 
     render = () => {

@@ -21,6 +21,10 @@ export default class Info extends React.Component {
             this.quill.setContents(JSON.parse(this.props.info.delta));
     }
 
+    componentDidUpdate = () => {
+        this.quill.setContents(JSON.parse(this.props.info.delta));
+    }
+
     render = () => {
         return <div className="containerInfo" onClick={this.props.onClick}>
             <div ref={this.quillContainer}></div>

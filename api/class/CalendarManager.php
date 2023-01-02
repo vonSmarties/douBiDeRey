@@ -15,15 +15,7 @@ class CalendarManager extends Manager
       'PDO' => PDO::PARAM_INT
     ],
     [
-      'nom' => 'year',
-      'PDO' => PDO::PARAM_STR
-    ],
-    [
       'nom' => 'date',
-      'PDO' => PDO::PARAM_STR
-    ],
-    [
-      'nom' => 'hour',
       'PDO' => PDO::PARAM_STR
     ],
     [
@@ -72,14 +64,14 @@ class CalendarManager extends Manager
 
   public function readListYear()
   {
-    $sql = "SELECT YEAR(date) FROM calendar GROUP BY YEAR(date) ORDER BY date desc";
+    $sql = "SELECT YEAR(date) as year FROM calendar GROUP BY YEAR(date) ORDER BY date desc";
 
     $req = $this->db->prepare($sql);
     $req->execute();
     $values = $req->fetchAll(PDO::FETCH_ASSOC);
     $tableau = [];
     foreach ($values as $value) {
-      $tableau[] = intval($value);
+      $tableau[] = intVal($value['year']);
     }
     return $tableau;  
   }

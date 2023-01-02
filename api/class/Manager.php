@@ -62,22 +62,23 @@ abstract class Manager
    *
    * @param Entity entity type défini par les managers enfants
    *
-   * @return void
+   * @return bool
    */
   public function create(Entity $entity)
   {
 
-    $champs = $this->strWithoutIdChamps();
+    $champs = $this->strWithoutIdChamps($entity);
     $noms = $champs['noms'];
     $values = $champs['values'];
 
     $sql = 'INSERT INTO ' . $this->table . " ($noms) VALUES ($values)";
     $req = $this->db->prepare($sql);
     $this->bindvaluesPDO($req, $entity);
-    $req->execute();
+    $rtrn = $req->execute();
 
     $id = $this->db->lastInsertId();
     $entity->setId($id);
+    return $rtrn;
   }
 
   /**
@@ -121,7 +122,7 @@ abstract class Manager
   {
 
     $sql = 'SELECT * FROM ' . $this->table . ' ORDER BY ' . $champ . ' ' . $direction;
-    if($limit){
+    if ($limit) {
       $sql .= ' LIMIT ' . $limit;
     }
     $req = $this->db->prepare($sql);
@@ -165,7 +166,7 @@ abstract class Manager
    *
    * @param Entity type défini par les manager enfant
    *
-   * @return void
+   * @return bool
    */
   public function update(Entity $entity)
   {
@@ -176,7 +177,27 @@ abstract class Manager
     $req = $this->db->prepare($sql);
     $this->bindValue($req, $entity->getId(), 'id');
     $this->bindvaluesPDO($req, $entity);
-    $req->execute();
+    return $req->execute();
+  }
+
+  /**
+   * fonction public : update
+   *
+   * met à jour les données d'une Entity
+   *
+   * @param Entity type défini par les manager enfant
+   *
+   * @return bool
+   */
+  public function updateWhereValue(Entity $entity, $value, string $champ)
+  {
+    $update = $this->lierChampsValuesPDO($entity);
+    $sql = 'UPDATE ' . $this->table . " SET $update WHERE " . $this->condition($champ);
+
+    $req = $this->db->prepare($sql);
+    $this->bindValue($req, $value, $champ);
+    $this->bindvaluesPDO($req, $entity);
+    return $req->execute();
   }
 
   /**
@@ -186,7 +207,7 @@ abstract class Manager
    *
    * @param Entity type défini par les manager enfant
    *
-   * @return void
+   * @return bool
    */
   public function delete(Entity $entity)
   {
@@ -195,7 +216,7 @@ abstract class Manager
 
     $req = $this->db->prepare($sql);
     $this->bindValue($req, $entity->getId(), 'id');
-    $req->execute();
+    return $req->execute();
   }
 
   /**
@@ -206,7 +227,7 @@ abstract class Manager
    * @param any valeur du champ de la table choisi.
    * @param string nom du champ de la table choisi.
    *   *
-   * @return void
+   * @return bool
    */
   public function deleteWhereValue($value, string $champ)
   {
@@ -215,7 +236,7 @@ abstract class Manager
 
     $req = $this->db->prepare($sql);
     $this->bindValue($req, $value, $champ);
-    $req->execute();
+    return $req->execute();
   }
 
   /**
@@ -227,14 +248,20 @@ abstract class Manager
    *
    * @return array<string> tableau de deux ligne contenant le nom des champs et les variable PDO formaté pour la requète SQL
    */
-  private function strWithoutIdChamps()
+  private function strWithoutIdChamps(Entity $entity)
   {
     $champs = array_slice($this->champs, 1);
     $noms = [];
     $values = [];
     foreach ($champs as $champ) {
-      $noms[] = $champ['nom'];
-      $values[] = ':' . $champ['nom'];
+      $methodName = 'get' . ucfirst($champ['nom']);
+      if (method_exists($entity, $methodName)) {
+        $value = $entity->$methodName();
+        if (isset($value)) {
+          $noms[] = $champ['nom'];
+          $values[] = ':' . $champ['nom'];
+        }
+      }
     }
     return [
       'noms' => implode(',', $noms),

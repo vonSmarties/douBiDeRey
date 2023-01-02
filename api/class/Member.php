@@ -6,8 +6,18 @@ include_once 'Entity.php';
 class Member extends Entity
 {
 
-  private $name, $firstName, $role, $address, $city, $phone, $mobile, $picture;
-  protected $keys = ["id", "name", "firstName", "role", "address", "city", "phone", "mobile", "picture"];
+  private $rang, $name, $firstName, $role, $address, $city, $phone, $mobile, $picture;
+  protected $keys = ["id","rang", "name", "firstName", "role", "address", "city", "phone", "mobile", "picture"];
+
+  public function getRang()
+  {
+    return $this->rang;
+  }
+
+  public function setRang(string $rang)
+  {
+    $this->rang = $rang;
+  }
 
   public function getName()
   {

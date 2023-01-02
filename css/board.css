@@ -4,6 +4,9 @@
 
 .reactContainer {
     width: calc(100% - var(--widthMenu));
+}
+
+.boardContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
