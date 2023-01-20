@@ -12,13 +12,13 @@ try {
     if ($passwordManager->create($password)) {
         header('Content-Type: application/json');
         echo json_encode([
-            "create" => "true"
+            "create" => true
         ]);
     }
 } catch (Exception $ex) {
     header('Content-Type: application/json');
     echo json_encode([
-        "create" => "false",
+        "create" => false,
         "exception" => $ex
     ]);
 }

@@ -18,20 +18,20 @@ if ($_SESSION["magicalUnicornToken"] == $_POST['magicalUnicornToken']) {
         if ($imageManager->create($image)) {
             header('Content-Type: application/json');
             echo json_encode([
-                "create" => "true",
+                "create" => true,
                 "file" => $image->getFile()
             ]);
         }
     } catch (Exception $ex) {
         header('Content-Type: application/json');
         echo json_encode([
-            "create" => "false",
+            "create" => false,
             "exception" => $ex
         ]);
     }
 } else {
     header('Content-Type: application/json');
     echo json_encode([
-        "unicorn" => "true"
+        "unicorn" => true
     ]);
 }

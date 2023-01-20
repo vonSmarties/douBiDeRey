@@ -1,12 +1,20 @@
 .containerInfo {
+    --margin: 23px;
     border-radius: 5px;
-    box-shadow: 0px 0px 15px var(--boxShadowColor);
-    padding: 23px;
-    background-color: aliceblue;
-    margin: 23px;
-    max-width: calc(100% - 92px);
+    box-shadow: -1px 1px var(--boxShadowColor);
+    padding: var(--margin);
+    background-color: var(--colorConstrast);
+    margin: var(--margin);
+    width: calc(100% - 4 * var(--margin));
 }
 
 .ql-clipboard {
     display: none;
+}
+
+
+@media (max-width:1023px) {
+    .ql-container {
+        font-size: var(--fontMobile);
+    }
 }

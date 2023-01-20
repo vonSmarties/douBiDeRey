@@ -1,0 +1,225 @@
+.log {
+    width: fit-content;
+    margin: auto;
+    margin-top: auto;
+    padding: 23px;
+    background-color: var(--colorBackground);
+    border-radius: 23px;
+    margin-top: 23vh;
+    padding-bottom: 10px;
+}
+
+.editModal {
+    top: 5%;
+    left: 5%;
+    z-index: 10;
+    position: fixed;
+    width: 90vw;
+    background-color: var(--colorConstrast);
+    border-radius: 5px;
+}
+
+.modalHeader {
+    justify-content: flex-end;
+}
+
+.modalScroll {
+    display: flex;
+    flex-direction: row;
+    gap: var(--padding);
+}
+
+.imageContainer {
+    position: relative;
+}
+
+.imageModal {
+    --imageModal: 300px;
+    height: var(--imageModal);
+    width: var(--imageModal);
+    object-fit: cover;
+}
+
+.headerCategory {
+    background-color: var(--boxShadowColor);
+    color: var(--colorConstrast);
+    padding: 10px;
+    border-bottom: 1px solid var(--colorBackground);
+}
+
+.headerCategory:hover {
+    background-color: var(--colorConstrast);
+    color: var(--boxShadowColor);
+    cursor: pointer;
+}
+
+.bottomRow {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.editButton {
+    width: fit-content;
+    padding: 5px;
+    margin: 10px;
+    background-color: var(--colorConstrast);
+    box-shadow: -1px 1px var(--boxShadowColor);
+    border-radius: 2px;
+}
+
+.editButtonLight {
+    width: fit-content;
+    padding: 5px;
+    margin-left: 10px;
+    background-color: var(--colorBackground);
+    box-shadow: -1px 1px var(--boxShadowColor);
+    border-radius: 2px;
+}
+
+.leftButton {
+    margin-left: 0px;
+}
+
+.editButton:hover {
+    background-color: var(--boxShadowColor);
+    color: var(--colorConstrast);
+    cursor: pointer;
+}
+
+.editButtonLight:hover {
+    cursor: pointer;
+    background-color: var(--boxShadowColor);
+    color: var(--colorConstrast);
+}
+
+.editable {
+    background-color: var(--colorConstrast);
+    box-shadow: -1px 1px var(--colorBackground);
+}
+
+.editable:hover {
+    background-color: var(--boxShadowColor);
+    color: var(--colorConstrast);
+    cursor: pointer;
+}
+
+.wrapperItem {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.galleryDisplay {
+    padding: 5px;
+    margin: 10px;
+    border-radius: 2px;
+}
+
+.editModal .containerInfo {
+    margin: 0px;
+    box-shadow: none;
+    width: auto;
+    background-color: initial;
+}
+
+.question {
+    margin-bottom: 10px;
+}
+
+.inputModal {
+    padding: 0px 10px;
+    margin: 5px 0px;
+    display: flex;
+    align-items: center;
+}
+
+.bottomModal {
+    padding: 0px 10px 10px 10px;
+}
+
+.galleryDelete {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+    padding: 4px;
+    border-radius: 1000px;
+    background-color: var(--colorBackground);
+    width: 23px;
+    height: 23px;
+    text-align: center;
+}
+
+.galleryDelete:hover {
+    cursor: pointer;
+    background-color: var(--boxShadowColor);
+    color: var(--colorConstrast);
+}
+
+.addFile {
+    display: none;
+}
+
+input {
+    flex-grow: 1;
+}
+
+.eventEditor {
+    --padding: 10px;
+}
+
+.itemEvent {
+    width: calc(100% - 2*var(--padding));
+    padding: var(--padding);
+}
+
+.eventClub {
+    width: calc(100% - 2*var(--padding));
+    padding: var(--padding);
+}
+
+.pageHeader {
+    background-color: var(--colorBackground);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    --header: 16px;
+}
+
+.pageHeader a {
+    text-decoration: inherit;
+    padding: 0;
+}
+
+.itemMenu {
+    margin-left: 10px;
+    width: fit-content;
+    text-decoration: inherit;
+}
+
+.itemMenu:hover {
+    background-color: inherit;
+    color: var(--colorText);
+}
+
+.logout {
+    display: flex;
+    padding: 5px;
+}
+
+.logout .modalCloseContainer {
+    height: auto;
+}
+
+.logout:hover {
+    cursor: pointer;
+}
+
+.editModal .cardMember {
+    --padding: 10px;
+    box-shadow: none;
+    height: auto;
+    width: calc(100% - 2* var(--padding));
+    margin: 0;
+    padding: var(--padding);
+    background-color: initial;
+}

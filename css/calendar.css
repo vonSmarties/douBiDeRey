@@ -8,8 +8,9 @@
 
 .calendarContainer {
     --padding: 10px;
-    width: calc(100% - 2*var(--padding));
+    width: fit-content;
     padding: var(--padding);
+    margin: auto;
 }
 
 .calendarHeader {
@@ -25,6 +26,12 @@
     background-color: var(--colorConstrast);
 }
 
+.claendarChoices {
+    display: flex;
+    margin-left: 10px;
+
+}
+
 
 @media (max-width:1023px) {
     .reactContainer {
@@ -33,5 +40,14 @@
 
     .calendarHeader {
         display: none;
+    }
+
+    .calendarContainer {
+        width: calc(100% - 2* var(--padding));
+        margin: 0;
+    }
+
+    .claendarChoices select {
+        font-size: var(--fontMobile);
     }
 }

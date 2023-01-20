@@ -11,6 +11,7 @@ export default class GalleryEditor extends React.Component {
         super(props);
         this.state = {
             title: props.gallery.title,
+            newTitle: false
         }
     }
 
@@ -23,18 +24,24 @@ export default class GalleryEditor extends React.Component {
     }
 
     editTitle = (event) =>
-        this.setState({ title: event.currentTarget.value })
+        this.setState({ title: event.currentTarget.value, newTitle: true });
 
-    saveTitle = (event) => {
-        if (event.key == "Enter") {
-            const gallery = this.props.gallery;
-            gallery.title = this.state.title;
-            this.apiSvc.post("galleryUpdate", gallery).then(rtrn => {
-                if (rtrn.update) {
-                    this.props.updateList(gallery);
-                }
-            });
-        }
+    saveTitleEvent = (event) => {
+        if (event.key == "Enter")
+            this.saveTitle();
+    }
+
+    saveTitle = () => {
+        const gallery = this.props.gallery;
+        gallery.title = this.state.title;
+        this.apiSvc.post("galleryUpdate", gallery).then(rtrn => {
+            if (rtrn.update) {
+                this.setState({ newTitle: null });
+                this.props.updateList(gallery);
+            } else {
+                window.alert("Echec de l'édition");
+            }
+        });
     }
 
     deleteImg = (image) => {
@@ -43,6 +50,8 @@ export default class GalleryEditor extends React.Component {
                 const images = this.state.images;
                 images.splice(images.indexOf(image), 1);
                 this.setState({ images });
+            } else {
+                window.alert("Echec de la suppression");
             }
         });
     }
@@ -50,8 +59,11 @@ export default class GalleryEditor extends React.Component {
     deleteGallery = () => {
         if (window.confirm("Confirmez vous la suppression de la galerie ?")) {
             this.apiSvc.post("galleryDelete", this.props.gallery).then(rtrn => {
-                if (rtrn.delete) 
+                if (rtrn.delete) {
                     this.props.delFromList(this.props.gallery);
+                } else {
+                    window.alert("Echec de la suppression");
+                }
             });
         }
     }
@@ -66,9 +78,13 @@ export default class GalleryEditor extends React.Component {
         formData.append("idGallery", this.props.gallery.id);
         formData.append("file", files[i]);
         this.apiSvc.postFormData("imageCreate", formData).then(rtrn => {
-            this.pushImage({ gallery: this.props.gallery.id, file: rtrn.file });
-            if (i < files.length - 1)
-                this.upload(files, i + 1);
+            if (rtrn.create) {
+                this.pushImage({ gallery: this.props.gallery.id, file: rtrn.file });
+                if (i < files.length - 1)
+                    this.upload(files, i + 1);
+            } else {
+                window.alert("Echec de l'ajout de l'image");
+            }
         });
     }
 
@@ -78,10 +94,13 @@ export default class GalleryEditor extends React.Component {
         this.setState({ images });
     }
 
+    openInputFile = () => {
+        this.fileRef.current.click()
+    }
+
     render = () => {
-        return <div className="galleryContainer">
+        return <div className={this.props.className}>
             <div className="modalHeader">
-                <input type="text" value={this.state.title} onChange={this.editTitle} onKeyUp={this.saveTitle}></input>
                 <div
                     className="modalCloseContainer"
                     onClick={this.props.close}
@@ -91,19 +110,39 @@ export default class GalleryEditor extends React.Component {
                 </div>
             </div>
             <div>
-                <div
-                    onClick={this.deleteGallery}
-                >supprimer</div>
-                <input name="file[]" type="file" ref={this.fileRef} multiple onInput={this.addImage} />
+                <div className="inputModal">
+                    <div style={{ marginRight: "5px" }}>Titre :</div>
+                    <input
+                        type="text"
+                        value={this.state.title}
+                        onChange={this.editTitle}
+                        onKeyUp={this.saveTitleEvent}
+                    ></input>
+                    {this.state.newTitle && <div
+                        onClick={this.saveTitle}
+                        className="editButtonLight"
+                    >Ok</div>}
+                </div>
+                <div className="inputModal">
+                    <div onClick={this.openInputFile} className="editButtonLight leftButton">Ajouter des photos</div>
+                    <input className="addFile" name="file[]" type="file" ref={this.fileRef} multiple onInput={this.addImage} />
+                </div>
             </div>
             <div className="modalScroll">
-                {this.state.images && this.state.images.map((image) => <div key={image.file}>
+                {this.state.images && this.state.images.map((image) => <div className="imageContainer" key={image.file}>
                     <img className="imageModal" src={image.file}></img>
                     <div
                         onClick={() => this.deleteImg(image)}
+                        className="galleryDelete"
                     >x</div>
                 </div>
                 )}
+            </div>
+            <div className="bottomRow bottomModal">
+                <div
+                    onClick={this.deleteGallery}
+                    className="editButtonLight"
+                >Supprimer la galerie</div>
             </div>
         </div>
     };

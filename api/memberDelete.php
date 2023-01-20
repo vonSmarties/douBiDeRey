@@ -10,17 +10,17 @@ if ($_SESSION["magicalUnicornToken"] == $data->magicalUnicornToken) {
     try {
         if ($memberManager->deleteMember($member)) {
             header('Content-Type: application/json');
-            echo json_encode(["delete" => "true"]);
+            echo json_encode(["delete" => true]);
         }
     } catch (Exception $ex) {
         header('Content-Type: application/json');
         echo json_encode([
-            "delete" => "false"
+            "delete" => false
         ]);
     }
 } else {
     header('Content-Type: application/json');
     echo json_encode([
-        "unicorn" => "true"
+        "unicorn" => true
     ]);
 }

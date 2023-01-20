@@ -37,7 +37,7 @@
 
 .modalCloseContainer {
     height: 100%;
-    width: 23px;
+    width: var(--header);
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -50,8 +50,8 @@
     display: block;
     background-color: var(--colorText);
     position: absolute;
-    height: 2px;
-    width: 23px;
+    height: 3px;
+    width: var(--header);
     /* transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1); */
     border-radius: 1px;
 }
@@ -61,7 +61,6 @@
 }
 
 .modalClose2 {
-    content: '';
     transform: rotate(-405deg);
 }
 
@@ -69,20 +68,36 @@
     width: calc(100% - 2*var(--padding));
     height: calc(100% - var(--header));
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     padding: 0 var(--padding);
     overflow: auto;
+    justify-content: center;
+}
+
+.imageContainer {
+    width: 369px;
+    max-height: 369px;
+    padding: 5px;
+}
+
+.imageErsatz {
+    width: 369px;
 }
 
 .imageModal {
     width: 100%;
-    max-height: 100%;
-    padding-bottom: 5px;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
 }
 
 .galleryContainer:hover {
     cursor: pointer;
+}
+
+.imageFull {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .galleryDisplay {
@@ -104,10 +119,102 @@
 }
 
 .galleryContainer {
+    --marginContainer: 23px;
     width: 320px;
-    margin: 23px;
+    margin: var(--marginContainer);
     border-radius: 5px;
-    box-shadow: 0px 0px 15px var(--boxShadowColor);
+    box-shadow: -1px 1px var(--boxShadowColor);
     background-color: var(--colorConstrast);
     overflow: hidden;
+}
+
+.downloadButton {
+    background-color: var(--colorBackground);
+    padding: 5px;    
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: -1px 1px var(--boxShadowColor);
+}
+
+.controlcloseFull {
+    --header: 32px;
+    background-color: var(--colorConstrast);
+    height: var(--header);
+    width: var(--header);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+}
+
+.controlrightFull {
+    background-color: var(--colorConstrast);
+    display: flex;
+    cursor: pointer;
+    width: fit-content;
+    padding: 10px;
+    font-size: 23px;
+    position: absolute;
+    right: 0;
+    top: calc(50vh - 22px);
+}
+
+.controlLeftFull {
+    background-color: var(--colorConstrast);
+    display: flex;
+    cursor: pointer;
+    width: fit-content;
+    padding: 10px;
+    font-size: 23px;
+    position: absolute;
+    left: 0;
+    top: calc(50vh - 22px);
+}
+
+@media (max-width:1023px) {
+    .galleryWrapper {
+        width: 100%;
+    }
+
+    .galleryContainer {
+        width: calc(100% - 2 * var(--marginContainer));
+    }
+
+    .previewGallery {
+        height: 420px;
+    }
+
+    .modalHeader,
+    .modalScroll {
+        --header: 69px;
+    }
+
+    /* .modalScroll {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    } */
+
+    .modalClose1,
+    .modalClose2 {
+        height: 6px;
+    }
+
+    .controlLeftFull,
+    .controlrightFull,
+    .controlcloseFull {
+        display: none;
+    }
+
+    .imageContainer {
+        width: 100%;
+        max-height: 100%;
+        padding-bottom: 5px;
+    }
+
+    .imageModal {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
 }

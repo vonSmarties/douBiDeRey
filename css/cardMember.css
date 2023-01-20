@@ -1,13 +1,14 @@
 .cardMember {
+    --space: 10px;
     --widthPict: 40%;
     display: flex;
-    padding: 10px;
-    width: 380px;
-    height: 180px;
+    padding: var(--space);
+    width: 510px;
+    height: 210px;
     border-radius: 5px;
     background-color: var(--colorConstrast);
-    box-shadow: 0 0 23px var(--boxShadowColor);
-    margin: 10px;
+    box-shadow: -1px 1px var(--boxShadowColor);
+    margin: var(--space);
 }
 
 .pictMember {
@@ -17,8 +18,8 @@
     object-fit: cover;
 }
 
-.memberContainer{
-    --marginleft:10px;
+.memberContainer {
+    --marginleft: 10px;
     margin-left: var(--marginleft);
     width: calc(100% - var(--widthPict) - var(--marginleft));
 }
@@ -26,7 +27,11 @@
 .lineMember {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 5px ;
+    margin-bottom: 5px;
+}
+
+.emailMember{    
+    line-break: anywhere;
 }
 
 .roleMember {
@@ -35,4 +40,16 @@
 
 .lineMemberItem {
     margin-right: 5px;
+}
+
+@media (max-width:1023px) {
+    .cardMember {
+        --space: 23px;
+        width: calc(100% - 4* var(--space));
+        height: 510px;
+    }
+
+    .separator {
+        display: none;
+    }
 }

@@ -8,7 +8,7 @@ session_start();
 if ($_SESSION["magicalUnicornToken"] == $data->magicalUnicornToken) {
     try {
         $update = true;
-        foreach ($data as $datum) {
+        foreach ($data->members as $datum) {
             $member = $memberManager->read($datum->id);
             $member->fill($datum);
             if (!$memberManager->update($member)) {
@@ -17,17 +17,17 @@ if ($_SESSION["magicalUnicornToken"] == $data->magicalUnicornToken) {
         }
         if ($update) {
             header('Content-Type: application/json');
-            echo json_encode(["update" => "true"]);
+            echo json_encode(["update" => true]);
         }
     } catch (Exception $ex) {
         header('Content-Type: application/json');
         echo json_encode([
-            "update" => "false"
+            "update" => false
         ]);
     }
 } else {
     header('Content-Type: application/json');
     echo json_encode([
-        "unicorn" => "true"
+        "unicorn" => true
     ]);
 }

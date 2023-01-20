@@ -31,6 +31,10 @@ class MemberManager extends Manager
       'PDO' => PDO::PARAM_STR
     ],
     [
+      'nom' => 'email',
+      'PDO' => PDO::PARAM_STR
+    ],
+    [
       'nom' => 'address',
       'PDO' => PDO::PARAM_STR
     ],
@@ -74,6 +78,10 @@ class MemberManager extends Manager
 
   public function deleteMember(Member $member)
   {
-    return unlink('../' . $member->getPicture()) && parent::delete($member);
+    if ($member->getPicture()) {
+      return unlink('../' . $member->getPicture()) && parent::delete($member);
+    } else {
+      return parent::delete($member);
+    }
   }
 }

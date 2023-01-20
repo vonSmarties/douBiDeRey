@@ -18,19 +18,19 @@ if ($_SESSION["magicalUnicornToken"] == $_POST['magicalUnicornToken']) {
         if ($memberManager->update($member)) {
             header('Content-Type: application/json');
             echo json_encode([
-                "update" => "true",
+                "update" => true,
                 "file" => $member->getPicture()
             ]);
         }
     } catch (Exception $ex) {
         header('Content-Type: application/json');
         echo json_encode([
-            "update" => "false"
+            "update" => false
         ]);
     }
 } else {
     header('Content-Type: application/json');
     echo json_encode([
-        "unicorn" => "true"
+        "unicorn" => true
     ]);
 }

@@ -11,18 +11,18 @@ if ($_SESSION["magicalUnicornToken"] == $data->magicalUnicornToken) {
     try {
         if ($galleryManager->update($gallery)) {
             header('Content-Type: application/json');
-            echo json_encode(["update" => "true"]);
+            echo json_encode(["update" => true]);
         }
     } catch (Exception $ex) {
         header('Content-Type: application/json');
         echo json_encode([
-            "update" => "false",
+            "update" => false,
             "exception" => $ex
         ]);
     }
 } else {
     header('Content-Type: application/json');
     echo json_encode([
-        "unicorn" => "true"
+        "unicorn" => true
     ]);
 }

@@ -11,17 +11,17 @@ if ($_SESSION["magicalUnicornToken"] == $data->magicalUnicornToken) {
     try {
         if ($memberManager->update($member)) {
             header('Content-Type: application/json');
-            echo json_encode(["update" => "true"]);
+            echo json_encode(["update" => true]);
         }
     } catch (Exception $ex) {
         header('Content-Type: application/json');
         echo json_encode([
-            "update" => "false"
+            "update" => false
         ]);
     }
 } else {
     header('Content-Type: application/json');
     echo json_encode([
-        "unicorn" => "true"
+        "unicorn" => true
     ]);
 }

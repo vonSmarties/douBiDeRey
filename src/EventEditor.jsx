@@ -78,6 +78,9 @@ export default class EventEditor extends React.Component {
                 if (rtrn.update) {
                     body.date = this.state.date;
                     this.props.updateList(body);
+                    this.props.close();
+                } else {
+                    window.alert("Echec de l'édition");
                 }
             });
         } else {
@@ -86,6 +89,9 @@ export default class EventEditor extends React.Component {
                     body.id = rtrn.id;
                     body.date = this.state.date;
                     this.props.addInList(body);
+                    this.props.close();
+                } else {
+                    window.alert("Echec de la création");
                 }
             });
         }
@@ -94,40 +100,52 @@ export default class EventEditor extends React.Component {
     delete = () => {
         if (window.confirm("Confirmez vous la suppression de cet élément du calendrier ?"))
             this.apiSvc.post("calendarDelete", this.props.event).then(rtrn => {
-                if (rtrn.delete)
+                if (rtrn.delete){
                     this.props.delFromList(this.props.event);
+                } else {
+                    window.alert("Echec de la suppression");
+                }
             });
     }
 
     render = () => {
         return <div className={this.props.className}>
-            <div>
-                <div onClick={this.save}>sauvegarder</div>
-                {this.props.event.id && <div onClick={this.delete}>supprimer</div>}
+            <div className="modalHeader">
+                <div
+                    className="modalCloseContainer"
+                    onClick={this.props.close}
+                >
+                    <div className="modalClose1"></div>
+                    <div className="modalClose2"></div>
+                </div>
             </div>
             <div className="eventLine">
                 <div className="itemEvent eventDate">
-                    <div className="labelMobiel">Date: </div>
+                    <div>Date : </div>
                     <input type="date" value={this.state.date.toISOString().split("T").shift()} onChange={(event) => this.editDate(event.currentTarget.value)} />
                 </div>
                 <div className="itemEvent eventHour">
-                    <div className="labelMobiel">Heure : </div>
+                    <div>Heure : </div>
                     <input type="time" value={this.state.date.toTimeString().slice(0, 5)} onChange={(event) => this.editHours(event.currentTarget.value)} />
                 </div>
             </div>
             <div className="eventLine">
                 <div className="itemEvent eventDistance">
-                    <div className="labelMobiel">Distance/Durée : </div>
+                    <div>Distance/Durée : </div>
                     <input type="text" defaultValue={this.props.event.length} onChange={(event) => this.setState({ length: event.currentTarget.value })} />
                 </div>
                 <div className="itemEvent eventPlace">
-                    <div className="labelMobiel">Lieu : </div>
+                    <div>Lieu : </div>
                     <input type="text" defaultValue={this.props.event.place} onChange={(event) => this.setState({ place: event.currentTarget.value })} />
                 </div>
             </div>
             <div className="eventClub">
-                <div className="labelMobiel">Club : </div>
+                <div>Club : </div>
                 <input type="text" defaultValue={this.props.event.club} onChange={(event) => this.setState({ club: event.currentTarget.value })} />
+            </div>
+            <div className="bottomRow bottomModal">
+                <div onClick={this.save} className="editButtonLight">sauvegarder</div>
+                {this.props.event.id && <div onClick={this.delete} className="editButtonLight">supprimer</div>}
             </div>
         </div >;
     };

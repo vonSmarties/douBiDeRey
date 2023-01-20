@@ -19,13 +19,18 @@ export default class Logger extends React.Component {
     }
 
     render = () => {
-        return <div>
-            <div>Multi-passe</div>
+        return <div className={this.props.className}>
+            <div className="question">Multi-passe ???</div>
             <input
                 type="password"
                 onChange={(event) => this.setState({ password: event.currentTarget.value })}
                 onKeyUp={(event) => event.key == "Enter" && this.log()}
             />
+            <div className="bottomRow">
+                <div
+                    onClick={this.log}
+                    className="editButton">Valider</div>
+            </div>
         </div>
     };
 }

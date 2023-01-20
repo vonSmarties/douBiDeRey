@@ -44,6 +44,9 @@ export default class InfoEditor extends React.Component {
             this.apiSvc.post("infoUpdate", body).then(rtrn => {
                 if (rtrn.update) {
                     this.props.updateList(body);
+                    this.props.close();
+                } else {
+                    window.alert("Echec de l'édition");
                 }
             });
         } else {
@@ -51,24 +54,49 @@ export default class InfoEditor extends React.Component {
                 if (rtrn.create) {
                     body.id = rtrn.id;
                     this.props.addInList(body);
+                    this.props.close();
+                } else {
+                    window.alert("Echec de la création");
                 }
             });
         }
     }
 
     delete = () => {
-        if (window.confirm("Confirmez vous la suppression de cette information ?")) 
-        this.apiSvc.post("infoDelete", this.props.info).then(rtrn => {
-            if (rtrn.delete) {
-                this.props.delFromList(this.props.info);
-            }
-        });
+        if (window.confirm("Confirmez vous la suppression de cette information ?"))
+            this.apiSvc.post("infoDelete", this.props.info).then(rtrn => {
+                if (rtrn.delete) {
+                    this.props.delFromList(this.props.info);
+                } else {
+                    window.alert("Echec de la suppression");
+                }
+            });
     }
 
     render = () => {
-        return <div className="containerInfo">
-            <div><div onClick={this.save}>sauvegarder</div>{this.props.info.id && <div onClick={this.delete}>supprimer</div>}</div>
-            <div ref={this.quillContainer}></div>
+        return <div className={this.props.className}>
+            <div className="modalHeader">
+                <div
+                    className="modalCloseContainer"
+                    onClick={this.props.close}
+                >
+                    <div className="modalClose1"></div>
+                    <div className="modalClose2"></div>
+                </div>
+            </div>
+            <div className="containerInfo">
+                <div ref={this.quillContainer}></div>
+            </div>
+            <div className="bottomRow bottomModal">
+                <div
+                    onClick={this.save}
+                    className="editButtonLight"
+                >sauvegarder</div>
+                {this.props.info.id && <div
+                    onClick={this.delete}
+                    className="editButtonLight"
+                >supprimer</div>}
+            </div>
         </div>
     };
 }

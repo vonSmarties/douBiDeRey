@@ -12,7 +12,7 @@ try {
         $_SESSION["magicalUnicornToken"] = md5(uniqid());
         header('Content-Type: application/json');
         echo json_encode([
-            "check" => "true",
+            "check" => true,
             "magicalUnicornToken" => $_SESSION["magicalUnicornToken"]
         ]);
     } else {
@@ -25,7 +25,7 @@ try {
 } catch (Exception $ex) {
     header('Content-Type: application/json');
     echo json_encode([
-        "check" => "false",
+        "check" => false,
         "exception" => $ex
     ]);
 }

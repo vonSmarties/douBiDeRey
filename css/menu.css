@@ -1,9 +1,9 @@
 body {
-    --widthMenu: 200px;
+    --widthMenu: 230px;
     --heightHeader: 51px;
-    --boxShadowColor: darkgray;
+    --boxShadowColor: darkGreen;
     --colorBackground: orange;
-    --colorConstrast: aliceblue;
+    --colorConstrast: rgba(240, 248, 255,0.9);
     --colorText: black;
     --colorTextConstrast: white;
     --widthClutch: 1023px;
@@ -21,6 +21,7 @@ header {
     width: 100%;
     color: var(--colorText);
     background-color: var(--colorBackground);
+    z-index: 1;
 }
 
 .main {
@@ -37,7 +38,7 @@ header {
     height: 100vh;
     background-image: url('http://localhost/doubiderey/asset/marcheurs-Dou-bi-de-Rey.jpg');
     background-size: contain;
-    background-position: top;
+    background-position: center;
     background-repeat: no-repeat;
 }
 
@@ -78,7 +79,7 @@ h1 {
 }
 
 .itemMenu:hover {
-    background-color: aliceblue;
+    background-color: var(--colorConstrast);
     color: var(--colorDark);
 }
 
@@ -94,7 +95,18 @@ h1 {
     margin-right: 0px;
 }
 
+.titleMenu {
+    padding: var(--paddingMenu);
+    text-align: right;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--boxShadowColor);
+}
 
+.textMenu {
+    padding: var(--paddingMenu);
+    text-align: right;
+}
 
 .menu-button-container {
     display: none;
@@ -150,6 +162,16 @@ h1 {
 
 
 @media (max-width:1023px) {
+    body {
+        --fontMobile: 42px;
+        font-size: var(--fontMobile);
+        --heightHeader: 102px;
+    }
+
+    .titleHeader {
+        font-size: var(--fontMobile);
+    }
+
     .menu-button-container {
         display: flex;
     }
@@ -158,10 +180,41 @@ h1 {
         display: none;
         background-color: var(--colorBackground);
         right: 0;
-        z-index: 1;
+        width: auto;
+        --paddingMenu: 42px;
+    }
+
+    .itemMenu {
+        font-size: var(--fontMobile);
+    }
+
+    .titleMenu {
+        font-size: var(--fontMobile);
     }
 
     #menu-toggle:checked~.generalMenu {
         display: block;
+    }
+
+    .menu-button-container {
+        width: 69px;
+    }
+
+    .menu-button,
+    .menu-button::before,
+    .menu-button::after {
+        position: absolute;
+        height: 9px;
+        width: 69px;
+        /* transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1); */
+        border-radius: 2px;
+    }
+
+    .menu-button::before {
+        margin-top: -18px;
+    }
+
+    .menu-button::after {
+        margin-top: 18px;
     }
 }

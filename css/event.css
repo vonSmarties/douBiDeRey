@@ -4,6 +4,8 @@
     padding: 2px;
     padding-left: 10px;
     max-width: fit-content;
+    margin-bottom: 2px;
+    box-shadow: -1px 1px var(--boxShadowColor);
 }
 
 .eventLine {
@@ -45,7 +47,7 @@
 
 @media (max-width:1023px) {
     .event {
-        --marginLeft: 42px;
+        --marginLeft: 102px;
         display: block;
         padding: 10px;
         max-width: 100%;
@@ -57,22 +59,13 @@
     }
 
     .eventLine {
+        width: calc(100%- var(--marginLeft));
+        display: block;
         margin-left: var(--marginLeft);
     }
 
     .eventClub {
         margin-left: var(--marginLeft);
-    }
-
-    .itemEvent {
-        width: calc(50% - var(--marginLeft)/2);
-    }
-}
-
-@media (max-width:666px) {
-    .eventLine  {
-        width: calc(100%- var(--marginLeft));
-        display: block;
     }
 
     .itemEvent {

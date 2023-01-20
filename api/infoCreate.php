@@ -13,20 +13,20 @@ if ($_SESSION["magicalUnicornToken"] == $data->magicalUnicornToken) {
         if ($infoManager->create($info)) {
             header('Content-Type: application/json');
             echo json_encode([
-                "create" => "true",
+                "create" => true,
                 "id" => $info->getId()
             ]);
         }
     } catch (Exception $ex) {
         header('Content-Type: application/json');
         echo json_encode([
-            "create" => "false",
+            "create" => false,
             "exception" => $ex
         ]);
     }
 } else {
     header('Content-Type: application/json');
     echo json_encode([
-        "unicorn" => "true"
+        "unicorn" => true
     ]);
 }

@@ -8,11 +8,11 @@ session_start();
 if (isset($_SESSION["magicalUnicornToken"]) && isset($data->magicalUnicornToken) && $_SESSION["magicalUnicornToken"] == $data->magicalUnicornToken) {
     header('Content-Type: application/json');
     echo json_encode([
-        "check" => "true"
+        "check" => true
     ]);
 } else {
     header('Content-Type: application/json');
     echo json_encode([
-        "unicorn" => "true"
+        "unicorn" => true
     ]);
 }

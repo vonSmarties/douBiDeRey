@@ -1,7 +1,7 @@
 class ApiService {
-    http = "http://localhost/doubiderey/api/";
+    http = "http://192.168.174.110/doubiderey/api/";
     ext = ".php";
-    logOut = new Event("logOut");
+    logOutEvent = new Event("logOutEvent");
 
     load = (route) => {
         return fetch(this.http + route + this.ext).then(rtrn => rtrn.json());
@@ -13,7 +13,7 @@ class ApiService {
             .then(rtrn => rtrn.json())
             .then(rtrn => {
                 if (rtrn.unicorn)
-                    document.dispatchEvent(this.logOut);
+                    document.dispatchEvent(this.logOutEvent);
                 return rtrn;
             });
     }
@@ -24,7 +24,7 @@ class ApiService {
             .then(rtrn => rtrn.json())
             .then(rtrn => {
                 if (rtrn.unicorn)
-                    document.dispatchEvent(this.logOut);
+                    document.dispatchEvent(this.logOutEvent);
                 return rtrn;
             });;
     }
@@ -37,6 +37,28 @@ class ApiService {
                     localStorage.setItem('magicalUnicornToken', rtrn.magicalUnicornToken);
                 return rtrn;
             });
+    }
+
+    logOut = () => localStorage.removeItem('magicalUnicornToken');
+
+    downloadGallery = (title, body) => {
+        return fetch(this.http + 'galleryDownload' + this.ext, { method: "POST", body: JSON.stringify(body) })
+            .then(rtrn => rtrn.blob()).then(rtrn => {
+                this.download(title, rtrn);
+            });
+    }
+
+    download = (filename, data) => {
+        const reader = new FileReader();
+
+        reader.addEventListener("load", () => {
+            const element = document.createElement('a');
+            element.setAttribute('href', reader.result);
+            element.setAttribute('download', filename + '.zip');
+            element.click();
+        }, { once: true });
+
+        reader.readAsDataURL(data);
     }
 }
 export default ApiService; 

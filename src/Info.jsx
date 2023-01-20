@@ -26,7 +26,7 @@ export default class Info extends React.Component {
     }
 
     render = () => {
-        return <div className="containerInfo" onClick={this.props.onClick}>
+        return <div className={"containerInfo " + this.props.className} onClick={this.props.onClick}>
             <div ref={this.quillContainer}></div>
         </div>
     };
