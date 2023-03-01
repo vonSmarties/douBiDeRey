@@ -36,7 +36,7 @@ header {
     z-index: -1;
     width: 100vw;
     height: 100vh;
-    background-image: url('http://localhost/doubiderey/asset/marcheurs-Dou-bi-de-Rey.jpg');
+    background-image: url('https://www.marcheurs-dou-bi-de-rey.fr/asset/marcheurs-Dou-bi-de-Rey.jpg');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -166,6 +166,10 @@ h1 {
         --fontMobile: 42px;
         font-size: var(--fontMobile);
         --heightHeader: 102px;
+    }
+
+    main {
+        height: fit-content;
     }
 
     .titleHeader {

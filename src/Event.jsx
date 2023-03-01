@@ -1,5 +1,4 @@
-import "../service/react";
-import "../service/reactDom";
+import "../service/react.js";
 
 export default class Event extends React.Component {
 

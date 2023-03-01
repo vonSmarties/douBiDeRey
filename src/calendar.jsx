@@ -1,7 +1,7 @@
-import "../service/react";
-import "../service/reactDom";
-import ApiService from "../service/api";
-import Event from "./Event";
+import "../service/react.js";
+import "../service/reactDom.js";
+import ApiService from "../service/api.js";
+import Event from "./Event.js";
 
 
 export default class Calendar extends React.Component {

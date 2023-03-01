@@ -5,6 +5,7 @@ $galleryManager = new GalleryManager();
 
 $galleries = $galleryManager->readAll();
 $data = [];
+if ($galleries)
 foreach ($galleries as $gallery) {
     $data[] = $gallery->getJson();
 }

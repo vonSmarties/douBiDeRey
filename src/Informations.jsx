@@ -1,7 +1,7 @@
-import ApiService from "../service/api";
-import Info from "./Info";
-import "../service/react";
-import "../service/reactDom";
+import ApiService from "../service/api.js";
+import Info from "./Info.js";
+import "../service/react.js";
+import "../service/reactDom.js";
 
 
 class AllInfo extends React.Component {

@@ -2,7 +2,7 @@
     margin-top: var(--heightHeader);
 }
 
-section {
+main {
     width: calc(100% - var(--widthMenu));
     --marginBoard: 23px;
 }
@@ -23,7 +23,7 @@ h2 {
 
 .boardErsatz {
     width: 510px;
-    margin: 0 23px;
+    margin: 0 20px;
 }
 
 .rowClub {
@@ -48,7 +48,7 @@ h2 {
 }
 
 @media (max-width:1023px) {
-    section {
+    main {
         width: 100%;
     }
 
@@ -63,6 +63,4 @@ h2 {
     .colClub {
         --widthCol: 100%;
     }
-
-
 }

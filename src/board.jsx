@@ -1,7 +1,7 @@
-import "../service/react";
-import "../service/reactDom";
-import ApiService from "../service/api";
-import Member from "./Member";
+import "../service/react.js";
+import "../service/reactDom.js";
+import ApiService from "../service/api.js";
+import Member from "./Member.js";
 
 
 export default class Board extends React.Component {

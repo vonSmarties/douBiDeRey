@@ -6,9 +6,10 @@ $calendarManager = new CalendarManager();
 
 $calendar = $calendarManager->readYear($data->year);
 $data = [];
-foreach ($calendar as $item) {
-    $data[] = $item->getJson();
-}
+if ($calendar)
+    foreach ($calendar as $item) {
+        $data[] = $item->getJson();
+    }
 
 header('Content-Type: application/json');
 echo json_encode($data);

@@ -16,9 +16,9 @@
     getMenu("Galeries");
     ?>
     <div class="backgroundLogo"></div>
-    <section class="galleries main">
+    <main class="galleries main">
         <div class="reactContainer" id="galleries"></div>
-    </section>
+    </main>
     <!-- <script type="module" src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script type="module" src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script> -->
     <script type="module" src="js/Galleries.js"></script>

@@ -1,5 +1,6 @@
 class ApiService {
-    http = "http://192.168.174.110/doubiderey/api/";
+    // http = "https://www.marcheurs-dou-bi-de-rey.fr/api/";
+    http = "http://localhost/doubiderey/api/";
     ext = ".php";
     logOutEvent = new Event("logOutEvent");
 

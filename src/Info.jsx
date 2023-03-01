@@ -1,6 +1,5 @@
-import "../service/react";
-import "../service/reactDom";
-import "../service/quill";
+import "../service/react.js";
+import "../service/quill.js";
 
 
 export default class Info extends React.Component {

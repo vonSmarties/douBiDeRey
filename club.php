@@ -16,7 +16,7 @@
     getMenu("Le club");
     ?>
     <div class="backgroundLogo"></div>
-    <div class="main firstSection">
+    <main class="main firstSection">
         <section>
             <h2>Nous trouver</h2>
             <div class="rowClub">
@@ -44,7 +44,7 @@
             <h2>Le bureau</h2>
             <div class="reactContainer" id="board"></div>
         </section>
-    </div>
+    </main>
     <!-- <script type="module" src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script> -->
     <!-- <script type="module" src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script> -->
     <script type="module" src="js/board.js"></script>

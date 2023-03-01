@@ -1,7 +1,7 @@
-import ApiService from "../service/api";
-import Gallery from "./Gallery";
-import "../service/react";
-import "../service/reactDom";
+import ApiService from "../service/api.js";
+import Gallery from "./Gallery.js";
+import "../service/react.js";
+import "../service/reactDom.js";
 
 
 class AllGalleries extends React.Component {

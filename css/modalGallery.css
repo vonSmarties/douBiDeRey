@@ -33,6 +33,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    --numberElm: 3;
+}
+
+.headerElm {
+    width: calc(100% / var(--numberElm));
+    display: flex;
+}
+
+.downloadContainer {
+    justify-content: center;
+}
+
+.closeContainer {
+    justify-content: flex-end;height: 100%;
 }
 
 .modalCloseContainer {
@@ -72,16 +86,18 @@
     padding: 0 var(--padding);
     overflow: auto;
     justify-content: center;
+    --imgPadding: 5px;
 }
 
 .imageContainer {
     width: 369px;
     max-height: 369px;
-    padding: 5px;
+    padding: var(--imgPadding);
 }
 
 .imageErsatz {
     width: 369px;
+    padding: var(--imgPadding);
 }
 
 .imageModal {
@@ -103,6 +119,7 @@
 .galleryDisplay {
     padding: 23px 23px 10px 23px;
     text-align: center;
+    width: calc(100% - 46px);
 }
 
 .previewGallery {
@@ -130,7 +147,7 @@
 
 .downloadButton {
     background-color: var(--colorBackground);
-    padding: 5px;    
+    padding: 5px;
     cursor: pointer;
     border-radius: 5px;
     box-shadow: -1px 1px var(--boxShadowColor);

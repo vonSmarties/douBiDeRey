@@ -1,14 +1,14 @@
-import ApiService from "../service/api";
-import GalleryEditor from "./galleryEditor";
-import "../service/react";
-import "../service/reactDom";
-import InfoEditor from "./infoEditor";
-import Info from "./info";
-import Event from "./Event";
-import EventEditor from "./EventEditor";
-import Member from "./Member";
-import MemberEditor from "./MemberEditor";
-import Logger from "./Logger";
+import ApiService from "../service/api.js";
+import GalleryEditor from "./galleryEditor.js";
+import "../service/react.js";
+import "../service/reactDom.js";
+import InfoEditor from "./infoEditor.js";
+import Info from "./info.js";
+import Event from "./Event.js";
+import EventEditor from "./EventEditor.js";
+import Member from "./Member.js";
+import MemberEditor from "./MemberEditor.js";
+import Logger from "./Logger.js";
 
 
 
@@ -206,8 +206,8 @@ class Admin extends React.Component {
         const index = calendar.findIndex(oldev => oldev.id == ev.id);
         const year = (new Date(ev.date)).getFullYear();
         if (year == this.state.selectedYear) {
-            calendar[index] = ev;
-            this.setState({ calendar });
+            calendar.splice(index, 1);
+            this.setState({ calendar: this.orderEvents(calendar, ev) });
         } else {
             this.loadCalendar(year);
         }

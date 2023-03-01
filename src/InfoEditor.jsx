@@ -1,7 +1,6 @@
-import "../service/react";
-import "../service/reactDom";
-import "../service/quill";
-import ApiService from "../service/api";
+import "../service/react.js";
+import "../service/quill.js";
+import ApiService from "../service/api.js";
 
 
 export default class InfoEditor extends React.Component {

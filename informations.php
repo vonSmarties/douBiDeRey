@@ -17,9 +17,9 @@
     getMenu("Informations");
     ?>
     <div class="backgroundLogo"></div>
-    <section class="informations main">
+    <main class="informations main">
         <div class="reactContainer" id="infos"></div>
-    </section>
+    </main>
     <!-- <script type="module" src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script type="module" src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script> -->
     <script type="module" src="js/Informations.js"></script>

@@ -1,5 +1,4 @@
 import "../service/react";
-import "../service/reactDom";
 import ApiService from "../service/api";
 
 export default class GalleryEditor extends React.Component {

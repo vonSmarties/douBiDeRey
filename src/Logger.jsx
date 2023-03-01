@@ -1,6 +1,5 @@
-import "../service/react";
-import "../service/reactDom";
-import ApiService from "../service/api";
+import "../service/react.js";
+import ApiService from "../service/api.js";
 
 
 export default class Logger extends React.Component {
@@ -29,7 +28,10 @@ export default class Logger extends React.Component {
             <div className="bottomRow">
                 <div
                     onClick={this.log}
-                    className="editButton">Valider</div>
+                    className="editButton"
+                >
+                    Valider
+                </div>
             </div>
         </div>
     };

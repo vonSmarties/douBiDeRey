@@ -1,10 +1,11 @@
-import "../service/react";
-import "../service/reactDom";
-import ApiService from "../service/api";
+import "../service/react.js";
+import ApiService from "../service/api.js";
 
 export default class Gallery extends React.Component {
 
     fullScreen = React.createRef();
+    imgFull = React.createRef();
+    scale = 1;
     initialX = null;
     initialY = null;
 
@@ -100,6 +101,19 @@ export default class Gallery extends React.Component {
         e.preventDefault();
     }
 
+    zoom = (event) => {
+        event.preventDefault();
+
+        this.scale += event.deltaY * -0.01;
+
+        // Restrict scale
+        this.scale = Math.min(Math.max(1, this.scale), 4);
+
+        // Apply scale transform
+        this.imgFull.current.style.transform = `scale(${this.scale})`;
+    }
+
+
     prevImage = () => {
         if (this.state.displayed > 0)
             this.setState({ displayed: this.state.displayed - 1 })
@@ -128,22 +142,26 @@ export default class Gallery extends React.Component {
             {this.state.isOpen && <div>
                 <div className="modalGallery">
                     <div className="modalHeader">
-                        <div>{this.props.gallery.title}</div>
-                        <div
-                            className="downloadButton"
-                            onClick={this.download}
-                        >
-                            Télécharger
+                        <div className="headerElm downloadContainer">
+                            <div
+                                className="downloadButton"
+                                onClick={this.download}
+                            >
+                                Télécharger
+                            </div>
                         </div>
-                        <div
-                            className="modalCloseContainer"
-                            onClick={this.closeModal}
-                        >
-                            <div className="modalClose1"></div>
-                            <div className="modalClose2"></div>
+                        <div className="headerElm closeContainer">
+                            <div
+                                className="modalCloseContainer"
+                                onClick={this.closeModal}
+                            >
+                                <div className="modalClose1"></div>
+                                <div className="modalClose2"></div>
+                            </div>
                         </div>
                     </div>
                     <div className="modalScroll">
+                        <div className="galleryDisplay">{this.props.gallery.title}</div>
                         {this.state.images && this.state.images.map((image, index) => <div
                             key={image.file}
                             // href={image.file}
@@ -159,15 +177,21 @@ export default class Gallery extends React.Component {
                     </div>
                     {
                         this.state.fullScreen && <div ref={this.fullScreen}>
-                            <div className="controlLeftFull" onClick={this.prevImage}>{"<"}</div>
-                            <div className="controlrightFull" onClick={this.nextImage}>{">"}</div>
+                            {
+                                this.state.displayed != 0 &&
+                                <div className="controlLeftFull" onClick={this.prevImage}>{"<"}</div>
+                            }
+                            {
+                                this.state.displayed != this.state.images.length - 1 &&
+                                <div className="controlrightFull" onClick={this.nextImage}>{">"}</div>
+                            }
                             <div className="controlcloseFull" onClick={this.closeFullScreen}>
                                 <div className="modalClose1"></div>
                                 <div className="modalClose2"></div>
                             </div>
                             {
                                 this.state.displayed != null &&
-                                <img className="imageFull" src={this.state.images[this.state.displayed].file}></img>
+                                <img className="imageFull" ref={this.imgFull} src={this.state.images[this.state.displayed].file}></img>
                             }
                         </div>
                     }

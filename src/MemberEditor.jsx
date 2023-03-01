@@ -1,6 +1,5 @@
-import "../service/react";
-import "../service/reactDom";
-import ApiService from "../service/api";
+import "../service/react.js";
+import ApiService from "../service/api.js";
 
 export default class MemberEditor extends React.Component {
 
