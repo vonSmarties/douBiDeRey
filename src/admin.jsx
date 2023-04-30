@@ -39,7 +39,7 @@ class Admin extends React.Component {
 
     logIn = () => {
         this.setState({ isLogged: true });
-        document.addEventListener('logOut', this.logOut, { once: true })
+        document.addEventListener('logOutEvent', this.logOut, { once: true })
     }
 
     logOut = () => {
