@@ -11,4 +11,5 @@ foreach ($galleries as $gallery) {
 }
 
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: https://www.marcheurs-dou-bi-de-rey.fr/api/galleryAll.php');
 echo json_encode($data);

@@ -36,8 +36,8 @@ header {
     z-index: -1;
     width: 100vw;
     height: 100vh;
-    background-image: url('https://www.marcheurs-dou-bi-de-rey.fr/asset/marcheurs-Dou-bi-de-Rey.jpg');
-    background-size: contain;
+    background-image: url('https://www.marcheurs-dou-bi-de-rey.fr/asset/20210310_142258.jpg');
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -58,9 +58,15 @@ h1 {
 .generalMenu {
     position: fixed;
     top: var(--heightHeader);
-    right: 17px;
+    right: 0;
     width: var(--widthMenu);
     --paddingMenu: 10px;
+    background-color: var(--colorTextConstrast);
+    height: calc(100% - var(--heightHeader));
+}
+
+.logo {
+    width:100%;
 }
 
 .generalMenu>a {
@@ -183,9 +189,13 @@ h1 {
     .generalMenu {
         display: none;
         background-color: var(--colorBackground);
-        right: 0;
         width: auto;
         --paddingMenu: 42px;
+        height: fit-content;
+    }
+
+    .logo {
+        display: none;
     }
 
     .itemMenu {

@@ -4,7 +4,8 @@ include_once 'class/CalendarManager.php';
 $data = json_decode(file_get_contents('php://input'));
 $calendarManager = new CalendarManager();
 
-$calendar = $calendarManager->readYear($data->year);
+if ($data->year)
+    $calendar = $calendarManager->readYear($data->year);
 $data = [];
 if ($calendar)
     foreach ($calendar as $item) {

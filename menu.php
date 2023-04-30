@@ -8,19 +8,19 @@ function getMenu($title)
         <div class='menu-button'></div>
     </label>
     <div class='generalMenu'>
-        <a href='index'>
+        <a href='index.php'>
             <div class='itemMenu'>Accueil</div>
         </a>
-        <a href='galeries'>
+        <a href='galeries.php'>
             <div class='itemMenu'>Galeries</div>
         </a>
-        <a href='informations'>
+        <a href='informations.php'>
             <div class='itemMenu'>Informations</div>
         </a>
-        <a href='calendar'>
+        <a href='calendar.php'>
             <div class='itemMenu'>Calendrier</div>
         </a>
-        <a href='club'>
+        <a href='club.php'>
             <div class='itemMenu'>Le club</div>
         </a>
         <div class='titleMenu'>Nos amis</div>
@@ -32,6 +32,7 @@ function getMenu($title)
         </a>
         <div class='titleMenu'>Nous rejoindre</div>
         <div class='textMenu'>inscription@doubiderey.fr</div>
+        <img class='logo' alt='marcheurs Dou bi de Rey' src='https://www.marcheurs-dou-bi-de-rey.fr/doubiderey/asset/marcheurs-Dou-bi-de-Rey.jpg'></img>
     </div>
 </header>";
 }

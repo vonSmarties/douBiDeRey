@@ -3,9 +3,12 @@ class ApiService {
     http = "http://localhost/doubiderey/api/";
     ext = ".php";
     logOutEvent = new Event("logOutEvent");
+    header = new Headers({
+        "Access-Control-Allow-Origin": this.http
+    });
 
     load = (route) => {
-        return fetch(this.http + route + this.ext).then(rtrn => rtrn.json());
+        return fetch(this.http + route + this.ext, { headers: this.header }).then(rtrn => rtrn.json());
     }
 
     post = (route, body) => {
