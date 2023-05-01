@@ -2,8 +2,8 @@ import ApiService from "../service/api.js";
 import GalleryEditor from "./galleryEditor.js";
 import "../service/react.js";
 import "../service/reactDom.js";
-import InfoEditor from "./infoEditor.js";
-import Info from "./info.js";
+import InfoEditor from "./InfoEditor.js";
+import Info from "./Info.js";
 import Event from "./Event.js";
 import EventEditor from "./EventEditor.js";
 import Member from "./Member.js";
@@ -329,7 +329,9 @@ class Admin extends React.Component {
                                             ></div>
                                         </div>
                                     }
-                                    <div>Liste des galeries : </div>
+                                    {this.state.galleries.length > 0 &&
+                                        <div>Liste des galeries : </div>
+                                    }
                                     <div className="wrapperItem">
                                         {
                                             this.state.galleries.map(gallery => {

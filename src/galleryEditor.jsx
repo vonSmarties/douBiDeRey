@@ -1,5 +1,5 @@
-import "../service/react";
-import ApiService from "../service/api";
+import "../service/react.js";
+import ApiService from "../service/api.js";
 
 export default class GalleryEditor extends React.Component {
 
@@ -121,21 +121,19 @@ export default class GalleryEditor extends React.Component {
                         onClick={this.saveTitle}
                         className="editButtonLight"
                     >Ok</div>}
-                </div>
-                <div className="inputModal">
-                    <div onClick={this.openInputFile} className="editButtonLight leftButton">Ajouter des photos</div>
-                    <input className="addFile" name="file[]" type="file" ref={this.fileRef} multiple onInput={this.addImage} />
-                </div>
+                </div>  
             </div>
             <div className="modalScroll">
+                <div className="scrollContainer">
                 {this.state.images && this.state.images.map((image) => <div className="imageContainer" key={image.file}>
                     <img className="imageModal" src={image.file}></img>
                     <div
                         onClick={() => this.deleteImg(image)}
                         className="galleryDelete"
                     >x</div>
-                </div>
+                </div>  
                 )}
+                </div>
             </div>
             <div className="bottomRow bottomModal">
                 <div

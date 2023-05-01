@@ -23,11 +23,9 @@
     justify-content: flex-end;
 }
 
-.modalScroll {
+.scrollContainer {
     display: flex;
-    flex-direction: row;
-    gap: var(--padding);
-    flex-wrap: inherit;
+    width: 100%;
 }
 
 .imageContainer {
