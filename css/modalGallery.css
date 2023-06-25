@@ -42,7 +42,7 @@
 }
 
 .downloadContainer {
-    justify-content: center;
+    justify-content: left;
 }
 
 .closeContainer {
@@ -133,6 +133,7 @@
 .previewImage {
     min-height: 100%;
     min-width: 100%;
+    object-fit: cover;
 }
 
 .galleryContainer {

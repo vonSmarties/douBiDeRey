@@ -121,7 +121,11 @@ export default class GalleryEditor extends React.Component {
                         onClick={this.saveTitle}
                         className="editButtonLight"
                     >Ok</div>}
-                </div>  
+                </div>                
+                <div className="inputModal">
+                    <div onClick={this.openInputFile} className="editButtonLight leftButton">Ajouter des photos</div>
+                    <input className="addFile" name="file[]" type="file" ref={this.fileRef} multiple onInput={this.addImage} />
+                </div>
             </div>
             <div className="modalScroll">
                 <div className="scrollContainer">

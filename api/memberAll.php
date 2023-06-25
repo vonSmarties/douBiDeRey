@@ -1,7 +1,6 @@
 <?php
 include_once 'class/MemberManager.php';
-
-$memberManager = new MemberManager();
+include_once 'class/RequestHandler.php';
 
 $members = $memberManager->readAll();
 $data = [];
@@ -10,5 +9,4 @@ if ($members)
         $data[] = $member->getJson();
     }
 /** whatever is being serialized **/;
-header('Content-Type: application/json');
-echo json_encode($data);
+$requestHandler->jsonResponse($data);

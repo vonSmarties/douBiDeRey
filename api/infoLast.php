@@ -1,9 +1,7 @@
 <?php
 include_once 'class/InfoManager.php';
-
-$infoManager = new InfoManager();
+include_once 'class/RequestHandler.php';
 
 $info = $infoManager->readLast();
  /** whatever is being serialized **/; 
-header('Content-Type: application/json'); 
-echo json_encode($info->getJson());
+    $requestHandler->jsonResponse($info->getJson());

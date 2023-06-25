@@ -1,32 +1,22 @@
 <?php
 include_once 'class/GalleryManager.php';
 include_once 'class/Gallery.php';
+include_once 'class/RequestHandler.php';
 
-$data = json_decode(file_get_contents('php://input'));
-$galleryManager = new GalleryManager();
+$data = $requestHandler->privateRequest();
 $gallery = new Gallery();
 $gallery->fill($data);
-session_start();
 
-if ($_SESSION["magicalUnicornToken"] == $data->magicalUnicornToken) {
-    try {
-        if ($galleryManager->create($gallery)) {
-            header('Content-Type: application/json');
-            echo json_encode([
-                "create" => true,
-                "id" => $gallery->getId()
-            ]);
-        }
-    } catch (Exception $ex) {
-        header('Content-Type: application/json');
-        echo json_encode([
-            "create" => false,
-            "exception" => $ex
+try {
+    if ($galleryManager->create($gallery)) {
+        $requestHandler->jsonResponse([
+            "create" => true,
+            "id" => $gallery->getId()
         ]);
     }
-} else {
-    header('Content-Type: application/json');
-    echo json_encode([
-        "unicorn" => true
+} catch (Exception $ex) {
+    $requestHandler->jsonResponse([
+        "create" => false,
+        "exception" => $ex
     ]);
 }

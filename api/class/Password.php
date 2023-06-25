@@ -6,7 +6,7 @@ include_once 'Entity.php';
 class Password extends Entity
 {
 
-  private $password;
+  private $password,$idUser;
   protected $keys = ["idUser", "password"];
 
   public function checkPassword(string $password)
@@ -34,7 +34,7 @@ class Password extends Entity
     return $this->idUser;
   }
 
-  public function setIdUser(string $idUser)
+  public function setIdUser(int $idUser)
   {
     $this->idUser = $idUser;
   }

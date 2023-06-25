@@ -1,27 +1,18 @@
 <?php
 include_once 'class/InfoManager.php';
+include_once 'class/RequestHandler.php';
 
-$data = json_decode(file_get_contents('php://input'));
+$data = $requestHandler->privateRequest();
 $infoManager = new InfoManager();
 $info = $infoManager->read($data->id);
 $info->setDelta($data->delta);
-session_start();
 
-if ($_SESSION["magicalUnicornToken"] == $data->magicalUnicornToken) {
-    try {
-        if ($infoManager->update($info)) {
-            header('Content-Type: application/json');
-            echo json_encode(["update" => true]);
-        }
-    } catch (Exception $ex) {
-        header('Content-Type: application/json');
-        echo json_encode([
-            "update" => false
-        ]);
+try {
+    if ($infoManager->update($info)) {
+        $requestHandler->jsonResponse(["update" => true]);
     }
-} else {
-    header('Content-Type: application/json');
-    echo json_encode([
-        "unicorn" => true
+} catch (Exception $ex) {
+    $requestHandler->jsonResponse([
+        "update" => false
     ]);
 }

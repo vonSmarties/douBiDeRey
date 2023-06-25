@@ -78,3 +78,5 @@ class CalendarManager extends Manager
 
   
 }
+
+$calendarManager = new CalendarManager();

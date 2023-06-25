@@ -58,16 +58,15 @@ abstract class Entity
   }
 
   /**
-   * fonction hydrate
+   * fonction getJson
    *
-   * cherche une méthode set d'un modèle
+   * crée la structure php pour un encode_json
    *
-   * @param string nom de la données.
-   *
-   * @return string json de l'objet.
+   * @return array json de l'objet.
    */
   public function getJson()
   {
+    $json = [];
     foreach ($this->keys as $key) {
       $methodName = 'get' . ucfirst($key);
       if (method_exists($this, $methodName)) {

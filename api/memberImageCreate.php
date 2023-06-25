@@ -1,12 +1,11 @@
 <?php
 include_once 'class/MemberManager.php';
 include_once 'class/Member.php';
+include_once 'class/RequestHandler.php';
 
-$memberManager = new MemberManager();
+$requestHandler->privateFormData();
 $member = new Member();
-session_start();
 
-if ($_SESSION["magicalUnicornToken"] == $_POST['magicalUnicornToken']) {
     try {
         $target_path = "asset/board/";
         $ext = explode('.', basename($_FILES['file']['name']));
@@ -15,21 +14,13 @@ if ($_SESSION["magicalUnicornToken"] == $_POST['magicalUnicornToken']) {
         move_uploaded_file($_FILES['file']['tmp_name'], "../" . $target_path);
         $member->setPicture($target_path);
         if ($memberManager->update($member)) {
-            header('Content-Type: application/json');
-            echo json_encode([
+            $requestHandler->jsonResponse([
                 "create" => true,
                 "file" => $member->getPicture()
             ]);
         }
     } catch (Exception $ex) {
-        header('Content-Type: application/json');
-        echo json_encode([
+        $requestHandler->jsonResponse([
             "create" => false
         ]);
     }
-} else {
-    header('Content-Type: application/json');
-    echo json_encode([
-        "unicorn" => true
-    ]);
-}

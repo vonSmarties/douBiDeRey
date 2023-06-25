@@ -1,7 +1,6 @@
 <?php
 include_once 'class/InfoManager.php';
-
-$infoManager = new InfoManager();
+include_once 'class/RequestHandler.php';
 
 $infos = $infoManager->readAll();
 $data = [];
@@ -10,5 +9,4 @@ if ($infos)
         $data[] = $info->getJson();
     }
 /** whatever is being serialized **/;
-header('Content-Type: application/json');
-echo json_encode($data);
+$requestHandler->jsonResponse($data);

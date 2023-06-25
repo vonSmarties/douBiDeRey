@@ -1,8 +1,5 @@
 <?php
 include_once 'class/CalendarManager.php';
+include_once 'class/RequestHandler.php';
 
-$calendarManager = new CalendarManager();
-
-$list = $calendarManager->readListYear();
-header('Content-Type: application/json');
-echo json_encode($list);
+$requestHandler->jsonResponse($calendarManager->readListYear());

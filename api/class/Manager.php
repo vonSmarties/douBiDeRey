@@ -70,7 +70,6 @@ abstract class Manager
     $champs = $this->strWithoutIdChamps($entity);
     $noms = $champs['noms'];
     $values = $champs['values'];
-
     $sql = 'INSERT INTO ' . $this->table . " ($noms) VALUES ($values)";
     $req = $this->db->prepare($sql);
     $this->bindvaluesPDO($req, $entity);
@@ -250,7 +249,9 @@ abstract class Manager
    */
   private function strWithoutIdChamps(Entity $entity)
   {
-    $champs = array_slice($this->champs, 1);
+    $champs = $this->champs[0] == "id"
+      ? array_slice($this->champs, 1)
+      : $this->champs;
     $noms = [];
     $values = [];
     foreach ($champs as $champ) {
@@ -339,7 +340,9 @@ abstract class Manager
    */
   protected function bindvaluesPDO($req, Entity $entity)
   {
-    $champs = array_slice($this->champs, 1);
+    $champs = $this->champs[0] == "id"
+      ? array_slice($this->champs, 1)
+      : $this->champs;
     foreach ($champs as  $champ) {
       $methodName = 'get' . ucfirst($champ['nom']);
       if (method_exists($entity, $methodName)) {

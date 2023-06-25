@@ -1,31 +1,22 @@
 <?php
 include_once 'class/CalendarManager.php';
 include_once 'class/Calendar.php';
+include_once 'class/RequestHandler.php';
 
-$data = json_decode(file_get_contents('php://input'));
-$calendarManager = new CalendarManager();
+$data = $requestHandler->privateRequest();
 $calendar = new Calendar();
 $calendar->fill($data);
-session_start();
-if ($_SESSION["magicalUnicornToken"] == $data->magicalUnicornToken) {
-    try {
-        if ($calendarManager->create($calendar)) {
-            header('Content-Type: application/json');
-            echo json_encode([
-                "create" => true,
-                "id" => $calendar->getId()
-            ]);
-        }
-    } catch (Exception $ex) {
-        header('Content-Type: application/json');
-        echo json_encode([
-            "create" => false,
-            "exception" => $ex
+
+try {
+    if ($calendarManager->create($calendar)) {
+        $requestHandler->jsonResponse([
+            "create" => true,
+            "id" => $calendar->getId()
         ]);
     }
-} else {
-    header('Content-Type: application/json');
-    echo json_encode([
-        "unicorn" => true
+} catch (Exception $ex) {
+    $requestHandler->jsonResponse([
+        "create" => false,
+        "exception" => $ex
     ]);
 }

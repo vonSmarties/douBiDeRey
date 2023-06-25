@@ -1,33 +1,23 @@
 <?php
 include_once 'class/MemberManager.php';
+include_once 'class/RequestHandler.php';
 
-$data = json_decode(file_get_contents('php://input'));
-$memberManager = new MemberManager();
-session_start();
+$data = $requestHandler->privateRequest();
 
-if ($_SESSION["magicalUnicornToken"] == $data->magicalUnicornToken) {
-    try {
-        $update = true;
-        foreach ($data->members as $datum) {
-            $member = $memberManager->read($datum->id);
-            $member->fill($datum);
-            if (!$memberManager->update($member)) {
-                $update = false;
-            }
+try {
+    $update = true;
+    foreach ($data->members as $datum) {
+        $member = $memberManager->read($datum->id);
+        $member->fill($datum);
+        if (!$memberManager->update($member)) {
+            $update = false;
         }
-        if ($update) {
-            header('Content-Type: application/json');
-            echo json_encode(["update" => true]);
-        }
-    } catch (Exception $ex) {
-        header('Content-Type: application/json');
-        echo json_encode([
-            "update" => false
-        ]);
     }
-} else {
-    header('Content-Type: application/json');
-    echo json_encode([
-        "unicorn" => true
+    if ($update) {
+        $requestHandler->jsonResponse(["update" => true]);
+    }
+} catch (Exception $ex) {
+    $requestHandler->jsonResponse([
+        "update" => false
     ]);
 }

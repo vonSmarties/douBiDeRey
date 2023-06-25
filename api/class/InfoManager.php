@@ -50,3 +50,5 @@ class InfoManager extends Manager
     return $tableau;
   }
 }
+
+$infoManager = new InfoManager();

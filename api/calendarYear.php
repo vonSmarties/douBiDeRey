@@ -1,8 +1,8 @@
 <?php
 include_once 'class/CalendarManager.php';
+include_once 'class/RequestHandler.php';
 
-$data = json_decode(file_get_contents('php://input'));
-$calendarManager = new CalendarManager();
+$data = $requestHandler->publicRequest();
 
 if ($data->year)
     $calendar = $calendarManager->readYear($data->year);
@@ -12,5 +12,4 @@ if ($calendar)
         $data[] = $item->getJson();
     }
 
-header('Content-Type: application/json');
-echo json_encode($data);
+$requestHandler->jsonResponse($data);

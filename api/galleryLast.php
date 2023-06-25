@@ -1,10 +1,8 @@
 <?php
 include_once 'class/GalleryManager.php';
-
-$galleryManager = new GalleryManager();
+include_once 'class/RequestHandler.php';
 
 $gallery = $galleryManager->readLast();
 
  /** whatever is being serialized **/; 
-header('Content-Type: application/json'); 
-echo json_encode($gallery->getJson());
+ $requestHandler->jsonResponse($gallery->getJson());

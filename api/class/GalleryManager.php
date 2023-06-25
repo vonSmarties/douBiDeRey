@@ -51,6 +51,7 @@ class GalleryManager extends Manager
   public function readAll()
   {
     $values = parent::readWithOrder('id', 'Desc');
+    $tableau = [];
     foreach ($values as $value) {
       $tableau[] = new Gallery($value);
     }
@@ -65,3 +66,5 @@ class GalleryManager extends Manager
     return $rtrn;
   }
 }
+
+$galleryManager = new GalleryManager();

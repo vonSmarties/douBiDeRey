@@ -1,11 +1,9 @@
 <?php
 include_once 'class/ImageManager.php';
 include_once 'class/GalleryManager.php';
+include_once 'class/RequestHandler.php';
 
-$gallery = json_decode(file_get_contents('php://input'));
-
-$imageManager = new ImageManager();
-$galleryManager = new GalleryManager();
+$gallery = $requestHandler->publicRequest();
 $images = $imageManager->readAllGallery($gallery->id);
 $gallery = $galleryManager->read($gallery->id);
 $tmp_file = tempnam('.', '');
@@ -18,7 +16,5 @@ foreach ($images as $image) {
     );
 }
 $zip->close();
-header('Content-disposition: attachment; filename=Resumes.zip');
-header('Content-type: application/zip');
-readfile($tmp_file);
+$requestHandler->zipResponse($tmp_file);
 unlink($tmp_file);

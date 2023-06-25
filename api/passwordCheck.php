@@ -1,30 +1,26 @@
 <?php
 include_once 'class/PasswordManager.php';
 include_once 'class/Password.php';
+include_once 'class/RequestHandler.php';
 
-$data = json_decode(file_get_contents('php://input'));
-
-$passwordManager = new PasswordManager();
+$data = $requestHandler->publicRequest();
 $password = $passwordManager->read(0);
 try {
     if ($password->checkPassword($data->password)) {
         session_start();
         $_SESSION["magicalUnicornToken"] = md5(uniqid());
-        header('Content-Type: application/json');
-        echo json_encode([
+        $requestHandler->jsonResponse([
             "check" => true,
             "magicalUnicornToken" => $_SESSION["magicalUnicornToken"]
         ]);
     } else {
-        header('Content-Type: application/json');
-        echo json_encode([
+        $requestHandler->jsonResponse([
             "check" => false,
             "magicalUnicornToken" => "unicorn"
         ]);
     }
 } catch (Exception $ex) {
-    header('Content-Type: application/json');
-    echo json_encode([
+    $requestHandler->jsonResponse([
         "check" => false,
         "exception" => $ex
     ]);

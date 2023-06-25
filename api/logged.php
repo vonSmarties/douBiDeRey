@@ -1,18 +1,17 @@
 <?php
 include_once 'class/PasswordManager.php';
 include_once 'class/Password.php';
+include_once 'class/RequestHandler.php';
 
-$data = json_decode(file_get_contents('php://input'));
+$data = $requestHandler->publicRequest();
 session_start();
 
 if (isset($_SESSION["magicalUnicornToken"]) && isset($data->magicalUnicornToken) && $_SESSION["magicalUnicornToken"] == $data->magicalUnicornToken) {
-    header('Content-Type: application/json');
-    echo json_encode([
+    $requestHandler->jsonResponse([
         "check" => true
     ]);
 } else {
-    header('Content-Type: application/json');
-    echo json_encode([
+    $requestHandler->jsonResponse([
         "unicorn" => true
     ]);
 }

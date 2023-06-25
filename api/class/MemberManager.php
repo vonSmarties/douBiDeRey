@@ -79,9 +79,14 @@ class MemberManager extends Manager
   public function deleteMember(Member $member)
   {
     if ($member->getPicture()) {
-      return unlink('../' . $member->getPicture()) && parent::delete($member);
+      if (file_exists('../' . $member->getPicture()))
+        return unlink('../' . $member->getPicture()) && parent::delete($member);
+      return parent::delete($member);
     } else {
       return parent::delete($member);
     }
   }
 }
+
+
+$memberManager = new MemberManager();

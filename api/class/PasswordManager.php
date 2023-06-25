@@ -30,3 +30,5 @@ class PasswordManager extends Manager
     }
   }
 }
+
+$passwordManager = new PasswordManager();
