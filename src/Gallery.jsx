@@ -20,12 +20,12 @@ export default class Gallery extends React.Component {
     }
 
     componentDidMount = () => {
-        const apiSvc = new ApiService();
-        if (!this.state.images)
+        if (!this.state.images) {
+            const apiSvc = new ApiService();
             apiSvc.post("imageGallery", this.props.gallery).then(images =>
                 this.setState({ images })
             );
-
+        }
     }
 
     openModal = () => {
@@ -162,18 +162,21 @@ export default class Gallery extends React.Component {
                     </div>
                     <div className="modalScroll">
                         <div className="galleryDisplay">{this.props.gallery.title}</div>
-                        {this.state.images && this.state.images.map((image, index) => <div
-                            key={image.file}
-                            // href={image.file}
-                            // target="_blank"
-                            className="imageContainer"
-                            onClick={() => this.requestFullScreen(index)}
-                        >
-                            <img className="imageModal" src={image.file}></img>
-                        </div>
-                        ).concat(this.state.images.map((_, index) =>
-                            <div className="imageErsatz" key={"void" + index}></div>
-                        ))}
+                        {this.state.images
+                            ? this.state.images.map((image, index) => <div
+                                key={image.file}
+                                // href={image.file}
+                                // target="_blank"
+                                className="imageContainer"
+                                onClick={() => this.requestFullScreen(index)}
+                            >
+                                <img className="imageModal" src={image.file}></img>
+                            </div>
+                            ).concat(this.state.images.map((_, index) =>
+                                <div className="imageErsatz" key={"void" + index}></div>
+                            ))
+                            : <div>Chargement</div>
+                        }
                     </div>
                     {
                         this.state.fullScreen && <div ref={this.fullScreen}>

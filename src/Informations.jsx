@@ -6,19 +6,16 @@ import "../service/reactDom.js";
 
 class AllInfo extends React.Component {
 
-    componentDidMount = () => {
-        const apiSvc = new ApiService();
-        apiSvc.load("infoAll").then(infos => this.setState({ infos }));
-
-    }
+    informations = window['informations'];
 
     render = () => {
-        return this.state
-            ? this.state.infos.map(info =>
+        console.log(this.informations)
+        return this.informations && this.informations.length > 0
+            ? this.informations.map(info =>
                 <Info info={info} key={info.id} />
             )
-            : <div>chargement</div>
-    };
+            : <div>Rien à annoncer pour le moment, revenez plus tard pour plus d'informations</div>;
+    }
 }
 
 const infos = React.createElement(AllInfo);
