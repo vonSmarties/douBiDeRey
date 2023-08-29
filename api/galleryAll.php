@@ -4,7 +4,7 @@ include_once 'class/RequestHandler.php';
 
 $galleries = $galleryManager->readAll();
 $data = [];
-if ($galleries)
+if (isset($galleries))
 foreach ($galleries as $gallery) {
     $data[] = $gallery->getJson();
 }

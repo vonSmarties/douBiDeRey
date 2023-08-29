@@ -4,7 +4,7 @@ include_once 'class/RequestHandler.php';
 
 $members = $memberManager->readAll();
 $data = [];
-if ($members)
+if (isset($members))
     foreach ($members as $member) {
         $data[] = $member->getJson();
     }

@@ -6,7 +6,7 @@ $gallery = $requestHandler->privateRequest();
 
 $images = $imageManager->readAllGallery($gallery->id);
 $data = [];
-if ($images)
+if (isset($images))
     foreach ($images as $image) {
         $data[] = $image->getJson();
     }

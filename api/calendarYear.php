@@ -4,10 +4,10 @@ include_once 'class/RequestHandler.php';
 
 $data = $requestHandler->publicRequest();
 
-if ($data->year)
+if (isset($data->year))
     $calendar = $calendarManager->readYear($data->year);
 $data = [];
-if ($calendar)
+if (isset($calendar))
     foreach ($calendar as $item) {
         $data[] = $item->getJson();
     }

@@ -4,7 +4,7 @@ include_once 'class/RequestHandler.php';
 
 $infos = $infoManager->readAll();
 $data = [];
-if ($infos)
+if (isset($infos))
     foreach ($infos as $info) {
         $data[] = $info->getJson();
     }

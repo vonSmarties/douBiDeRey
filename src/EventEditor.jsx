@@ -52,7 +52,8 @@ export default class EventEditor extends React.Component {
         const date = new Date(dateString);
         date.setHours(this.state.date.getHours());
         date.setMinutes(this.state.date.getMinutes());
-        this.setState({ date });
+        if (!isNaN(date.valueOf()))
+            this.setState({ date });
     }
 
     editHours = (hoursString) => {
@@ -60,7 +61,8 @@ export default class EventEditor extends React.Component {
         const date = this.state.date;
         date.setHours(hours[0]);
         date.setMinutes(hours[1]);
-        this.setState({ date });
+        if (!isNaN(date.valueOf()))
+            this.setState({ date });
     }
 
     save = () => {
@@ -99,7 +101,7 @@ export default class EventEditor extends React.Component {
     delete = () => {
         if (window.confirm("Confirmez vous la suppression de cet élément du calendrier ?"))
             this.apiSvc.post("calendarDelete", this.props.event).then(rtrn => {
-                if (rtrn.delete){
+                if (rtrn.delete) {
                     this.props.delFromList(this.props.event);
                 } else {
                     window.alert("Echec de la suppression");
@@ -119,26 +121,26 @@ export default class EventEditor extends React.Component {
                 </div>
             </div>
             <div className="eventLine">
-                <div className="itemEvent eventDate">
+                <div className="itemEvent">
                     <div>Date : </div>
                     <input type="date" value={this.state.date.toISOString().split("T").shift()} onChange={(event) => this.editDate(event.currentTarget.value)} />
                 </div>
-                <div className="itemEvent eventHour">
+                <div className="itemEvent">
                     <div>Heure : </div>
                     <input type="time" value={this.state.date.toTimeString().slice(0, 5)} onChange={(event) => this.editHours(event.currentTarget.value)} />
                 </div>
             </div>
             <div className="eventLine">
-                <div className="itemEvent eventDistance">
+                <div className="itemEvent">
                     <div>Distance/Durée : </div>
                     <input type="text" defaultValue={this.props.event.length} onChange={(event) => this.setState({ length: event.currentTarget.value })} />
                 </div>
-                <div className="itemEvent eventPlace">
+                <div className="itemEvent">
                     <div>Lieu : </div>
                     <input type="text" defaultValue={this.props.event.place} onChange={(event) => this.setState({ place: event.currentTarget.value })} />
                 </div>
             </div>
-            <div className="eventClub">
+            <div className="itemEvent">
                 <div>Club : </div>
                 <input type="text" defaultValue={this.props.event.club} onChange={(event) => this.setState({ club: event.currentTarget.value })} />
             </div>

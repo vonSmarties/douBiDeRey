@@ -1,7 +1,8 @@
 <?php
 include_once 'class/MemberManager.php';
+include_once 'class/RequestHandler.php';
 
-$data = json_decode(file_get_contents('php://input'));
+$data = $requestHandler->privateRequest();
 $memberManager = new MemberManager();
 $member = $memberManager->read($data->id);
 $member->fill($data);

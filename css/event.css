@@ -13,18 +13,22 @@
 
 .eventDate {
     min-width: 200px;
+    margin-right:10px;
 }
 
 .eventHour {
     min-width: 100px;
+    margin-right:10px;
 }
 
 .eventDistance {
     min-width: 150px;
+    margin-right:10px;
 }
 
 .eventPlace {
     min-width: 200px;
+    margin-right:10px;
 }
 
 .eventClub {
