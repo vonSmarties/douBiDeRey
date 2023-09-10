@@ -9,7 +9,6 @@ class AllInfo extends React.Component {
     informations = window['informations'];
 
     render = () => {
-        console.log(this.informations)
         return this.informations && this.informations.length > 0
             ? this.informations.map(info =>
                 <Info info={info} key={info.id} />

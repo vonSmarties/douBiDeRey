@@ -6,6 +6,7 @@
     background-color: var(--colorConstrast);
     margin: var(--margin);
     width: calc(100% - 4 * var(--margin));
+    max-width: 900px;
 }
 
 .ql-clipboard {
