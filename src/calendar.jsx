@@ -30,7 +30,7 @@ export default class Calendar extends React.Component {
         return this.state
             ? <div className="calendarContainer">
                 <div className="claendarChoices">
-                    <div>Année : </div>
+                    <div>Année</div>
                     <select
                         onChange={(event) => this.loadCalendar(event.currentTarget.value)}
                         value={this.state.selectedYear}
@@ -44,17 +44,19 @@ export default class Calendar extends React.Component {
                         }
                     </select>
                 </div>
-                <div className="calendarHeader">
-                    <div className="eventDate">Date</div>
-                    <div className="eventHour">Heure</div>
-                    <div className="eventDistance">Distance/Durée</div>
-                    <div className="eventPlace">Lieu de Départ</div>
-                    <div className="eventClub">Club</div>
+                <div className="calendarWrapper">
+                    <div className="calendarHeader">
+                        <div className="eventDate">Date</div>
+                        <div className="eventHour">Heure</div>
+                        <div className="eventDistance">Distance/Durée</div>
+                        <div className="eventPlace">Lieu de Départ</div>
+                        <div className="eventClub">Club</div>
+                    </div>
+                    {this.state.calendar && this.state.calendar.map((event, index) => {
+                        return <Event className={this.className[index % 2]} key={event.id} event={event}></Event>
+                    })
+                    }
                 </div>
-                {this.state.calendar && this.state.calendar.map((event, index) => {
-                    return <Event className={this.className[index % 2]} key={event.id} event={event}></Event>
-                })
-                }
             </div>
             : "Chargement";
     };

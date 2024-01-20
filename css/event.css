@@ -1,39 +1,33 @@
 .event {
-    display: flex;
-    border-radius: 1000px;
-    padding: 2px 10px;
-    max-width: fit-content;
-    margin-bottom: 2px;
-    box-shadow: -1px 1px var(--boxShadowColor);
-}
-
-.eventLine {
-    display: flex;
+    width: calc(100% - 2 * var(--horizontalWrapperPadding));
+    display: grid;
+    grid-template-columns: repeat(14, 1fr);
+    gap:10px;
+    padding: 5px var(--horizontalWrapperPadding);
 }
 
 .eventDate {
-    min-width: 200px;
-    margin-right:10px;
+    grid-column: 1 / 4;
 }
 
 .eventHour {
-    min-width: 100px;
-    margin-right:10px;
+    grid-column: 4;
+    
 }
 
 .eventDistance {
-    min-width: 150px;
-    margin-right:10px;
+    grid-column: 5 /9;
+    
 }
 
 .eventPlace {
-    min-width: 200px;
-    margin-right:10px;
+    grid-column: 9 / 12;
+    
 }
 
 .eventClub {
+    grid-column: 12 / 15;
     display: flex;
-    min-width: 200px;
 }
 
 .mainEventLine {
@@ -42,6 +36,8 @@
 
 .itemEvent {
     display: flex;
+    margin-left: var(--marginLeft);
+    align-items: center;
 }
 
 .labelMobiel {
@@ -50,15 +46,16 @@
 
 @media (max-width:1023px) {
     .event {
+        border-radius: 100px;
         --marginLeft: 102px;
         display: block;
         padding: 10px;
-        max-width: 100%;
+        width: 100%;
     }
 
     .labelMobiel {
         display: block;
-        margin-right: 10px;
+        color: var(--boxShadowColor);
     }
 
     .eventLine {
@@ -72,6 +69,8 @@
     }
 
     .itemEvent {
-        width:100%;
+        width: calc(100% - var(--marginLeft));
+        margin-bottom: 10px;
+        display: block;
     }
 }

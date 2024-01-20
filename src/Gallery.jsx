@@ -15,7 +15,8 @@ export default class Gallery extends React.Component {
             isOpen: false,
             fullScreen: false,
             displayed: null,
-            isFull: false
+            isFull: false,
+            downloadEnabled: true
         }
     }
 
@@ -49,6 +50,7 @@ export default class Gallery extends React.Component {
             this.fullScreen.current.requestFullscreen();
             this.fullScreen.current.addEventListener('touchstart', this.startTouch);
             this.fullScreen.current.addEventListener('touchmove', this.moveTouch);
+            this.fullScreen.current.addEventListener('scroll', this.zoom);
             this.fullScreen.current.addEventListener("fullscreenchange", this.handleFullScreen);
             this.setState({ displayed });
         });
@@ -102,6 +104,7 @@ export default class Gallery extends React.Component {
     }
 
     zoom = (event) => {
+        console.log("something append", event.deltaY)
         event.preventDefault();
 
         this.scale += event.deltaY * -0.01;
@@ -125,8 +128,18 @@ export default class Gallery extends React.Component {
     }
 
     download = () => {
-        const apiSvc = new ApiService();
-        apiSvc.downloadGallery(this.props.gallery.title, { id: this.props.gallery.id });
+        if (this.state.downloadEnabled)
+            this.setState({ downloadEnabled: false }, () => {
+                const apiSvc = new ApiService();
+                apiSvc.post('galleryDownload', { id: this.props.gallery.id })
+                    .then(data => {
+                        const element = document.createElement('a');
+                        element.setAttribute('href', data.dir);
+                        element.setAttribute('download', this.props.gallery.title + ".zip");
+                        element.click();
+                        this.setState({ downloadEnabled: true });
+                    });
+            });
     }
 
     render = () => {
@@ -144,7 +157,7 @@ export default class Gallery extends React.Component {
                     <div className="modalHeader">
                         <div className="headerElm downloadContainer">
                             <div
-                                className="downloadButton"
+                                className={this.state.downloadEnabled ? "downloadButton" : "downloadButtonDisabled"}
                                 onClick={this.download}
                             >
                                 Télécharger

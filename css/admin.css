@@ -52,6 +52,10 @@
     cursor: pointer;
 }
 
+.contentWrapper {
+    margin-bottom: 20px;
+}
+
 .bottomRow {
     display: flex;
     justify-content: flex-end;
@@ -94,6 +98,7 @@
 .editable {
     background-color: var(--colorConstrast);
     box-shadow: -1px 1px var(--colorBackground);
+    margin-bottom: 2px;
 }
 
 .editable:hover {
@@ -170,6 +175,19 @@ input {
 .itemEvent {
     width: calc(100% - 2*var(--padding));
     padding: var(--padding);
+}
+
+.claendarChoices {
+    --padding: 10px;
+}
+
+.calendarWrapper {
+    align-items: initial;
+}
+
+.calendarHeader {
+    color: var(--colorText);
+    background-color: var(--colorBackground);
 }
 
 .eventClub {

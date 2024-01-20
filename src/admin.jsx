@@ -271,7 +271,7 @@ class Admin extends React.Component {
         return this.state.isLogged
             ? <div>
                 <div className="pageHeader">
-                    <a href="index" target="_blank">
+                    <a href="index.php" target="_blank">
                         <div className="itemMenu">Accueil du site</div>
                     </a>
                     <div onClick={this.logOut} className="logout">
@@ -289,124 +289,68 @@ class Admin extends React.Component {
                     Galeries
                 </div>
                 {
-                    this.state.galleriesOpen && <div>
-                        {
-                            this.state.galleries
-                                ? <div>
-                                    <div
-                                        onClick={() => this.setState({ openAddGallery: true })}
-                                        className="editButton"
-                                    >
-                                        Ajouter une nouvelle Galerie
-                                    </div>
-                                    {
-                                        this.state.openAddGallery && <div>
-                                            <div className="editModal">
-                                                <div className="modalHeader">
-                                                    <div
-                                                        className="modalCloseContainer"
-                                                        onClick={() => this.setState({ openAddGallery: false })}
-                                                    >
-                                                        <div className="modalClose1"></div>
-                                                        <div className="modalClose2"></div>
-                                                    </div>
-                                                </div>
-                                                <div className="inputModal">
-                                                    <div style={{ marginRight: "5px" }}>Titre :</div>
-                                                    <input
-                                                        type="text"
-                                                        onChange={(event) => this.setState({ titleNewGallery: event.currentTarget.value })}
-                                                        onKeyUp={(event) => event.key == "Enter" && this.newGallery()}
-                                                    />
-                                                </div>
-                                                <div className="bottomRow bottomModal">
-                                                    <div onClick={this.newGallery} className="editButtonLight">Créer</div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                className="greyScreen"
-                                                onClick={() => this.setState({ openAddGallery: false })}
-                                            ></div>
-                                        </div>
-                                    }
-                                    {this.state.galleries.length > 0 &&
-                                        <div>Liste des galeries : </div>
-                                    }
-                                    <div className="wrapperItem">
-                                        {
-                                            this.state.galleries.map(gallery => {
-                                                return <div key={gallery.id}>
-                                                    <div
-                                                        onClick={() => this.handleGallery(gallery)}
-                                                        className="editable galleryDisplay"
-                                                    >
-                                                        {gallery.title}
-                                                    </div>
-                                                    {this.state.galleryOpen[gallery.id] && <div>
-                                                        <GalleryEditor
-                                                            close={() => this.handleGallery(gallery)}
-                                                            className="editModal"
-                                                            updateList={this.updateGalleries}
-                                                            delFromList={this.deleteGalleries}
-                                                            gallery={gallery}
-                                                        ></GalleryEditor>
-                                                        <div className="greyScreen" onClick={() => this.handleGallery(gallery)}>
-                                                        </div>
-                                                    </div>
-                                                    }
-                                                </div>
-                                            })
-                                        }
-                                    </div>
+                    this.state.galleriesOpen &&
+                    (
+                        this.state.galleries
+                            ? <div className="contentWrapper">
+                                <div
+                                    onClick={() => this.setState({ openAddGallery: true })}
+                                    className="editButton"
+                                >
+                                    Ajouter une nouvelle Galerie
                                 </div>
-                                : "chargement"
-                        }
-                    </div>
-                }
-                <div
-                    onClick={this.openInformations}
-                    className="headerCategory"
-                >Informations</div>
-                {
-                    this.state.informationsOpen && <div>
-                        {
-                            this.state.informations
-                                ? <div>
-                                    <div
-                                        onClick={() => this.setState({ openAddInfo: true })}
-                                        className="editButton"
-                                    >
-                                        Ajouter une nouvelle information
-                                    </div>
-                                    {
-                                        this.state.openAddInfo && <div>
-                                            <InfoEditor
-                                                info={{}}
-                                                addInList={this.addInfo}
-                                                className="editModal"
-                                                close={() => this.setState({ openAddInfo: false })}
-                                            ></InfoEditor>
-                                            <div className="greyScreen" onClick={() => this.setState({ openAddInfo: false })}>
+                                {
+                                    this.state.openAddGallery && <div>
+                                        <div className="editModal">
+                                            <div className="modalHeader">
+                                                <div
+                                                    className="modalCloseContainer"
+                                                    onClick={() => this.setState({ openAddGallery: false })}
+                                                >
+                                                    <div className="modalClose1"></div>
+                                                    <div className="modalClose2"></div>
+                                                </div>
+                                            </div>
+                                            <div className="inputModal">
+                                                <div style={{ marginRight: "5px" }}>Titre :</div>
+                                                <input
+                                                    type="text"
+                                                    onChange={(event) => this.setState({ titleNewGallery: event.currentTarget.value })}
+                                                    onKeyUp={(event) => event.key == "Enter" && this.newGallery()}
+                                                />
+                                            </div>
+                                            <div className="bottomRow bottomModal">
+                                                <div onClick={this.newGallery} className="editButtonLight">Créer</div>
                                             </div>
                                         </div>
-                                    }
+                                        <div
+                                            className="greyScreen"
+                                            onClick={() => this.setState({ openAddGallery: false })}
+                                        ></div>
+                                    </div>
+                                }
+                                {this.state.galleries.length > 0 &&
+                                    <div>Liste des galeries : </div>
+                                }
+                                <div className="wrapperItem">
                                     {
-                                        this.state.informations.map(info => {
-                                            return <div key={info.id}>
-                                                <Info
-                                                    onClick={() => this.handleInfo(info)}
-                                                    info={info}
-                                                    className="editable"
-                                                ></Info>
-                                                {this.state.infoOpen[info.id] && <div>
-                                                    <InfoEditor
-                                                        info={info}
+                                        this.state.galleries.map(gallery => {
+                                            return <div key={gallery.id}>
+                                                <div
+                                                    onClick={() => this.handleGallery(gallery)}
+                                                    className="editable galleryDisplay"
+                                                >
+                                                    {gallery.title}
+                                                </div>
+                                                {this.state.galleryOpen[gallery.id] && <div>
+                                                    <GalleryEditor
+                                                        close={() => this.handleGallery(gallery)}
                                                         className="editModal"
-                                                        updateList={this.updateInfo}
-                                                        delFromList={this.deleteInfo}
-                                                        close={() => this.handleInfo(info)}
-                                                    ></InfoEditor>
-                                                    <div className="greyScreen" onClick={() => this.handleInfo(info)}>
+                                                        updateList={this.updateGalleries}
+                                                        delFromList={this.deleteGalleries}
+                                                        gallery={gallery}
+                                                    ></GalleryEditor>
+                                                    <div className="greyScreen" onClick={() => this.handleGallery(gallery)}>
                                                     </div>
                                                 </div>
                                                 }
@@ -414,9 +358,63 @@ class Admin extends React.Component {
                                         })
                                     }
                                 </div>
-                                : "chargement"
-                        }
-                    </div>
+                            </div>
+                            : "chargement"
+                    )
+                }
+                <div
+                    onClick={this.openInformations}
+                    className="headerCategory"
+                >Informations</div>
+                {
+                    this.state.informationsOpen &&
+                    (
+                        this.state.informations
+                            ? <div className="contentWrapper">
+                                <div
+                                    onClick={() => this.setState({ openAddInfo: true })}
+                                    className="editButton"
+                                >
+                                    Ajouter une nouvelle information
+                                </div>
+                                {
+                                    this.state.openAddInfo && <div>
+                                        <InfoEditor
+                                            info={{}}
+                                            addInList={this.addInfo}
+                                            className="editModal"
+                                            close={() => this.setState({ openAddInfo: false })}
+                                        ></InfoEditor>
+                                        <div className="greyScreen" onClick={() => this.setState({ openAddInfo: false })}>
+                                        </div>
+                                    </div>
+                                }
+                                {
+                                    this.state.informations.map(info => {
+                                        return <div key={info.id}>
+                                            <Info
+                                                onClick={() => this.handleInfo(info)}
+                                                info={info}
+                                                className="editable"
+                                            ></Info>
+                                            {this.state.infoOpen[info.id] && <div>
+                                                <InfoEditor
+                                                    info={info}
+                                                    className="editModal"
+                                                    updateList={this.updateInfo}
+                                                    delFromList={this.deleteInfo}
+                                                    close={() => this.handleInfo(info)}
+                                                ></InfoEditor>
+                                                <div className="greyScreen" onClick={() => this.handleInfo(info)}>
+                                                </div>
+                                            </div>
+                                            }
+                                        </div>
+                                    })
+                                }
+                            </div>
+                            : "chargement"
+                    )
                 }
                 <div
                     onClick={this.openCalendar}
@@ -428,7 +426,7 @@ class Admin extends React.Component {
                     this.state.calendarOpen &&
                     (
                         this.state.calendar
-                            ? <div>
+                            ? <div className="contentWrapper">
                                 <div
                                     onClick={() => this.setState({ openAddcalendar: true })}
                                     className="editButton"
@@ -464,38 +462,40 @@ class Admin extends React.Component {
                                         }
                                     </select>
                                 </div>
-                                <div className="calendarHeader">
-                                    <div className="eventDate">Date</div>
-                                    <div className="eventHour">Heure</div>
-                                    <div className="eventDistance">Distance/Durée</div>
-                                    <div className="eventPlace">Lieu de Départ</div>
-                                    <div className="eventClub">Club</div>
-                                </div>
-                                {
-                                    this.state.calendar.map(event => {
-                                        return <div key={event.id}>
-                                            <Event
-                                                event={event}
-                                                onClick={() => this.handleEvent(event)}
-                                                className="editable"
-                                            ></Event>
-                                            {this.state.eventOpen[event.id] && <div>
-                                                <EventEditor
-                                                    className="editModal eventEditor"
+                                <div className="calendarWrapper">
+                                    <div className="calendarHeader">
+                                        <div className="eventDate">Date</div>
+                                        <div className="eventHour">Heure</div>
+                                        <div className="eventDistance">Distance/Durée</div>
+                                        <div className="eventPlace">Lieu de Départ</div>
+                                        <div className="eventClub">Club</div>
+                                    </div>
+                                    {
+                                        this.state.calendar.map(event => {
+                                            return <div key={event.id}>
+                                                <Event
                                                     event={event}
-                                                    updateList={this.updateEvent}
-                                                    delFromList={this.deleteEvent}
-                                                    close={() => this.handleEvent(event)}
-                                                ></EventEditor>
-                                                <div
-                                                    className="greyScreen"
                                                     onClick={() => this.handleEvent(event)}
-                                                ></div>
+                                                    className="editable"
+                                                ></Event>
+                                                {this.state.eventOpen[event.id] && <div>
+                                                    <EventEditor
+                                                        className="editModal eventEditor"
+                                                        event={event}
+                                                        updateList={this.updateEvent}
+                                                        delFromList={this.deleteEvent}
+                                                        close={() => this.handleEvent(event)}
+                                                    ></EventEditor>
+                                                    <div
+                                                        className="greyScreen"
+                                                        onClick={() => this.handleEvent(event)}
+                                                    ></div>
+                                                </div>
+                                                }
                                             </div>
-                                            }
-                                        </div>
-                                    })
-                                }
+                                        })
+                                    }
+                                </div>
                             </div>
                             : "chargement"
                     )
@@ -507,49 +507,48 @@ class Admin extends React.Component {
                     Bureau
                 </div>
                 {
-                    this.state.membersOpen && <div>
-                        {
-                            this.state.members
-                                ? <div>
-                                    <div
-                                        onClick={this.addMember}
-                                        className="editButton"
-                                    >
-                                        Ajouter une nouveau membre
-                                    </div>
-                                    <div className="wrapperItem">
-                                        {
-                                            this.state.members.map((member, index) => {
-                                                return <div key={member.id} onDragOver={(ev) => ev.preventDefault()} onDropCapture={() => this.newMemberOrder(index)}>
-                                                    <Member
-                                                        member={member}
-                                                        onClick={() => this.handleMember(member)}
-                                                        draggable={true}
-                                                        onDragStart={() => { this.memberIndexOnMove = index }}
-                                                        className="editable"
-                                                    ></Member>
-                                                    {this.state.memberOpen[member.id] && <div>
-                                                        <MemberEditor
-                                                            className="editModal"
-                                                            member={member}
-                                                            updateList={this.updateMember}
-                                                            delFromList={this.deleteMember}
-                                                            close={() => this.handleMember(member)}
-                                                        ></MemberEditor>
-                                                        <div
-                                                            className="greyScreen"
-                                                            onClick={() => this.handleMember(member)}
-                                                        ></div>
-                                                    </div>
-                                                    }
-                                                </div>
-                                            })
-                                        }
-                                    </div>
+                    this.state.membersOpen &&
+                    (
+                        this.state.members
+                            ? <div className="contentWrapper">
+                                <div
+                                    onClick={this.addMember}
+                                    className="editButton"
+                                >
+                                    Ajouter une nouveau membre
                                 </div>
-                                : "chargement"
-                        }
-                    </div>
+                                <div className="wrapperItem">
+                                    {
+                                        this.state.members.map((member, index) => {
+                                            return <div key={member.id} onDragOver={(ev) => ev.preventDefault()} onDropCapture={() => this.newMemberOrder(index)}>
+                                                <Member
+                                                    member={member}
+                                                    onClick={() => this.handleMember(member)}
+                                                    draggable={true}
+                                                    onDragStart={() => { this.memberIndexOnMove = index }}
+                                                    className="editable"
+                                                ></Member>
+                                                {this.state.memberOpen[member.id] && <div>
+                                                    <MemberEditor
+                                                        className="editModal"
+                                                        member={member}
+                                                        updateList={this.updateMember}
+                                                        delFromList={this.deleteMember}
+                                                        close={() => this.handleMember(member)}
+                                                    ></MemberEditor>
+                                                    <div
+                                                        className="greyScreen"
+                                                        onClick={() => this.handleMember(member)}
+                                                    ></div>
+                                                </div>
+                                                }
+                                            </div>
+                                        })
+                                    }
+                                </div>
+                            </div>
+                            : "chargement"
+                    )
                 }
             </div>
             : <Logger

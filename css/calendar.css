@@ -8,14 +8,35 @@
 
 .calendarContainer {
     --padding: 10px;
-    width: fit-content;
-    padding: var(--padding);
-    margin: auto;
+    --borderRadius: 20px;
+    margin: var(--padding);
+    padding-top: var(--padding);
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.calendarWrapper {
+    --horizontalWrapperPadding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--colorBackground);
+    border-radius: var(--borderRadius);
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: -1px 1px var(--boxShadowColor);
 }
 
 .calendarHeader {
-    display: flex;
-    margin-left: 10px;
+    display: grid;
+    grid-template-columns: repeat(14, 1fr);
+    gap: 10px;
+    padding: 20px var(--horizontalWrapperPadding);
+    color: var(--colorTextConstrast);
+    background-color: var(--boxShadowColor);
+    border-radius: var(--borderRadius);
+    width: calc(100% - 2 * var(--horizontalWrapperPadding));
 }
 
 .eventOrange {
@@ -28,8 +49,13 @@
 
 .claendarChoices {
     display: flex;
+    align-items: center;
     margin-left: 10px;
-
+    padding: var(--padding);
+    border-radius: 1000px;
+    background-color: var(--colorBackground);
+    width: fit-content;
+    gap: 5px;
 }
 
 
@@ -38,13 +64,26 @@
         width: 100%;
     }
 
+    .calendarWrapper {
+        width: 100%;
+        background-color: transparent;
+        box-shadow: none;
+    }
+
     .calendarHeader {
         display: none;
     }
 
     .calendarContainer {
         width: calc(100% - 2* var(--padding));
-        margin: 0;
+        max-width: none;
+        margin: auto;
+    }
+
+    .claendarChoices {
+        padding: 30px;
+        background-color: var(--boxShadowColor);
+        color: var(--colorTextConstrast);
     }
 
     .claendarChoices select {

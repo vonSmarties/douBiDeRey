@@ -2,7 +2,6 @@ import Gallery from "./Gallery.js";
 import "../service/react.js";
 import "../service/reactDom.js";
 
-
 class AllGalleries extends React.Component {
 
     Galleries = window['Galleries'];

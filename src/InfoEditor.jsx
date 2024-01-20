@@ -21,13 +21,14 @@ export default class InfoEditor extends React.Component {
                     [{ 'font': [] }],
                     [{ 'size': ['small', false, 'large', 'huge'] }],
                     ['bold', 'italic', 'underline', 'strike'],
+                    ['link'],
                     [{ 'script': 'sub' }, { 'script': 'super' }],
                     [{ 'align': [] }],
                     [{ 'color': [] }, { 'background': [] }],
                     [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                     [{ 'indent': '-1' }, { 'indent': '+1' }],
 
-                    ['clean']                                         // remove formatting button
+                    ['clean'],// remove formatting button
                 ]
             },
             theme: 'snow'

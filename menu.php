@@ -32,7 +32,7 @@ function getMenu($title)
         </a>
         <div class='titleMenu'>Nous rejoindre</div>
         <div class='textMenu'>inscription@doubiderey.fr</div>
-        <img class='logo' alt='marcheurs Dou bi de Rey' src='https://www.marcheurs-dou-bi-de-rey.fr/doubiderey/asset/marcheurs-Dou-bi-de-Rey.jpg'></img>
+        <img class='logo' alt='marcheurs Dou bi de Rey association jurançon' src='https://www.marcheurs-dou-bi-de-rey.fr/doubiderey/asset/marcheurs-Dou-bi-de-Rey.jpg'></img>
     </div>
 </header>";
 }

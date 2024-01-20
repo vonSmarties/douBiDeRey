@@ -1,8 +1,8 @@
 body {
     --widthMenu: 230px;
     --heightHeader: 51px;
-    --boxShadowColor: darkGreen;
-    --colorBackground: orange;
+    --boxShadowColor: #00912C;
+    --colorBackground: #FFA20C;
     --colorConstrast: rgba(240, 248, 255,0.9);
     --colorText: black;
     --colorTextConstrast: white;

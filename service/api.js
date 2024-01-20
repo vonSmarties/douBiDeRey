@@ -45,24 +45,5 @@ class ApiService {
 
     logOut = () => localStorage.removeItem('magicalUnicornToken');
 
-    downloadGallery = (title, body) => {
-        return fetch(this.http + 'galleryDownload' + this.ext, { method: "POST", body: JSON.stringify(body) })
-            .then(rtrn => rtrn.blob()).then(rtrn => {
-                this.download(title, rtrn);
-            });
-    }
-
-    download = (filename, data) => {
-        const reader = new FileReader();
-
-        reader.addEventListener("load", () => {
-            const element = document.createElement('a');
-            element.setAttribute('href', reader.result);
-            element.setAttribute('download', filename + '.zip');
-            element.click();
-        }, { once: true });
-
-        reader.readAsDataURL(data);
-    }
 }
 export default ApiService; 
