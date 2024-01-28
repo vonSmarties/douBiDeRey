@@ -69,20 +69,23 @@ export default class GalleryEditor extends React.Component {
 
     addImage = () => {
         const files = this.fileRef.current.files;
-        this.upload(files, 0);
+        this.upload(files, 0).then(_ =>
+            this.apiSvc.post("galleryZipImages", this.props.gallery)
+        );
     }
 
     upload = (files, i) => {
         const formData = new FormData();
         formData.append("idGallery", this.props.gallery.id);
         formData.append("file", files[i]);
-        this.apiSvc.postFormData("imageCreate", formData).then(rtrn => {
+        return this.apiSvc.postFormData("imageCreate", formData).then(rtrn => {
             if (rtrn.create) {
                 this.pushImage({ gallery: this.props.gallery.id, file: rtrn.file });
                 if (i < files.length - 1)
-                    this.upload(files, i + 1);
+                    return this.upload(files, i + 1);
             } else {
                 window.alert("Echec de l'ajout de l'image");
+                return Promise.reject();
             }
         });
     }
@@ -121,7 +124,7 @@ export default class GalleryEditor extends React.Component {
                         onClick={this.saveTitle}
                         className="editButtonLight"
                     >Ok</div>}
-                </div>                
+                </div>
                 <div className="inputModal">
                     <div onClick={this.openInputFile} className="editButtonLight leftButton">Ajouter des photos</div>
                     <input className="addFile" name="file[]" type="file" ref={this.fileRef} multiple onInput={this.addImage} />
@@ -129,14 +132,14 @@ export default class GalleryEditor extends React.Component {
             </div>
             <div className="modalScroll">
                 <div className="scrollContainer">
-                {this.state.images && this.state.images.map((image) => <div className="imageContainer" key={image.file}>
-                    <img className="imageModal" src={image.file}></img>
-                    <div
-                        onClick={() => this.deleteImg(image)}
-                        className="galleryDelete"
-                    >x</div>
-                </div>  
-                )}
+                    {this.state.images && this.state.images.map((image) => <div className="imageContainer" key={image.file}>
+                        <img className="imageModal" src={image.file}></img>
+                        <div
+                            onClick={() => this.deleteImg(image)}
+                            className="galleryDelete"
+                        >x</div>
+                    </div>
+                    )}
                 </div>
             </div>
             <div className="bottomRow bottomModal">

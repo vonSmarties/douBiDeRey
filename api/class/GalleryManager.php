@@ -23,8 +23,9 @@ class GalleryManager extends Manager
   public function create(Entity $gallery)
   {
     $rtrn = parent::create($gallery);
-    if ($rtrn)
+    if ($rtrn) {
       mkdir("../gallery/" . $gallery->getId());
+    }
     return $rtrn;
   }
 
@@ -61,8 +62,10 @@ class GalleryManager extends Manager
   public function delete(Entity $gallery)
   {
     $rtrn = parent::delete($gallery);
-    if ($rtrn)
+    if ($rtrn){
+      unlink("../gallery/" . $gallery->getId() . "/zip");
       rmdir("../gallery/" . $gallery->getId());
+    }
     return $rtrn;
   }
 }

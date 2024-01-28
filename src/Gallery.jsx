@@ -156,12 +156,13 @@ export default class Gallery extends React.Component {
                 <div className="modalGallery">
                     <div className="modalHeader">
                         <div className="headerElm downloadContainer">
-                            <div
-                                className={this.state.downloadEnabled ? "downloadButton" : "downloadButtonDisabled"}
-                                onClick={this.download}
+                            <a
+                                className={"downloadButton"}
+                                href={"./gallery/" + this.props.gallery.id + "/zip"}
+                                download={this.props.gallery.title + ".zip"}
                             >
                                 Télécharger
-                            </div>
+                            </a>
                         </div>
                         <div className="headerElm closeContainer">
                             <div

@@ -17,10 +17,10 @@ class Image extends Entity {
   }
 
   public function getGallery() {
-    return $this->gallery;
+    return intval($this->gallery);
   }
 
-  public function setGallery(string $gallery) {
+  public function setGallery(int $gallery) {
     $this->gallery=$gallery;
   }
 }

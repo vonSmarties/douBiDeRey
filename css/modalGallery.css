@@ -146,6 +146,8 @@
 }
 
 .downloadButton {
+    text-decoration: inherit;
+    color: inherit;
     background-color: var(--colorBackground);
     padding: 5px;
     cursor: pointer;
