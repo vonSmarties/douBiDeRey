@@ -63,7 +63,7 @@ class GalleryManager extends Manager
   {
     $rtrn = parent::delete($gallery);
     if ($rtrn){
-      unlink("../gallery/" . $gallery->getId() . "/zip");
+      unlink("../gallery/" . $gallery->getId() . "/export.zip");
       rmdir("../gallery/" . $gallery->getId());
     }
     return $rtrn;

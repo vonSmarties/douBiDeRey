@@ -127,21 +127,6 @@ export default class Gallery extends React.Component {
             this.setState({ displayed: this.state.displayed + 1 })
     }
 
-    download = () => {
-        if (this.state.downloadEnabled)
-            this.setState({ downloadEnabled: false }, () => {
-                const apiSvc = new ApiService();
-                apiSvc.post('galleryDownload', { id: this.props.gallery.id })
-                    .then(data => {
-                        const element = document.createElement('a');
-                        element.setAttribute('href', data.dir);
-                        element.setAttribute('download', this.props.gallery.title + ".zip");
-                        element.click();
-                        this.setState({ downloadEnabled: true });
-                    });
-            });
-    }
-
     render = () => {
         return <div className="galleryWrapper">
             <div className="galleryContainer" onClick={this.openModal}>
@@ -158,7 +143,7 @@ export default class Gallery extends React.Component {
                         <div className="headerElm downloadContainer">
                             <a
                                 className={"downloadButton"}
-                                href={"./gallery/" + this.props.gallery.id + "/zip"}
+                                href={"./gallery/" + this.props.gallery.id + "/export.zip"}
                                 download={this.props.gallery.title + ".zip"}
                             >
                                 Télécharger

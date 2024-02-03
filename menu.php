@@ -31,8 +31,8 @@ function getMenu($title)
             <div class='itemMenu'>Audax UAF</div>
         </a>
         <div class='titleMenu'>Nous rejoindre</div>
-        <div class='textMenu'>inscription@doubiderey.fr</div>
-        <img class='logo' alt='marcheurs Dou bi de Rey association jurançon' src='https://www.marcheurs-dou-bi-de-rey.fr/doubiderey/asset/marcheurs-Dou-bi-de-Rey.jpg'></img>
+        <div class='textMenu'>inscription@marcheurs-dou-bi-de-rey.fr</div>
+        <img class='logo' alt='marcheurs Dou bi de Rey association jurançon' src='https://www.marcheurs-dou-bi-de-rey.fr/asset/marcheurs-Dou-bi-de-Rey.jpg'></img>
     </div>
 </header>";
 }

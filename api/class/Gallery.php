@@ -24,7 +24,7 @@ class Gallery extends Entity
   {
     try {
       $zip = new ZipArchive();
-      $zipName = "../gallery/" . $this->getId() . "/zip";
+      $zipName = "../gallery/" . $this->getId() . "/export.zip";
       $tmp = fopen($zipName,"w");
       fclose($tmp);
       $zip->open($zipName, ZipArchive::OVERWRITE);
