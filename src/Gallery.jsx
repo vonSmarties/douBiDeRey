@@ -5,6 +5,7 @@ export default class Gallery extends React.Component {
 
     fullScreen = React.createRef();
     imgFull = React.createRef();
+    modalScroll = React.createRef();
     scale = 1;
     initialX = null;
     initialY = null;
@@ -30,19 +31,22 @@ export default class Gallery extends React.Component {
     }
 
     openModal = () => {
-        window.addEventListener('popstate', this.handlePopstate, { once: true })
-        this.setState({ isOpen: true });
+        window.addEventListener('popstate', this.handlePopstate, { once: true });
+        this.setState(
+            { isOpen: true, renderedImages: this.state.images.slice(0, 20) },
+            () => this.modalScroll.current.addEventListener('scroll', this.lazyLoading)
+        );
         history.pushState({}, "", window.location.href);
     }
 
     handlePopstate = () => {
+        if (this.scrollObserver) this.scrollObserver.disconnect();
         this.setState({ isOpen: false });
     }
 
     closeModal = () => {
         history.back();
         window.removeEventListener('popstate', this.closeModal, { once: true })
-        this.setState({ isOpen: false });
     }
 
     requestFullScreen = (displayed) => {
@@ -50,7 +54,7 @@ export default class Gallery extends React.Component {
             this.fullScreen.current.requestFullscreen();
             this.fullScreen.current.addEventListener('touchstart', this.startTouch);
             this.fullScreen.current.addEventListener('touchmove', this.moveTouch);
-            this.fullScreen.current.addEventListener('scroll', this.zoom);
+            // this.fullScreen.current.addEventListener('scroll', this.zoom);
             this.fullScreen.current.addEventListener("fullscreenchange", this.handleFullScreen);
             this.setState({ displayed });
         });
@@ -84,7 +88,6 @@ export default class Gallery extends React.Component {
         let diffX = this.initialX - currentX;
         let diffY = this.initialY - currentY;
 
-        console.log(diffX, this.state.displayed, this.state.images.length - 1)
 
         if (Math.abs(diffX) > Math.abs(diffY)) {
             // sliding horizontally
@@ -104,7 +107,6 @@ export default class Gallery extends React.Component {
     }
 
     zoom = (event) => {
-        console.log("something append", event.deltaY)
         event.preventDefault();
 
         this.scale += event.deltaY * -0.01;
@@ -125,6 +127,19 @@ export default class Gallery extends React.Component {
     nextImage = () => {
         if (this.state.displayed < this.state.images.length - 1)
             this.setState({ displayed: this.state.displayed + 1 })
+    }
+
+    lazyLoading = (ev) => {
+        if (ev.target.scrollTop + this.modalScroll.current.clientHeight < this.modalScroll.current.scrollHeight)
+            return;
+        const renderedImages = this.state.renderedImages.concat(this.state.images.slice(this.state.renderedImages.length, this.state.renderedImages.length + 20));
+        this.setState(
+            { renderedImages },
+            () => {
+                if (renderedImages.length == this.state.images.length)
+                    this.modalScroll.current.removeEventListener('scroll', this.lazyLoading);
+            }
+        );
     }
 
     render = () => {
@@ -159,21 +174,25 @@ export default class Gallery extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="modalScroll">
+                    <div className="modalScroll" ref={this.modalScroll}>
                         <div className="galleryDisplay">{this.props.gallery.title}</div>
-                        {this.state.images
-                            ? this.state.images.map((image, index) => <div
-                                key={image.file}
-                                // href={image.file}
-                                // target="_blank"
-                                className="imageContainer"
-                                onClick={() => this.requestFullScreen(index)}
-                            >
-                                <img className="imageModal" src={image.file}></img>
-                            </div>
-                            ).concat(this.state.images.map((_, index) =>
-                                <div className="imageErsatz" key={"void" + index}></div>
-                            ))
+                        {this.state.images && this.state.renderedImages
+                            ? <React.Fragment>
+                                {this.state.renderedImages.map((image, index) =>
+                                    <div
+                                        key={image.file}
+                                        // href={image.file}
+                                        // target="_blank"
+                                        className="imageContainer"
+                                        onClick={() => this.requestFullScreen(index)}
+                                    >
+                                        <img className="imageModal" src={image.file} loading="lazy"></img>
+                                    </div>
+                                )}
+                                {this.state.images.map((_, index) =>
+                                    <div className="imageErsatz" key={"void" + index}></div>
+                                )}
+                            </React.Fragment>
                             : <div>Chargement</div>
                         }
                     </div>
