@@ -100,6 +100,16 @@ export default class GalleryEditor extends React.Component {
         this.fileRef.current.click()
     }
 
+    renderTinyMedia(media) {
+        switch (media.file.split('.').pop()) {
+            case "mp4":
+                return <video className="imageModal" src={media.file} autoPlay loop />;
+            default:
+                return <img className="imageModal" src={media.file} loading="lazy"></img>;
+        }
+
+    }
+
     render = () => {
         return <div className={this.props.className}>
             <div className="modalHeader">
@@ -133,7 +143,7 @@ export default class GalleryEditor extends React.Component {
             <div className="modalScroll">
                 <div className="scrollContainer">
                     {this.state.images && this.state.images.map((image) => <div className="imageContainer" key={image.file}>
-                        <img className="imageModal" src={image.file}></img>
+                        {this.renderTinyMedia(image)}
                         <div
                             onClick={() => this.deleteImg(image)}
                             className="galleryDelete"

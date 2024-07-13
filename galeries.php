@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/modalGallery.css">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/galleries.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" /> 
+    <link rel="stylesheet" href="css/swiper-bundle.min.css" /> 
 </head>
 
 <body>

@@ -93,6 +93,31 @@ export default class Gallery extends React.Component {
         );
     }
 
+    renderTinyMedia(media) {
+        switch (media.file.split('.').pop()) {
+            case "mp4":
+                return <video className="imageModal" src={media.file} autoPlay loop />;
+            default:
+                return <img className="imageModal" src={media.file} loading="lazy"></img>;
+        }
+
+    }
+
+    renderMedia(media) {
+        switch (media.file.split('.').pop()) {
+            case "mp4":
+                return <div className="videoWithHandle">
+                    <div className="handle" />
+                    <video className="videoFull" src={media.file} controls controlsList="nofullscreen"></video>
+                </div>
+            default:
+                return <div className="swiper-zoom-container">
+                    <img src={media.file}></img>
+                </div>;
+        }
+
+    }
+
     render = () => {
         return <div className="galleryWrapper">
             <div className="galleryContainer" onClick={this.openModal}>
@@ -137,7 +162,7 @@ export default class Gallery extends React.Component {
                                         className="imageContainer"
                                         onClick={() => this.requestFullScreen(index)}
                                     >
-                                        <img className="imageModal" src={image.file} loading="lazy"></img>
+                                        {this.renderTinyMedia(image)}
                                     </div>
                                 )}
                                 {this.state.images.map((_, index) =>
@@ -158,9 +183,7 @@ export default class Gallery extends React.Component {
                                     {
                                         this.state.images.map(image =>
                                             <div key={image.file} className="swiper-slide">
-                                                <div className="swiper-zoom-container">
-                                                    <img className="imageFull" src={image.file}></img>
-                                                </div>
+                                                {this.renderMedia(image)}
                                             </div>
                                         )
                                     }

@@ -126,6 +126,24 @@
     width: calc(100% - 46px);
 }
 
+.videoWithHandle {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.handle {
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    z-index: 1;
+}
+
+.videoFull {
+    width: 100%;
+    height: 100%;
+}
+
 .previewGallery {
     width: 100%;
     height: 180px;
@@ -179,30 +197,6 @@
     position: absolute;
     right: 0;
     z-index: 2;
-}
-
-.controlrightFull {
-    background-color: var(--colorConstrast);
-    display: flex;
-    cursor: pointer;
-    width: fit-content;
-    padding: 10px;
-    font-size: 23px;
-    position: absolute;
-    right: 0;
-    top: calc(50vh - 22px);
-}
-
-.controlLeftFull {
-    background-color: var(--colorConstrast);
-    display: flex;
-    cursor: pointer;
-    width: fit-content;
-    padding: 10px;
-    font-size: 23px;
-    position: absolute;
-    left: 0;
-    top: calc(50vh - 22px);
 }
 
 @media (max-width:1023px) {
