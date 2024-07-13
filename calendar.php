@@ -15,7 +15,6 @@
     require_once('menu.php');
     getMenu("Calendrier");
     ?>
-    <div class="backgroundLogo"></div>
     <main class="calendar main">
             <div class="reactContainer" id="calendar"></div>
     </main>

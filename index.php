@@ -17,7 +17,6 @@
     require_once('menu.php');
     getMenu("Les marcheurs Dou Bi de Rey");
     ?>
-    <div class="backgroundLogo"></div>
     <main class="accueil main">
         <h2>Accueil</h2>
     </main>

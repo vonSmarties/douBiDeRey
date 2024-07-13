@@ -1,5 +1,5 @@
 class ApiService {
-    // http = "https://www.marcheurs-dou-bi-de-rey.fr/api/";
+    // http = `${window.location.origin}/api/`;
     http = "http://localhost/doubiderey/api/";
     ext = ".php";
     logOutEvent = new Event("logOutEvent");

@@ -6,6 +6,8 @@ export default class Gallery extends React.Component {
     fullScreen = React.createRef();
     imgFull = React.createRef();
     modalScroll = React.createRef();
+    swipe = React.createRef();
+    swipeWrapper = React.createRef();
     scale = 1;
     initialX = null;
     initialY = null;
@@ -52,11 +54,17 @@ export default class Gallery extends React.Component {
     requestFullScreen = (displayed) => {
         this.setState({ fullScreen: true }, () => {
             this.fullScreen.current.requestFullscreen();
-            this.fullScreen.current.addEventListener('touchstart', this.startTouch);
-            this.fullScreen.current.addEventListener('touchmove', this.moveTouch);
-            // this.fullScreen.current.addEventListener('scroll', this.zoom);
+            this.swipe.current = new Swiper(this.swipeWrapper.current, {
+                // Setting default settings
+                initialSlide: displayed,
+                grabCursor: true,
+                centeredSlides: true,
+                loop: true,
+                zoom: {
+                    limitToOriginalSize: true
+                }
+            });
             this.fullScreen.current.addEventListener("fullscreenchange", this.handleFullScreen);
-            this.setState({ displayed });
         });
     }
 
@@ -70,63 +78,6 @@ export default class Gallery extends React.Component {
 
     closeFullScreen = () => {
         this.setState({ fullScreen: false, displayed: null, isFull: false });
-    }
-
-    startTouch = (e) => {
-        this.initialX = e.touches[0].clientX;
-        this.initialY = e.touches[0].clientY;
-    }
-
-    moveTouch = (e) => {
-        if (this.initialX == null || this.initialY == null) {
-            return;
-        }
-
-        let currentX = e.touches[0].clientX;
-        let currentY = e.touches[0].clientY;
-
-        let diffX = this.initialX - currentX;
-        let diffY = this.initialY - currentY;
-
-
-        if (Math.abs(diffX) > Math.abs(diffY)) {
-            // sliding horizontally
-            if (diffX > 0) {
-                // swiped left
-                this.nextImage();
-            } else {
-                // swiped right
-                this.prevImage();
-            }
-        }
-
-        this.initialX = null;
-        this.initialY = null;
-
-        e.preventDefault();
-    }
-
-    zoom = (event) => {
-        event.preventDefault();
-
-        this.scale += event.deltaY * -0.01;
-
-        // Restrict scale
-        this.scale = Math.min(Math.max(1, this.scale), 4);
-
-        // Apply scale transform
-        this.imgFull.current.style.transform = `scale(${this.scale})`;
-    }
-
-
-    prevImage = () => {
-        if (this.state.displayed > 0)
-            this.setState({ displayed: this.state.displayed - 1 })
-    }
-
-    nextImage = () => {
-        if (this.state.displayed < this.state.images.length - 1)
-            this.setState({ displayed: this.state.displayed + 1 })
     }
 
     lazyLoading = (ev) => {
@@ -197,23 +148,24 @@ export default class Gallery extends React.Component {
                         }
                     </div>
                     {
-                        this.state.fullScreen && <div ref={this.fullScreen}>
-                            {
-                                this.state.displayed != 0 &&
-                                <div className="controlLeftFull" onClick={this.prevImage}>{"<"}</div>
-                            }
-                            {
-                                this.state.displayed != this.state.images.length - 1 &&
-                                <div className="controlrightFull" onClick={this.nextImage}>{">"}</div>
-                            }
+                        this.state.fullScreen && <div ref={this.fullScreen} className="fullScreenContainer">
                             <div className="controlcloseFull" onClick={this.closeFullScreen}>
                                 <div className="modalClose1"></div>
                                 <div className="modalClose2"></div>
                             </div>
-                            {
-                                this.state.displayed != null &&
-                                <img className="imageFull" ref={this.imgFull} src={this.state.images[this.state.displayed].file}></img>
-                            }
+                            <div ref={this.swipeWrapper} className="swiper-container">
+                                <div className="swiper-wrapper">
+                                    {
+                                        this.state.images.map(image =>
+                                            <div key={image.file} className="swiper-slide">
+                                                <div className="swiper-zoom-container">
+                                                    <img className="imageFull" src={image.file}></img>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                </div>
+                            </div>
                         </div>
                     }
                 </div>

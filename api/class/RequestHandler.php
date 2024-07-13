@@ -40,7 +40,6 @@ class RequestHandler
     public function jsonResponse(Array $data)
     {        
         header('Content-Type: application/json');
-        header('Access-Control-Allow-Origin: https://marcheurs-dou-bi-de-rey.fr');
         echo json_encode($data);
     }
 
@@ -48,7 +47,6 @@ class RequestHandler
     {
         header('Content-disposition: attachment; filename=Resumes.zip');
         header('Content-type: application/zip');
-        header('Access-Control-Allow-Origin: https://marcheurs-dou-bi-de-rey.fr');
         readfile($file);
     }
 }

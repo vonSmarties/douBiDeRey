@@ -34,5 +34,7 @@ function getMenu($title)
         <div class='textMenu'>inscription@marcheurs-dou-bi-de-rey.fr</div>
         <img class='logo' alt='marcheurs Dou bi de Rey association jurançon' src='https://www.marcheurs-dou-bi-de-rey.fr/asset/marcheurs-Dou-bi-de-Rey.jpg'></img>
     </div>
-</header>";
+</header>
+<script src='js/mdk.js'></script>
+<div class='backgroundLogo'></div>";
 }

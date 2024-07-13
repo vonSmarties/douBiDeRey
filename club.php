@@ -15,7 +15,6 @@
     require_once('menu.php');
     getMenu("Le club");
     ?>
-    <div class="backgroundLogo"></div>
     <main class="main firstSection">
         <section>
             <h2>Nous trouver</h2>

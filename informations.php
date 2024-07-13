@@ -16,7 +16,6 @@
     require_once('menu.php');
     getMenu("Informations");
     ?>
-    <div class="backgroundLogo"></div>
     <main class="informations main">
         <div class="reactContainer" id="infos"></div>
     </main>

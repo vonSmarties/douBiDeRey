@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/modalGallery.css">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/galleries.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" /> 
 </head>
 
 <body>
@@ -15,7 +16,6 @@
     include_once('menu.php');
     getMenu("Galeries");
     ?>
-    <div class="backgroundLogo"></div>
     <main class="galleries main">
         <div class="reactContainer" id="galleries"></div>
     </main>
@@ -33,6 +33,7 @@
     </script>
     <!-- <script type="module" src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script type="module" src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script> -->
+    <script src="service/swiper-bundle.min.js"></script>
     <script type="module" src="js/Galleries.js"></script>
 </body>
 
