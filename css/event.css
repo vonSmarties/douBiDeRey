@@ -44,7 +44,7 @@
     display: none;
 }
 
-@media (max-width:1023px) {
+@media only screen and (max-width:1023px) and (orientation:portrait) {
     .event {
         border-radius: 100px;
         --marginLeft: 102px;
@@ -55,7 +55,7 @@
 
     .labelMobiel {
         display: block;
-        color: var(--boxShadowColor);
+        color: var(--colorSecond);
     }
 
     .eventLine {

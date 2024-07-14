@@ -34,13 +34,13 @@
     gap: 10px;
     padding: 20px var(--horizontalWrapperPadding);
     color: var(--colorTextConstrast);
-    background-color: var(--boxShadowColor);
+    background-color: var(--colorSecond);
     border-radius: var(--borderRadius);
     width: calc(100% - 2 * var(--horizontalWrapperPadding));
 }
 
 .eventOrange {
-    background-color: var(--colorBackground);
+    background-color: var(--colorMain);
 }
 
 .eventLight {
@@ -58,8 +58,13 @@
     gap: 5px;
 }
 
+@media only screen and (max-width:1023px) and (orientation:landscape) {
+    .reactContainer {
+        width: 100%;
+    }
+}
 
-@media (max-width:1023px) {
+@media only screen and (max-width:1023px) and (orientation:portrait) {
     .reactContainer {
         width: 100%;
     }
@@ -82,7 +87,7 @@
 
     .claendarChoices {
         padding: 30px;
-        background-color: var(--boxShadowColor);
+        background-color: var(--colorSecond);
         color: var(--colorTextConstrast);
     }
 

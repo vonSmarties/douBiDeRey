@@ -6,7 +6,6 @@
     height: 100vh;
     width: 100vw;
     background-color: var(--boxShadowColor);
-    opacity: 0.69;
 }
 
 .modalGallery {
@@ -46,7 +45,8 @@
 }
 
 .closeContainer {
-    justify-content: flex-end;height: 100%;
+    justify-content: flex-end;
+    height: 100%;
 }
 
 .modalCloseContainer {
@@ -110,7 +110,11 @@
 }
 
 .fullScreenContainer {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .swiper-container,
@@ -171,7 +175,7 @@
 .downloadButton {
     text-decoration: inherit;
     color: inherit;
-    background-color: var(--colorBackground);
+    background-color: var(--colorMain);
     padding: 5px;
     cursor: pointer;
     border-radius: 5px;
@@ -199,7 +203,7 @@
     z-index: 2;
 }
 
-@media (max-width:1023px) {
+@media only screen and (max-width:1023px) and (orientation:portrait) {
     .galleryWrapper {
         width: 100%;
     }
@@ -212,6 +216,9 @@
         height: 420px;
     }
 
+    .controlLeftFull,
+    .controlrightFull,
+    .controlcloseFull,
     .modalHeader,
     .modalScroll {
         --header: 69px;
@@ -227,11 +234,11 @@
         height: 6px;
     }
 
-    .controlLeftFull,
+    /* .controlLeftFull,
     .controlrightFull,
     .controlcloseFull {
         display: none;
-    }
+    } */
 
     .imageContainer {
         width: 100%;

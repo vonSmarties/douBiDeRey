@@ -10,7 +10,13 @@
     align-items: center;
 }
 
-@media (max-width:1023px) {
+@media only screen and (max-width:1023px) and (orientation:landscape) {
+    .reactContainer {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:1023px) and (orientation:portrait) {
     .reactContainer {
         width: 100%;
     }

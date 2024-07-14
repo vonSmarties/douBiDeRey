@@ -103,7 +103,7 @@ export default class GalleryEditor extends React.Component {
     renderTinyMedia(media) {
         switch (media.file.split('.').pop()) {
             case "mp4":
-                return <video className="imageModal" src={media.file} autoPlay loop />;
+                return <video className="imageModal" src={media.file} controls/>;
             default:
                 return <img className="imageModal" src={media.file} loading="lazy"></img>;
         }

@@ -40,7 +40,7 @@
 }
 
 .headerCategory {
-    background-color: var(--boxShadowColor);
+    background-color: var(--colorSecond);
     color: var(--colorConstrast);
     padding: 10px;
     border-bottom: 1px solid var(--colorBackground);
@@ -48,7 +48,7 @@
 
 .headerCategory:hover {
     background-color: var(--colorConstrast);
-    color: var(--boxShadowColor);
+    color: var(--colorSecond);
     cursor: pointer;
 }
 
@@ -74,7 +74,7 @@
     width: fit-content;
     padding: 5px;
     margin-left: 10px;
-    background-color: var(--colorBackground);
+    background-color: var(--colorMain);
     box-shadow: -1px 1px var(--boxShadowColor);
     border-radius: 2px;
 }
@@ -84,14 +84,14 @@
 }
 
 .editButton:hover {
-    background-color: var(--boxShadowColor);
+    background-color: var(--colorSecond);
     color: var(--colorConstrast);
     cursor: pointer;
 }
 
 .editButtonLight:hover {
     cursor: pointer;
-    background-color: var(--boxShadowColor);
+    background-color: var(--colorSecond);
     color: var(--colorConstrast);
 }
 
@@ -102,7 +102,7 @@
 }
 
 .editable:hover {
-    background-color: var(--boxShadowColor);
+    background-color: var(--colorSecond);
     color: var(--colorConstrast);
     cursor: pointer;
 }
@@ -148,7 +148,7 @@
     z-index: 1;
     padding: 4px;
     border-radius: 1000px;
-    background-color: var(--colorBackground);
+    background-color: var(--colorMain);
     width: 23px;
     height: 23px;
     text-align: center;
@@ -156,7 +156,7 @@
 
 .galleryDelete:hover {
     cursor: pointer;
-    background-color: var(--boxShadowColor);
+    background-color: var(--colorSecond);
     color: var(--colorConstrast);
 }
 

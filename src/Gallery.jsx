@@ -53,7 +53,7 @@ export default class Gallery extends React.Component {
 
     requestFullScreen = (displayed) => {
         this.setState({ fullScreen: true }, () => {
-            this.fullScreen.current.requestFullscreen();
+            // this.fullScreen.current.requestFullscreen();
             this.swipe.current = new Swiper(this.swipeWrapper.current, {
                 // Setting default settings
                 initialSlide: displayed,
@@ -96,7 +96,7 @@ export default class Gallery extends React.Component {
     renderTinyMedia(media) {
         switch (media.file.split('.').pop()) {
             case "mp4":
-                return <video className="imageModal" src={media.file} autoPlay loop />;
+                return <video className="imageModal" src={media.file} controls/>;
             default:
                 return <img className="imageModal" src={media.file} loading="lazy"></img>;
         }
@@ -108,11 +108,11 @@ export default class Gallery extends React.Component {
             case "mp4":
                 return <div className="videoWithHandle">
                     <div className="handle" />
-                    <video className="videoFull" src={media.file} controls controlsList="nofullscreen"></video>
+                    <video className="videoFull" src={media.file} controls></video>
                 </div>
             default:
                 return <div className="swiper-zoom-container">
-                    <img src={media.file}></img>
+                    <img src={media.file} loading="lazy"></img>
                 </div>;
         }
 
@@ -173,7 +173,7 @@ export default class Gallery extends React.Component {
                         }
                     </div>
                     {
-                        this.state.fullScreen && <div ref={this.fullScreen} className="fullScreenContainer">
+                        this.state.fullScreen && <div ref={this.fullScreen} className="greyScreen">
                             <div className="controlcloseFull" onClick={this.closeFullScreen}>
                                 <div className="modalClose1"></div>
                                 <div className="modalClose2"></div>
