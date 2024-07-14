@@ -18,9 +18,7 @@
     getMenu("Les marcheurs Dou Bi de Rey");
     ?>
     <main class="accueil main">
-        <div class="h2Wrapper">
             <h2>Accueil</h2>
-        </div>
     </main>
     <footer>
 
