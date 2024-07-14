@@ -9,6 +9,7 @@ body {
     --colorText: black;
     --colorTextConstrast: white;
     --widthClutch: 1023px;
+    --paddingH2:23px;
     font-family: Verdana;
     margin: 0px;
 }
@@ -46,15 +47,21 @@ header {
 
 h1 {
     padding: 10px;
-    font-size: 29px;
+    font-size: 1.5em;
     font-weight: 600;
     margin: 0px;
 }
 
+h2 {
+    background-color: var(--boxShadowColor);
+    margin: 0;
+    padding:23px;
+    font-size: 1.2em;
+}
+
 .titleHeader {
-    font-size: 23px;
     font-weight: 600;
-    padding: 10px;
+    padding:23px;
 }
 
 .generalMenu {
@@ -226,8 +233,12 @@ h1 {
         height: fit-content;
     }
 
-    .titleHeader {
-        font-size: var(--fontMobile);
+    h1 {
+        font-size: 1.2em;
+    }
+    
+    h2 {
+        font-size: 1.1em;
     }
 
     .menu-button-container {

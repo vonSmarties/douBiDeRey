@@ -17,7 +17,9 @@
     ?>
     <main class="main firstSection">
         <section>
-            <h2>Nous trouver</h2>
+            <div class="h2Wrapper">
+                <h2>Nous trouver</h2>
+            </div>
             <div class="rowClub">
                 <div class="colClub addressClub">
                     <p>LES MARCHEURS DOU BI DE REY</p>
@@ -29,7 +31,9 @@
             </div>
         </section>
         <section>
-            <h2>Dou Bi De Rey ?</h2>
+            <div class="h2Wrapper">
+                <h2>Dou Bi De Rey ?</h2>
+            </div>
             <div class="rowClub">
                 <img class="colClub imgClub" src="asset/Yuransoû-1.jpg" alt="Maison pour tous">
                 <div class="colClub">
@@ -40,7 +44,9 @@
             </div>
         </section>
         <section>
-            <h2>Le bureau</h2>
+            <div class="h2Wrapper">
+                <h2>Le bureau</h2>
+            </div>
             <div class="reactContainer" id="board"></div>
         </section>
     </main>

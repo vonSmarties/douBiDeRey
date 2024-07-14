@@ -46,10 +46,7 @@ export default class Gallery extends React.Component {
         this.setState({ isOpen: false });
     }
 
-    closeModal = () => {
-        history.back();
-        window.removeEventListener('popstate', this.closeModal, { once: true })
-    }
+    closeModal = () => history.back()
 
     requestFullScreen = (displayed) => {
         this.setState({ fullScreen: true }, () => {
@@ -64,21 +61,19 @@ export default class Gallery extends React.Component {
                     limitToOriginalSize: true
                 }
             });
-            this.fullScreen.current.addEventListener("fullscreenchange", this.handleFullScreen);
+            history.pushState({}, "", window.location.href);
+            window.removeEventListener('popstate', this.handlePopstate, { once: true });
+            window.addEventListener('popstate', this.handleFullScreen, { once: true });
         });
     }
 
-    handleFullScreen = () => {
-        this.setState({ isFull: !this.state.isFull },
-            () => {
-                if (!this.state.isFull)
-                    this.closeFullScreen();
-            });
-    }
+    handleFullScreen = () => 
+        this.setState(
+            { fullScreen: false, displayed: null, isFull: false },
+            () => window.addEventListener('popstate', this.handlePopstate, { once: true })
+        )
 
-    closeFullScreen = () => {
-        this.setState({ fullScreen: false, displayed: null, isFull: false });
-    }
+    closeFullScreen = () => history.back()
 
     lazyLoading = (ev) => {
         if (ev.target.scrollTop + this.modalScroll.current.clientHeight < this.modalScroll.current.scrollHeight)
@@ -96,7 +91,7 @@ export default class Gallery extends React.Component {
     renderTinyMedia(media) {
         switch (media.file.split('.').pop()) {
             case "mp4":
-                return <video className="imageModal" src={media.file} controls/>;
+                return <video className="imageModal" src={media.file} controls />;
             default:
                 return <img className="imageModal" src={media.file} loading="lazy"></img>;
         }

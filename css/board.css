@@ -7,10 +7,6 @@ main {
     --marginBoard: 23px;
 }
 
-h2 {
-    margin-left: var(--marginBoard);
-}
-
 .reactContainer {
     width: 100%;
 }
