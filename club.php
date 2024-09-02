@@ -34,7 +34,7 @@
                 <img class="colClub imgClub" src="asset/Yuransoû-1.jpg" alt="Maison pour tous">
                 <div class="colClub">
                     <p>Dou Bi De Rey, en Béarnais (le vin du roi) et Rey Dous Bis (le roi du vin), est la devise de la vile Jurançon, qui se trouve sur le fronton de l'hôtel de ville.</p>
-                    <p>Le club à été fondé le 2 octobre 1992 par M. Jacques Lartiguet, Président pendant 5 ans, M. André Ramier et M.Paul Bibé lui ont succédé jusqu'à 2005. Actuellement le responsable est M. Henri Lamarque.</p>
+                    <p>Le club à été fondé le 2 octobre 1992 par M. Jacques Lartiguet, Président pendant 5 ans, M. André Ramier, M.Paul Bibé et M. Henri Lamarque se sont succédés. Actuellement la responsable est Mme. Denise CISZEWSKI.</p>
                     <p>La Mairie met à notre disposition la grande salle de la Maison Pour Tous, rue Jean Moulin, pour les départs et les arrivées des différentes marches.</p>
                 </div class="colClub">
             </div>
