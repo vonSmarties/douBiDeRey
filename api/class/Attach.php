@@ -5,8 +5,8 @@ include_once 'Entity.php';
  */
 class Attach extends Entity {
 
-  private $file,$info;
-  protected $keys = ["file","info"];
+  private $file,$info,$title;
+  protected $keys = ["file","info","title"];
 
   public function getFile() {
     return $this->file;
@@ -14,6 +14,14 @@ class Attach extends Entity {
 
   public function setFile(string $file) {
     $this->file=$file;
+  }
+
+  public function getTitle() {
+    return $this->title;
+  }
+
+  public function setTitle(string $title) {
+    $this->title=$title;
   }
 
   public function getInfo() {

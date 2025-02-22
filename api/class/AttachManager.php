@@ -19,6 +19,10 @@ class AttachManager extends Manager
       'PDO' => PDO::PARAM_STR
     ],
     [
+      'nom' => 'title',
+      'PDO' => PDO::PARAM_STR
+    ],
+    [
       'nom' => 'info',
       'PDO' => PDO::PARAM_INT
     ]

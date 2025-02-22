@@ -14,6 +14,7 @@ try {
 
     move_uploaded_file($_FILES['file']['tmp_name'], "../" . $target_path);
     $attach->setInfo($_POST['idInfo']);
+    $attach->setTitle($_POST['title']);
     $attach->setFile($target_path);
     if ($attachManager->create($attach)) {
         $requestHandler->jsonResponse([
