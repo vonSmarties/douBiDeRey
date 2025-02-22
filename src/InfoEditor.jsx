@@ -1,6 +1,7 @@
 import "../service/react.js";
 import "../service/quill.js";
 import ApiService from "../service/api.js";
+import AttachEditor from "./attachEditor.js";
 
 
 export default class InfoEditor extends React.Component {
@@ -33,8 +34,12 @@ export default class InfoEditor extends React.Component {
             },
             theme: 'snow'
         });
-        if (this.props.info && this.props.info.delta)
+        if (this.props.info && this.props.info.delta) {
             this.quill.setContents(JSON.parse(this.props.info.delta));
+            this.apiSvc.post("attachInfo", this.props.info).then(attachs =>
+                this.setState({ attachs })
+            );
+        }
     }
 
     save = () => {
@@ -86,6 +91,12 @@ export default class InfoEditor extends React.Component {
             </div>
             <div className="containerInfo">
                 <div ref={this.quillContainer}></div>
+                <div className="AttachRow">
+                    <AttachEditor idInfo={this.props.info.id} />
+                    {this.state && this.state.attachs && this.state.attachs.map(attach =>
+                        <AttachEditor attach={attach} idInfo={this.props.info.id} />
+                    )}
+                </div>
             </div>
             <div className="bottomRow bottomModal">
                 <div
