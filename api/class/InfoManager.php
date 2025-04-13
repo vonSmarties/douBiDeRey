@@ -20,6 +20,15 @@ class InfoManager extends Manager
     ]
   ];
 
+  public function create(Entity $info)
+  {
+    $rtrn = parent::create($info);
+    if ($rtrn) {
+      mkdir("../attach/" . $info->getId());
+    }
+    return $rtrn;
+  }
+
   public function read(int $id)
   {
     $values = parent::readWhereValue($id, 'id');

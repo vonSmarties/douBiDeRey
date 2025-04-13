@@ -78,6 +78,18 @@ export default class InfoEditor extends React.Component {
             });
     }
 
+    addAttch(attach) {
+        this.setState({ attachs: [...this.state.attachs, attach] });
+    }
+
+    deleteAttach(attach) {
+        this.setState({ attachs: this.state.attachs.filter(a => a.file !== attach.file) });
+    }
+
+    updateAttach(attach) {
+        this.setState({ attachs: this.state.attachs.map(a => a.file === attach.file ? attach : a) });
+    }
+
     render = () => {
         return <div className={this.props.className}>
             <div className="modalHeader">
@@ -92,9 +104,21 @@ export default class InfoEditor extends React.Component {
             <div className="containerInfo">
                 <div ref={this.quillContainer}></div>
                 <div className="AttachRow">
-                    <AttachEditor idInfo={this.props.info.id} />
+                    <AttachEditor
+                        idInfo={this.props.info.id}
+                        addToList={this.addAttch.bind(this)}
+                        delFromList={this.deleteAttach.bind(this)}
+                        updateList={this.updateAttach.bind(this)}
+                    />
                     {this.state && this.state.attachs && this.state.attachs.map(attach =>
-                        <AttachEditor attach={attach} idInfo={this.props.info.id} />
+                        <AttachEditor
+                            key={attach.file}
+                            attach={attach}
+                            idInfo={this.props.info.id}
+                            addToList={this.addAttch.bind(this)}
+                            delFromList={this.deleteAttach.bind(this)}
+                            updateList={this.updateAttach.bind(this)}
+                        />
                     )}
                 </div>
             </div>

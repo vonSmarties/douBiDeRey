@@ -10,14 +10,16 @@ export default class AttachEditor extends React.Component {
         super(props);
         this.state = {
             title: props.attach ? props.attach.title : "",
-            newTitle: false
+            file: props.attach ? props.attach.file : "",
+            newTitle: false,
+            isOpenModal: false
         }
     }
 
     editTitle = (event) =>
         this.setState({ title: event.currentTarget.value, newTitle: true });
 
-    saveTitleEvent = (event) => {
+    saveTitleAttach = (event) => {
         if (event.key == "Enter")
             this.saveTitle();
     }
@@ -57,12 +59,9 @@ export default class AttachEditor extends React.Component {
 
         let title = this.state.title;
         if (!title) {
-            title = file.name;
+            title = file.name.split(".").slice(0, -1).join(".");
             this.setState({ title });
         }
-
-
-        console.log("uploadAttach", file);
 
         const formData = new FormData();
         formData.append("file", file);
@@ -74,6 +73,7 @@ export default class AttachEditor extends React.Component {
                     title: title,
                     file: rtrn.file
                 });
+                this.setState({ file });
             }
         })
     }
@@ -83,58 +83,69 @@ export default class AttachEditor extends React.Component {
     }
 
     render() {
-        const alreadyExist = this.props.attach && this.props.attach.file;
+        const alreadyExist = this.state.file !== "";
         return <div className={this.props.className}>
-            <div className="editModal">
-                <div className="modalHeader">
-                    <div
-                        className="modalCloseContainer"
-                        onClick={this.props.close}
-                    >
-                        <div className="modalClose1"></div>
-                        <div className="modalClose2"></div>
-                    </div>
-                </div>
-                <div className="containerAttach">
-                    <div className="titleContainer">
-                        <input
-                            className="titleInput"
-                            type="text"
-                            value={this.state.title}
-                            onChange={this.editTitle}
-                            onKeyUp={this.saveTitleEvent}
-                        />
-                        {this.state.newTitle &&
-                            <div onClick={this.saveTitle} className="editButtonLight">
-                                Ok
-                            </div>
-                        }
-                    </div>
-                    {alreadyExist
-                        ? <React.Fragment>
-                            <iframe src={this.props.attach.file} width="100%" height="100%"></iframe>
-                        </React.Fragment>
-                        : <div className="fileContainer">
-                            <input className="addFile" name="file" type="file" ref={this.fileRef} onInput={this.uploadAttach} />
-                            <div
-                                className="fileButton"
-                                onClick={this.openInputFile}
-                            >
-                                Selectionner un fichier
-                            </div>
-                        </div>
-                    }
-                    {alreadyExist &&
-                        <div className="deleteButton" onClick={this.deleteAttach}>
-                            Supprimer la pièce jointe
-                        </div>
-                    }
-                </div>
-            </div>
             <div
-                className="greyScreen"
-                onClick={() => this.setState({ openModal: false })}
-            ></div>
+                onClick={() => this.setState({ isOpenModal: true })}
+                className="editButtonLight"
+            >{alreadyExist ? this.state.title : "Ajouter une pièce jointe"}</div>
+            {this.state.isOpenModal &&
+                <React.Fragment>
+                    <div className="editModal">
+                        <div className="modalHeader">
+                            <div
+                                className="modalCloseContainer"
+                                onClick={() => this.setState({ isOpenModal: false })}
+                            >
+                                <div className="modalClose1"></div>
+                                <div className="modalClose2"></div>
+                            </div>
+                        </div>
+                        <div className="containerAttach">
+                            <div className="titleContainer">
+                                <div>Nom de la pièce jointe :</div>
+                                <input
+                                    className="titleInput"
+                                    type="text"
+                                    value={this.state.title}
+                                    onChange={this.editTitle}
+                                    onKeyUp={this.saveTitleAttach}
+                                />
+                                {this.state.newTitle &&
+                                    <div onClick={this.saveTitle} className="editButtonLight">
+                                        Ok
+                                    </div>
+                                }
+                            </div>
+                            {alreadyExist
+                                ? <iframe src={this.props.attach.file} className="attachDisplay" width="100%" height="100%" />
+                                : <div className="fileContainer">
+                                    <input className="addFile" name="file" type="file" ref={this.fileRef} onInput={this.uploadAttach} />
+                                    <div
+                                        className="editButtonLight"
+                                        onClick={this.openInputFile}
+                                    >
+                                        Selectionner un fichier
+                                    </div>
+                                </div>
+                            }
+                            {alreadyExist &&
+                                <div className="bottomRow bottomModal">
+                                    <div
+                                        className="editButtonLight"
+                                        onClick={this.deleteAttach}
+                                    >
+                                        Supprimer la pièce jointe
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div
+                        className="greyScreen"
+                        onClick={() => this.setState({ isOpenModal: false })}
+                    ></div>
+                </React.Fragment>}
         </div>
     }
 }

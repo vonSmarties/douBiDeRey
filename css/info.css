@@ -6,7 +6,51 @@
     background-color: var(--colorConstrast);
     margin: var(--margin);
     width: calc(100% - 4 * var(--margin));
-    max-width: 900px;
+    /* max-width: 900px; */
+    overflow: scroll;
+}
+
+.AttachRow {
+    margin-top: 5px;
+    display: flex;
+    gap: 5px;
+}
+
+.containerAttach {
+    --marginAttach: 10px;
+    display: flex;
+    flex-direction: column;
+    height: calc(90vh - var(--header));
+}
+
+.titleContainer {
+    margin: 0 var(--marginAttach);
+    display: flex;
+    gap: var(--marginAttach);
+    align-items: center;
+}
+
+.fileContainer {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleInput {
+    flex-grow: 1;
+}
+
+.attachDisplay {
+    width: calc(100% - 2 * var(--marginAttach));
+    border: none;
+    margin: var(--marginAttach);
+}
+
+.attachDisplay body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .ql-clipboard {

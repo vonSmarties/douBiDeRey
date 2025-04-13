@@ -15,8 +15,10 @@
     z-index: 10;
     position: fixed;
     width: 90vw;
+    max-height: 90vh;
     background-color: var(--colorConstrast);
     border-radius: 5px;
+    --header: 32px;
 }
 
 .modalHeader {
@@ -59,6 +61,7 @@
 .bottomRow {
     display: flex;
     justify-content: flex-end;
+    gap: 10px;
 }
 
 .editButton {
@@ -73,7 +76,6 @@
 .editButtonLight {
     width: fit-content;
     padding: 5px;
-    margin-left: 10px;
     background-color: var(--colorMain);
     box-shadow: -1px 1px var(--boxShadowColor);
     border-radius: 2px;
