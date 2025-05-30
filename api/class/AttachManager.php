@@ -73,6 +73,27 @@ class AttachManager extends Manager
 
     return $this->deleteWhereValue($info->getId(), "info");
   }
+
+  /**
+   * fonction public : update
+   *
+   * met à jour les données d'une piece jointe
+   *
+   * @param Attach type défini par les manager enfant
+   *
+   * @return bool
+   */
+  public function update($attach)
+  {
+
+    $update = $this->lierChampsValuesPDO($attach);
+    $sql = 'UPDATE ' . $this->table . " SET $update WHERE " . $this->condition('file');
+
+    $req = $this->db->prepare($sql);
+    $this->bindValue($req, $attach->getFile(), 'file');
+    $this->bindvaluesPDO($req, $attach);
+    return $req->execute();
+  }
 }
 
 $attachManager = new AttachManager();
