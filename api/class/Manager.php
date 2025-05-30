@@ -247,7 +247,7 @@ abstract class Manager
    *
    * @return array<string> tableau de deux ligne contenant le nom des champs et les variable PDO formaté pour la requète SQL
    */
-  private function strWithoutIdChamps(Entity $entity)
+  Protected function strWithoutIdChamps(Entity $entity)
   {
     $champs = $this->champs[0] == "id"
       ? array_slice($this->champs, 1)
@@ -279,7 +279,7 @@ abstract class Manager
    *
    * @return array<string> condition formmater pour la requète
    */
-  private function condition($champ)
+  Protected function condition($champ)
   {
     return $champ . '=:' . $champ;
   }
@@ -293,7 +293,7 @@ abstract class Manager
    *
    * @return string syntaxe du set de la requète SQL d'update
    */
-  private function lierChampsValuesPDO(Entity $entity)
+  Protected function lierChampsValuesPDO(Entity $entity)
   {
     $return = '';
     foreach ($this->champs as $champ) {
