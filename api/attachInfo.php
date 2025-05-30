@@ -2,7 +2,7 @@
 include_once 'class/AttachManager.php';
 include_once 'class/RequestHandler.php';
 
-$info = $requestHandler->privateRequest();
+$info = $requestHandler->publicRequest();
 
 $attachs = $attachManager->readAllInfo($info->id);
 $data = [];

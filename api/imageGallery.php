@@ -2,7 +2,7 @@
 include_once 'class/ImageManager.php';
 include_once 'class/RequestHandler.php';
 
-$gallery = $requestHandler->privateRequest();
+$gallery = $requestHandler->publicRequest();
 
 $images = $imageManager->readAllGallery($gallery->id);
 $data = [];
